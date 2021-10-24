@@ -1,0 +1,65 @@
+<resources>
+    <string name="app_name">Safelock Saving</string>
+    <string name="backText">Back</string>
+    <string name="loginText">Sing In</string>
+    <string name="userText">User</string>
+    <string name="passText">Password</string>
+    <string name="missPassText">Forgot your password?</string>
+    <string name="nextButton">Next</string>
+    <string name="registerText">Register</string>
+    <string name="emailText">Email</string>
+    <string name="nameText">Name</string>
+    <string name="lastnameText">Lastname</string>
+    <string name="accountText">Do you have an account?</string>
+    <string name="confirmPassText">Confirm Password</string>
+    <string name="remindersText">Reminders</string>
+    <string name="budgetsText">Budgets</string>
+    <string name="reportText">Report</string>
+    <string name="settingsText">Settings</string>
+    <string name="titleText">Title</string>
+    <string name="dateText">Date</string>
+    <string name="amountText">Amount</string>
+    <string name="enterEmailText">Enter Email</string>
+    <string name="enterCodeText">Enter Code</string>
+    <string name="codeText">Code</string>
+    <string name="cardText">Card</string>
+    <string name="subscriptionText">Subscription</string>
+    <string name="shopText">Shop</string>
+
+    <string-array name="typeReminders">
+        <item>@string/cardText</item>
+        <item>@string/subscriptionText</item>
+        <item>@string/shopText</item>
+    </string-array>
+
+    <string name="minAmountText">Minimum amount</string>
+    <string name="settlementText">Settlement</string>
+    <string name="cutoffDateText">Cutoff date</string>
+    <string name="deadlineText">Deadline</string>
+    <string name="importanceText">Importance</string>
+    <string name="monthsText">Months</string>
+    <string name="newReminderText">New Reminder</string>
+    <string name="lessImportantText">Less Important</string>
+    <string name="importantText">Important</string>
+    <string name="veryImportantText">Very Important</string>
+    <string name="okText">Ok</string>
+    <string name="cancelText">Cancelar</string>
+    <string name="nameIsRequiredText">Name is required</string>
+    <string name="lastnameIsRequiredText">Lastname is required</string>
+    <string name="emailIsRequiredText">Email is required</string>
+    <string name="userIsRequiredtext">User is required</string>
+    <string name="passwordIsRequiredtext">Password is required</string>
+    <string name="provideValidEmailText">Provide valid email</string>
+    <string name="passwordDoesnotMatchText">Password doesn\'t match</string>
+    <string name="failedToRegisterText">Failed to register</string>
+    <string name="informationText">Information</string>
+    <string name="userHasBeenRegisteredSuccessfullyText">User has been registered successfully</string>
+    <string name="errorText">Error</string>
+    <string name="pleaseCheckYourEmailText">Please check your email</string>
+    <string name="failedToLogin">Failed to login</string>
+    <string name="hiText">Hi</string>
+    <string name="pleaseWait...Text">Please Wait...</string>
+    <string name="editText">Edit</string>
+    <string name="pauseText">Pause</string>
+    <string name="deleteText">Delete</string>
+</resources>

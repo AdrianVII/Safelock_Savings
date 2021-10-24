@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Custom colors -->
+    <color name="white_background">#F3F3F3</color> <!-- Background -->
+    <color name="grey">#686868</color> <!--Text general -->
+    <color name="blue_grey_white">#2D8890</color> <!-- EditText Login, Register **Esto no es BLUE**  -->
+    <color name="white_edit_text">#EAEAEA</color> <!-- Background EditText -->
+    <color name="blue_grey">#008892</color> <!-- Button principal -->
+    <color name="white_green">#749D9F</color> <!-- Hint Login, Register -->
+    <color name="green_grey">#1B8288</color> <!-- Selected-->
+    <color name="green_white">#64AAAE</color> <!-- No Selected -->
+    <color name="green_black">#135359</color> <!-- First button -->
+    <color name="grey_spinner">#333333</color> <!-- Selection spinner -->
+    <color name="grey_white_spinner">#666666</color> <!-- Selected item spinner -->
+    <color name="orange_white">#FF9E45</color> <!-- Card orange -->
+    <color name="orange_black">#FF7245</color> <!-- Card orange black -->
+    <color name="start_color">#084A54</color> <!-- Color principal del fondo -->
+    <color name="end_color">#1F8E93</color> <!-- Color final del fondo -->
+</resources>
