@@ -15,6 +15,9 @@ import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 public class Main_Activity extends AppCompatActivity {
     private ChipNavigationBar chipNavigationBarMain;
     private Reminders_Fragments reminders_fragments = new Reminders_Fragments();
+    private Budgets_Fragments budgets_fragments = new Budgets_Fragments();
+    private Reports_Fragments reports_fragments = new Reports_Fragments();
+    private Settings_Fragments  settings_fragments =  new Settings_Fragments();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,9 +29,9 @@ public class Main_Activity extends AppCompatActivity {
         chipNavigationBarMain.setOnItemSelectedListener(item -> {
             switch (item) {
                 case R.id.menuReminders: loadFragments(reminders_fragments); break;
-                case R.id.menuBudgets: Toast.makeText(getBaseContext(), "Presupuestos", Toast.LENGTH_SHORT).show(); break;
-                case R.id.menuReport: Toast.makeText(getBaseContext(), "Reportes", Toast.LENGTH_SHORT).show(); break;
-                case R.id.menuSettings: Toast.makeText(getBaseContext(), "Ajustes", Toast.LENGTH_SHORT).show(); break;
+                case R.id.menuBudgets: loadFragments(budgets_fragments); break;
+                case R.id.menuReport: loadFragments(reports_fragments);break;
+                case R.id.menuSettings: loadFragments(settings_fragments);break;
             }
         });
     }
