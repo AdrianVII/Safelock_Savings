@@ -8,12 +8,13 @@ import androidx.annotation.Nullable;
 
 public class Forgot_Activity extends Activity {
     private TextView btnBACK;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forgot_activity);
         btnBACK = findViewById(R.id.btnBACK);
-        btnBACK.setOnClickListener(  view -> {
+        btnBACK.setOnClickListener(view -> {
             onBackPressed();
         });
     }

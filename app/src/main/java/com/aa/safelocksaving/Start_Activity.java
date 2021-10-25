@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 public class Start_Activity extends Activity {
     private Button btnSIGNIN;
     private Button btnREGISTER;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +22,7 @@ public class Start_Activity extends Activity {
         });
         btnREGISTER = findViewById(R.id.btnREGISTER);
         btnREGISTER.setOnClickListener(view -> {
-           startActivity(new Intent(this, Register_Activity.class));
+            startActivity(new Intent(this, Register_Activity.class));
         });
     }
 }

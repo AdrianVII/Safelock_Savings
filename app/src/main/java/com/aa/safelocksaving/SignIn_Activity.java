@@ -3,6 +3,7 @@ package com.aa.safelocksaving;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -11,6 +12,7 @@ public class SignIn_Activity extends Activity {
     private TextView btnFORGOT;
     private TextView btnBACK;
     private TextView btnREGISTER;
+    private Button btnNEXT;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,6 +29,10 @@ public class SignIn_Activity extends Activity {
         btnREGISTER = findViewById(R.id.btnREGISTER);
         btnREGISTER.setOnClickListener(view -> {
             startActivity(new Intent(this, Register_Activity.class));
+        });
+        btnNEXT = findViewById(R.id.btnNEXT);
+        btnNEXT.setOnClickListener(view -> {
+            startActivity(new Intent(this, Main_Activity.class));
         });
     }
 }

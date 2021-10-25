@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/backText"
-        android:layout_margin="10dp"
+        android:padding="10dp"
         android:fontFamily="@font/roboto_regular"/>
     <TextView
         android:layout_marginTop="20dp"
@@ -48,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="10dp">
+        android:padding="10dp">
         <Space
             android:layout_width="0dp"
             android:layout_height="match_parent"

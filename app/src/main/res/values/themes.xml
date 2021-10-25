@@ -17,4 +17,8 @@
         <item name="android:windowLightStatusBar">true</item>
 
     </style>
+
+    <style name="hideText" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="showText">false</item>
+    </style>
 </resources>
