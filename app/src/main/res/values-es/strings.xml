@@ -11,7 +11,7 @@
     <string name="emailText">Correo</string>
     <string name="nameText">Nombre</string>
     <string name="lastnameText">Apellidos</string>
-    <string name="accountText">¿Tienes una cuenta?</string>
+    <string name="doYouHaveAnAccountText">¿Tienes una cuenta?</string>
     <string name="confirmPassText">Confirmar Contraseña</string>
     <string name="remindersText">Recordatorios</string>
     <string name="budgetsText">Presupuestos</string>
@@ -56,4 +56,9 @@
     <string name="editText">Editar</string>
     <string name="pauseText">Pausar</string>
     <string name="deleteText">Borrar</string>
+    <string name="accountText">Cuenta</string>
+    <string name="notificationsText">Notificaciones</string>
+    <string name="languageText">Idioma</string>
+    <string name="biometricDataText">Datos Biométricos</string>
+    <string name="signOutText">Cerrar Sesión</string>
 </resources>

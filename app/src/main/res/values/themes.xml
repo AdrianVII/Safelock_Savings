@@ -18,7 +18,10 @@
 
     </style>
 
-    <style name="hideText" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="showText">false</item>
+    <style name="BrandedSwitch.control" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">@color/imagen_color</item>
+        <item name="colorSwitchThumbNormal">@color/imagen_color</item>
     </style>
+
 </resources>

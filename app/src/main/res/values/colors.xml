@@ -24,6 +24,9 @@
     <color name="orange_black">#FF7245</color> <!-- Card orange black -->
     <color name="start_color">#084A54</color> <!-- Color principal del fondo -->
     <color name="end_color">#1F8E93</color> <!-- Color final del fondo -->
+    <color name="budget_green">#0A515B</color>
+    <color name="imagen_color">#4DB6AC</color>
+    <color name="line">#E0E0E0</color>
 
     <color name="pink">#c6419e</color>
     <color name="yellow">#e5a818</color>
