@@ -13,6 +13,7 @@
         android:layout_marginBottom="45dp"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
@@ -32,6 +33,6 @@
         app:cnb_iconSize="30dp"
         app:cnb_unselectedColor="@color/green_grey"
         app:cnb_radius="28dp"
-        android:background="@android:color/transparent"/>
+        android:background="@android:color/white"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
