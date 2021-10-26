@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.biometric.BiometricPrompt;
 import androidx.core.content.ContextCompat;
 
@@ -20,14 +21,13 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.concurrent.Executor;
 
-public class Start_Activity extends Activity {
+public class Start_Activity extends AppCompatActivity {
     private Button btnSIGNIN;
     private Button btnREGISTER;
     private Authentication authentication;
     private FirebaseAuth mAuth;
     private BiometricPrompt biometricPrompt;
     private BiometricPrompt.PromptInfo promptInfo;
-    private boolean isCorrect = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,29 +45,6 @@ public class Start_Activity extends Activity {
             startActivity(new Intent(this, Register_Activity.class));
             finish();
         });
-        /*Executor executor = ContextCompat.getMainExecutor(this);
-        biometricPrompt = new BiometricPrompt(this, executor, new BiometricPrompt.AuthenticationCallback() {
-            @Override
-            public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
-                super.onAuthenticationError(errorCode, errString);
-            }
-
-            @Override
-            public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
-                super.onAuthenticationSucceeded(result);
-            }
-
-            @Override
-            public void onAuthenticationFailed() {
-                super.onAuthenticationFailed();
-            }
-        });
-
-                promptInfo = new BiometricPrompt.PromptInfo.Builder()
-                        .setTitle(getString(R.string.enterFingerprintText))
-                        .setNegativeButtonText(getString(R.string.cancelText))
-                        .build();
-                        */
     }
 
     @Override
@@ -75,15 +52,34 @@ public class Start_Activity extends Activity {
         super.onStart();
         if (authentication.isLogged(mAuth)) {
             if (verifyBiometric()) {
-                //Datos biometricos...
+                Executor executor = ContextCompat.getMainExecutor(this);
+                biometricPrompt = new BiometricPrompt(this, executor, new BiometricPrompt.AuthenticationCallback() {
+                    @Override
+                    public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
+                        super.onAuthenticationError(errorCode, errString);
+                    }
 
+                    @Override
+                    public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
+                        super.onAuthenticationSucceeded(result);
+                        startActivity(new Intent(getBaseContext(), Main_Activity.class));
+                        finish();
+                    }
 
+                    @Override
+                    public void onAuthenticationFailed() {
+                        super.onAuthenticationFailed();
+                    }
+                });
+                promptInfo = new BiometricPrompt.PromptInfo.Builder()
+                        .setTitle(getString(R.string.enterFingerprintText))
+                        .setNegativeButtonText(getString(R.string.cancelText))
+                        .build();
                 biometricPrompt.authenticate(promptInfo);
-
-                if (isCorrect) startActivity(new Intent(this, Main_Activity.class));
-
-            } else startActivity(new Intent(this, Main_Activity.class));
-            finish();
+            } else{
+                startActivity(new Intent(this, Main_Activity.class));
+                finish();
+            }
         }
     }
 
