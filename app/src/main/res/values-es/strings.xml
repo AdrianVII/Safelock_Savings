@@ -61,4 +61,6 @@
     <string name="languageText">Idioma</string>
     <string name="biometricDataText">Datos Biométricos</string>
     <string name="signOutText">Cerrar Sesión</string>
+    <string name="leastSixCharactersText">Mínimo seis caracteres</string>
+    <string name="enterFingerprintText">Ingrese huella dactilar</string>
 </resources>

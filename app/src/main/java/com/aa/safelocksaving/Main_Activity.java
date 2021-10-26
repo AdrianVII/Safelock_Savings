@@ -20,7 +20,6 @@ public class Main_Activity extends AppCompatActivity {
     private Budgets_Fragments budgets_fragments = new Budgets_Fragments();
     private Reports_Fragments reports_fragments = new Reports_Fragments();
     private Settings_Fragments  settings_fragments =  new Settings_Fragments();
-    private FloatingActionButton add;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,24 +27,19 @@ public class Main_Activity extends AppCompatActivity {
         setContentView(R.layout.main_activity);
         chipNavigationBarMain = findViewById(R.id.chipNavigationBarMain);
         loadFragments(reminders_fragments);
-        add = findViewById(R.id.add);
         chipNavigationBarMain.setOnItemSelectedListener(item -> {
             switch (item) {
                 case R.id.menuReminders:
                     loadFragments(reminders_fragments);
-                    add.setVisibility(View.VISIBLE);
                     break;
                 case R.id.menuBudgets:
                     loadFragments(budgets_fragments);
-                    add.setVisibility(View.VISIBLE);
                 break;
                 case R.id.menuReport:
                     loadFragments(reports_fragments);
-                    add.setVisibility(View.INVISIBLE);
                     break;
                 case R.id.menuSettings:
                     loadFragments(settings_fragments);
-                    add.setVisibility(View.INVISIBLE);
                     break;
             }
         });

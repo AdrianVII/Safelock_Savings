@@ -8,30 +8,54 @@ import com.aa.safelocksaving.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Objects;
+
 public class Authentication {
-    private FirebaseAuth mAuth;
-    //private FirebaseUser user;
-    private boolean isCreated;
-
-    public Authentication() {
-        mAuth = FirebaseAuth.getInstance();
+    public boolean isLogged(FirebaseAuth auth) {
+        FirebaseUser user = auth.getCurrentUser();
+        return user != null;
     }
 
-    public boolean isLogged() {
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        return currentUser != null;
+    public boolean logoutUser(FirebaseAuth auth) {
+        if (isLogged(auth)) {
+            auth.signOut();
+            return true;
+        } return false;
     }
 
-    /*public boolean createUser(String email, String password) {
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        //user = mAuth.getCurrentUser();
-                        isCreated = true;
-                    } else isCreated = false;
-                });
-        return isCreated;
-    }*/
+    public boolean logoutUser() {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        if (isLogged(auth)) {
+            auth.signOut();
+            return true;
+        } return false;
+    }
+
+    public boolean isCorrect(EditText email, EditText password, Activity activity) {
+        String emailText = email.getText().toString().trim();
+        String passwordText = password.getText().toString().trim();
+        if (emailText.isEmpty()) {
+            email.setError(activity.getString(R.string.emailIsRequiredText));
+            email.requestFocus();
+            return false;
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(emailText).matches()) {
+            email.setError(activity.getString(R.string.provideValidEmailText));
+            email.requestFocus();
+            return false;
+        }
+        if (passwordText.isEmpty()) {
+            password.setError(activity.getString(R.string.passwordIsRequiredtext));
+            password.requestFocus();
+            return false;
+        }
+        if (passwordText.length() < 6) {
+            password.setError(activity.getString(R.string.leastSixCharactersText));
+            password.requestFocus();
+            return false;
+        }
+        return true;
+    }
 
     public boolean isCorrect(
             EditText name,
@@ -69,6 +93,11 @@ public class Authentication {
         }
         if (passwordText.isEmpty()) {
             password.setError(activity.getString(R.string.passwordIsRequiredtext));
+            password.requestFocus();
+            return false;
+        }
+        if (passwordText.length() < 6) {
+            password.setError(activity.getString(R.string.leastSixCharactersText));
             password.requestFocus();
             return false;
         }
