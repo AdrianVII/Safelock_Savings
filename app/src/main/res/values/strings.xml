@@ -69,4 +69,5 @@
     <string name="signOutText">Sign Out</string>
     <string name="leastSixCharactersText">Least six characters</string>
     <string name="enterFingerprintText">Enter Fingerprint</string>
+    <string name="errorSendingEmailText">Error sending email</string>
 </resources>

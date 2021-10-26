@@ -46,12 +46,12 @@ public class Settings_Fragments extends Fragment {
     }
 
     private void setSwitchBiometric() {
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("Biometric", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("Configuration", Context.MODE_PRIVATE);
         switchBiometric.setChecked(sharedPreferences.getBoolean("biometric", false));
     }
 
     private void controlBiometric(boolean checked) {
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("Biometric", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("Configuration", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("biometric", checked);
         editor.apply();

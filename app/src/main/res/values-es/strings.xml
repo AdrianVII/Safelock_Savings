@@ -63,4 +63,5 @@
     <string name="signOutText">Cerrar Sesión</string>
     <string name="leastSixCharactersText">Mínimo seis caracteres</string>
     <string name="enterFingerprintText">Ingrese huella dactilar</string>
+    <string name="errorSendingEmailText">Error al enviar el correo</string>
 </resources>

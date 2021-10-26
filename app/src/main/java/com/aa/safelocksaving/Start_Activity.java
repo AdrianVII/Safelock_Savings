@@ -84,8 +84,7 @@ public class Start_Activity extends AppCompatActivity {
     }
 
     private boolean verifyBiometric() {
-        SharedPreferences sharedPreferences = getSharedPreferences("Biometric", Context.MODE_PRIVATE);
-        Toast.makeText(this, "Datos biometricos: " + sharedPreferences.getBoolean("biometric", false), Toast.LENGTH_SHORT).show();
+        SharedPreferences sharedPreferences = getSharedPreferences("Configuration", Context.MODE_PRIVATE);
         return sharedPreferences.getBoolean("biometric", false);
     }
 
