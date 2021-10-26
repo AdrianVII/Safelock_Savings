@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "618445844127",
+    "firebase_url": "https://safelocksavings-default-rtdb.firebaseio.com",
+    "project_id": "safelocksavings",
+    "storage_bucket": "safelocksavings.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:618445844127:android:11cec997457d9c2d4d7caa",
+        "android_client_info": {
+          "package_name": "com.aa.safelock_savings_test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "618445844127-to0uvlvdn8kfm042aedif0be0od7aps9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDid6kQlEfkWUpKNjYpq7BM-ujh8XOk5xI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "618445844127-to0uvlvdn8kfm042aedif0be0od7aps9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:618445844127:android:21cd93ddde3a5d2c4d7caa",
+        "android_client_info": {
+          "package_name": "com.aa.safelocksaving"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "618445844127-to0uvlvdn8kfm042aedif0be0od7aps9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDid6kQlEfkWUpKNjYpq7BM-ujh8XOk5xI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "618445844127-to0uvlvdn8kfm042aedif0be0od7aps9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

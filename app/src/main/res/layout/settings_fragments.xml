@@ -185,6 +185,6 @@
         android:fontFamily="@font/roboto_regular"
         android:textAllCaps="false"
         android:layout_marginHorizontal="19dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/singout_background"/>
 </LinearLayout>

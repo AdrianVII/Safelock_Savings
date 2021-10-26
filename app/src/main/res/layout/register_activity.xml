@@ -28,6 +28,7 @@
         android:layout_marginHorizontal="20dp"
         android:orientation="vertical">
         <EditText
+            android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/nameText"
@@ -40,6 +41,7 @@
             android:autofillHints="name"
             android:inputType="textPersonName"/>
         <EditText
+            android:id="@+id/lastname"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,6 +55,7 @@
             android:autofillHints="name"
             android:inputType="textPersonName"/>
         <EditText
+            android:id="@+id/email"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -64,6 +67,7 @@
             android:fontFamily="@font/roboto_medium"
             android:textColor="@color/blue_grey_white"/>
         <EditText
+            android:id="@+id/password"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -75,6 +79,7 @@
             android:fontFamily="@font/roboto_medium"
             android:textColor="@color/blue_grey_white"/>
         <EditText
+            android:id="@+id/confirm_pass"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -109,6 +114,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"/>
         <Button
+            android:id="@+id/btnNEXT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/nextButton"
