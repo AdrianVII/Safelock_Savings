@@ -71,13 +71,6 @@ public class Account_Activity extends Activity {
     private void loadPicture() {
         final String userID = user.getUid();
         StorageReference reference = storageReference.child(userID + "/images/ProfilePicture.jpg");
-        /*reference.getDownloadUrl().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                Glide.with(this)
-                        .load(reference)
-                        .into(imageView);
-            }
-        });*/
         final long MAXBYTES = 1024*1024;
         reference.getBytes(MAXBYTES).addOnSuccessListener(bytes -> {
             Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
