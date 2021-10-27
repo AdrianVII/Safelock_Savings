@@ -67,4 +67,5 @@
     <string name="deleteAccountText">Eliminar Cuenta</string>
     <string name="changePasswordText">Cambiar Contraseña</string>
     <string name="invalidEmailOrPasswordText">Correo o contraseña inválida</string>
+    <string name="theImageHasBeenUploadedText">"La imagen a sido subida "</string>
 </resources>

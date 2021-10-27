@@ -74,4 +74,5 @@
     <string name="threePointsText" translatable="false">...</string>
     <string name="changePasswordText">Change Password</string>
     <string name="invalidEmailOrPasswordText">Invalid email or password</string>
+    <string name="theImageHasBeenUploadedText">The image has been uploaded</string>
 </resources>
