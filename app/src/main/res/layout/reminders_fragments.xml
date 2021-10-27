@@ -12,7 +12,7 @@
         android:text="@string/remindersText"
         android:textSize="40sp"
         android:fontFamily="@font/poppins_regular"
-        android:layout_marginTop="46dp"
+        android:layout_marginTop="25dp"
         android:layout_marginHorizontal="26dp"
         android:textColor="@color/grey"/>
 

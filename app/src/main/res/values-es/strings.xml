@@ -64,4 +64,7 @@
     <string name="leastSixCharactersText">Mínimo seis caracteres</string>
     <string name="enterFingerprintText">Ingrese huella dactilar</string>
     <string name="errorSendingEmailText">Error al enviar el correo</string>
+    <string name="deleteAccountText">Eliminar Cuenta</string>
+    <string name="changePasswordText">Cambiar Contraseña</string>
+    <string name="invalidEmailOrPasswordText">Correo o contraseña inválida</string>
 </resources>

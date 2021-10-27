@@ -70,4 +70,8 @@
     <string name="leastSixCharactersText">Least six characters</string>
     <string name="enterFingerprintText">Enter Fingerprint</string>
     <string name="errorSendingEmailText">Error sending email</string>
+    <string name="deleteAccountText">Delete Account</string>
+    <string name="threePointsText" translatable="false">...</string>
+    <string name="changePasswordText">Change Password</string>
+    <string name="invalidEmailOrPasswordText">Invalid email or password</string>
 </resources>

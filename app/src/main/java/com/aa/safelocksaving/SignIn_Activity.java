@@ -12,6 +12,8 @@ import androidx.annotation.Nullable;
 
 import com.aa.safelocksaving.dataOperation.Authentication;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthEmailException;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
@@ -70,6 +72,11 @@ public class SignIn_Activity extends Activity {
                                 user.sendEmailVerification();
                                 authentication.logoutUser(mAuth);
                             }
+                        } else {
+                            email.setText("");
+                            password.setText("");
+                            email.requestFocus();
+                            Toast.makeText(this, getString(R.string.invalidEmailOrPasswordText), Toast.LENGTH_SHORT).show();
                         }
                     });
         }
