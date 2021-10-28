@@ -8,6 +8,7 @@
     android:fitsSystemWindows="true">
 
     <TextView
+        android:id="@+id/btnBACK"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/backText"
@@ -152,6 +153,6 @@
         android:textAllCaps="false"
         android:layout_marginHorizontal="19dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/singout_background"/>
+        android:background="@drawable/settings_button_background"/>
 
 </LinearLayout>

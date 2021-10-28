@@ -11,6 +11,8 @@
         android:roundIcon="@mipmap/logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SafelockSaving">
+        <activity android:name=".Language_Activity" android:exported="true"/>
+        <activity android:name=".Information_Activity" android:exported="true"/>
         <activity android:name=".Account_Activity" android:exported="true"/>
         <activity android:name=".SignIn_Activity" android:exported="true"/>
         <activity android:name=".Register_Activity" android:exported="true"/>

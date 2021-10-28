@@ -75,4 +75,8 @@
     <string name="changePasswordText">Change Password</string>
     <string name="invalidEmailOrPasswordText">Invalid email or password</string>
     <string name="theImageHasBeenUploadedText">The image has been uploaded</string>
+    <string name="spanishText">Spanish</string>
+    <string name="englishText">English</string>
+    <string name="applyChangesText">Apply Changes</string>
+    <string name="restartTheAppText">Restart the app</string>
 </resources>

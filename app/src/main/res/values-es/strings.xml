@@ -68,4 +68,8 @@
     <string name="changePasswordText">Cambiar Contraseña</string>
     <string name="invalidEmailOrPasswordText">Correo o contraseña inválida</string>
     <string name="theImageHasBeenUploadedText">"La imagen a sido subida "</string>
+    <string name="spanishText">Español</string>
+    <string name="englishText">Inglés</string>
+    <string name="applyChangesText">Aplicar Cambios</string>
+    <string name="restartTheAppText">Reinicia la aplicación</string>
 </resources>

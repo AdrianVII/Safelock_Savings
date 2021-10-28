@@ -23,6 +23,8 @@ public class Settings_Fragments extends Fragment {
     private SwitchCompat switchBiometric;
     private LinearLayout btnACCOUNT;
     private LinearLayout btnSWITCH;
+    private LinearLayout info;
+    private LinearLayout lang;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -31,6 +33,8 @@ public class Settings_Fragments extends Fragment {
         btnSIGNOUT = view.findViewById(R.id.btnSIGNOUT);
         switchBiometric = view.findViewById(R.id.switchBiometric);
         btnACCOUNT = view.findViewById(R.id.btnACCOUNT);
+        info = view.findViewById(R.id.info);
+        lang = view.findViewById(R.id.lang);
         btnSWITCH = view.findViewById(R.id.btnSWITCH);
         setSwitchBiometric();
         return view;
@@ -42,7 +46,8 @@ public class Settings_Fragments extends Fragment {
 
         btnACCOUNT.setOnClickListener(view -> startActivity(new Intent(getContext(), Account_Activity.class)));
         btnSWITCH.setOnClickListener(view -> switchBiometric.setChecked(!switchBiometric.isChecked()));
-
+        info.setOnClickListener( view -> startActivity(new Intent(getContext(), Information_Activity.class)));
+        lang.setOnClickListener(view -> startActivity(new Intent(getContext(), Language_Activity.class)));
         btnSIGNOUT.setOnClickListener(view -> {
             if (authentication.logoutUser()) {
                 startActivity(new Intent(getActivity(), Start_Activity.class));
