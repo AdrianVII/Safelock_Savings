@@ -1,28 +1,19 @@
 package com.aa.safelocksaving;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.biometric.BiometricPrompt;
 import androidx.core.content.ContextCompat;
-import androidx.core.os.ConfigurationCompat;
 
-import com.aa.safelocksaving.dataOperation.Authentication;
+import com.aa.safelocksaving.data.Authentication;
+import com.aa.safelocksaving.data.DAOConfigurationData;
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.Locale;
 import java.util.concurrent.Executor;
 
 public class Start_Activity extends AppCompatActivity {
@@ -36,7 +27,7 @@ public class Start_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setLanguage();
+        new DAOConfigurationData(this).setLanguage();
         authentication = new Authentication();
         mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.start_activity);
@@ -56,7 +47,7 @@ public class Start_Activity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if (authentication.isLogged(mAuth)) {
-            if (verifyBiometric()) {
+            if (new DAOConfigurationData(this).verifyBiometric()) {
                 Executor executor = ContextCompat.getMainExecutor(this);
                 biometricPrompt = new BiometricPrompt(this, executor, new BiometricPrompt.AuthenticationCallback() {
                     @Override
@@ -81,35 +72,10 @@ public class Start_Activity extends AppCompatActivity {
                         .setNegativeButtonText(getString(R.string.cancelText))
                         .build();
                 biometricPrompt.authenticate(promptInfo);
-            } else{
+            } else {
                 startActivity(new Intent(this, Main_Activity.class));
                 finish();
             }
         }
     }
-
-    private boolean verifyBiometric() {
-        SharedPreferences sharedPreferences = getSharedPreferences("Configuration", Context.MODE_PRIVATE);
-        return sharedPreferences.getBoolean("biometric", false);
-    }
-
-    private void setLanguage() {
-        String language = "";
-        SharedPreferences sharedPreferences = getSharedPreferences("Configuration", Context.MODE_PRIVATE);
-        if (!sharedPreferences.contains("Language")) {
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            language = ConfigurationCompat.getLocales(Resources.getSystem().getConfiguration()).toLanguageTags();
-            editor.putString("Language", language);
-            editor.apply();
-        } else {
-            language = sharedPreferences.getString("Language", "en");
-            Locale locale = new Locale(language);
-            Locale.setDefault(locale);
-            Configuration config = new Configuration();
-            config.locale = locale;
-            Toast.makeText(this, language, Toast.LENGTH_SHORT).show();
-            getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-        }
-    }
-
 }

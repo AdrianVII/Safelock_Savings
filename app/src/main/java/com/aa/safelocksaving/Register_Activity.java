@@ -3,7 +3,6 @@ package com.aa.safelocksaving;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -11,8 +10,11 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.aa.safelocksaving.data.DAOUser;
+import com.aa.safelocksaving.data.DAOUserData;
 import com.aa.safelocksaving.data.User;
-import com.aa.safelocksaving.dataOperation.Authentication;
+import com.aa.safelocksaving.data.Authentication;
+import com.aa.safelocksaving.operation.md5;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -30,12 +32,14 @@ public class Register_Activity extends Activity {
     private Button btnNEXT;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
-    private FirebaseDatabase database;
-    private DatabaseReference databaseReference;
+    private DAOUser daoUser;
+    private DAOUserData daoUserData;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        daoUserData = new DAOUserData(this);
+        daoUser =new DAOUser();
         authentication = new Authentication();
         mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.register_activity);
@@ -62,20 +66,16 @@ public class Register_Activity extends Activity {
             String nameText = name.getText().toString();
             String lastnameText = lastname.getText().toString();
             String emailText = email.getText().toString();
-            String passwordText = password.getText().toString();
+            String passwordText = md5.getMD5(password.getText().toString());
             mAuth.createUserWithEmailAndPassword(emailText, passwordText)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             user = mAuth.getCurrentUser();
-                            User dataUser = new User(nameText, lastnameText, emailText);
-
-                            database = FirebaseDatabase.getInstance();
-                            databaseReference = database.getReference("Users");
-                            databaseReference
-                                    .child(user.getUid())
-                                    .setValue(dataUser).addOnCompleteListener(task1 -> {
+                            User dataUser = new User(nameText, lastnameText, emailText, passwordText);
+                            daoUser.add(dataUser, user.getUid()).addOnCompleteListener(task1 -> {
                                 if (task1.isSuccessful()) {
                                     user.sendEmailVerification();
+                                    daoUserData.add(dataUser); //Guarda la informacion en el telefono
                                     Toast.makeText(this, getString(R.string.pleaseCheckYourEmailText), Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(this, SignIn_Activity.class));
                                     finish();

@@ -29,7 +29,6 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="26dp"
         android:layout_marginTop="46dp">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -42,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_marginBottom="20dp"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="20dp"
             android:src="@drawable/ic_round_add_24"
             android:backgroundTint="@color/white"
             app:borderWidth="0dp"

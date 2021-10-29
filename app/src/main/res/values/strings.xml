@@ -27,6 +27,7 @@
     <string name="shopText">Shop</string>
 
     <string-array name="typeReminders">
+        <item>@string/typeRemindersText</item>
         <item>@string/cardText</item>
         <item>@string/subscriptionText</item>
         <item>@string/shopText</item>
@@ -79,4 +80,8 @@
     <string name="englishText">English</string>
     <string name="applyChangesText">Apply Changes</string>
     <string name="restartTheAppText">Restart the app</string>
+    <string name="repeatText">Repeat</string>
+    <string name="descriptionText">Description</string>
+    <string name="typeRemindersText">Type Reminders</string>
+    <string name="newBudgetsText">New Budgets</string>
 </resources>

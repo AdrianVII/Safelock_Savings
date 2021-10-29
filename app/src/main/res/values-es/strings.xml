@@ -72,4 +72,8 @@
     <string name="englishText">Inglés</string>
     <string name="applyChangesText">Aplicar Cambios</string>
     <string name="restartTheAppText">Reinicia la aplicación</string>
+    <string name="repeatText">Repetir</string>
+    <string name="descriptionText">Descripción</string>
+    <string name="typeRemindersText">Tipo de Recordatorios</string>
+    <string name="newBudgetsText">Nuevo Presupuesto</string>
 </resources>

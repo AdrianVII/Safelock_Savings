@@ -1,5 +1,6 @@
 package com.aa.safelocksaving;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,9 +16,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
-import com.aa.safelocksaving.dataOperation.Authentication;
+import com.aa.safelocksaving.data.ConfigurationData;
+import com.aa.safelocksaving.data.Authentication;
+import com.aa.safelocksaving.data.DAOConfigurationData;
 
-public class Settings_Fragments extends Fragment {
+public class Settings_Fragments extends Fragment implements View.OnClickListener {
     private Authentication authentication;
     private Button btnSIGNOUT;
     private SwitchCompat switchBiometric;
@@ -43,32 +46,32 @@ public class Settings_Fragments extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        btnACCOUNT.setOnClickListener(this);
+        btnSWITCH.setOnClickListener(this);
+        info.setOnClickListener(this);
+        lang.setOnClickListener(this);
+        btnSIGNOUT.setOnClickListener(this);
+        switchBiometric.setOnCheckedChangeListener((buttonView, isChecked) -> controlBiometric(isChecked));
+    }
 
-        btnACCOUNT.setOnClickListener(view -> startActivity(new Intent(getContext(), Account_Activity.class)));
-        btnSWITCH.setOnClickListener(view -> switchBiometric.setChecked(!switchBiometric.isChecked()));
-        info.setOnClickListener( view -> startActivity(new Intent(getContext(), Information_Activity.class)));
-        lang.setOnClickListener(view -> startActivity(new Intent(getContext(), Language_Activity.class)));
-        btnSIGNOUT.setOnClickListener(view -> {
-            if (authentication.logoutUser()) {
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnACCOUNT: startActivity(new Intent(getContext(), Account_Activity.class)); break;
+            case R.id.btnSWITCH: switchBiometric.setChecked(!switchBiometric.isChecked()); break;
+            case R.id.info: startActivity(new Intent(getContext(), Information_Activity.class)); break;
+            case R.id.lang: startActivity(new Intent(getContext(), Language_Activity.class)); break;
+            case R.id.btnSIGNOUT: if (authentication.logoutUser()) {
                 startActivity(new Intent(getActivity(), Start_Activity.class));
                 getActivity().finish();
             }
-        });
-        switchBiometric.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            controlBiometric(isChecked);
-        });
+            break;
+        }
     }
 
-    private void setSwitchBiometric() {
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("Configuration", Context.MODE_PRIVATE);
-        switchBiometric.setChecked(sharedPreferences.getBoolean("biometric", false));
-    }
+    private void setSwitchBiometric() { switchBiometric.setChecked(new DAOConfigurationData(getActivity()).getBiometric()); }
 
-    private void controlBiometric(boolean checked) {
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("Configuration", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean("biometric", checked);
-        editor.apply();
-    }
+    private void controlBiometric(boolean checked) { new DAOConfigurationData(getActivity()).updateBiometric(checked); }
 
 }

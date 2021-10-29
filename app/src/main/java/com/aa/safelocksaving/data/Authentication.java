@@ -1,4 +1,4 @@
-package com.aa.safelocksaving.dataOperation;
+package com.aa.safelocksaving.data;
 
 import android.app.Activity;
 import android.util.Patterns;

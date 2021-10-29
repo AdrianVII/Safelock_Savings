@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,12 +16,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.aa.safelocksaving.data.Authentication;
+import com.aa.safelocksaving.data.DAOUserData;
 import com.aa.safelocksaving.data.User;
+import com.aa.safelocksaving.data.UserData;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -34,10 +40,11 @@ import com.google.firebase.storage.UploadTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class Account_Activity extends Activity {
+public class Account_Activity extends AppCompatActivity {
     private TextView email;
     private TextView name;
     private TextView btnBack;
+    private Button btnDELETEACC;
     private LinearLayout changepass;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
@@ -48,11 +55,14 @@ public class Account_Activity extends Activity {
     private StorageReference storageReference;
     private DatabaseReference databaseReference;
 
+    private DAOUserData daoUserData;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
+        daoUserData = new DAOUserData(this);
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
         setContentView(R.layout.account_activity);
@@ -63,6 +73,23 @@ public class Account_Activity extends Activity {
         changepass = findViewById(R.id.changepass);
         imageView = findViewById(R.id.imageView);
         imageView.setOnClickListener(view -> choosePicture());
+        btnDELETEACC = findViewById(R.id.btnDELETEACC);
+        btnDELETEACC.setOnClickListener(view -> {
+            AuthCredential credential = EmailAuthProvider
+                    .getCredential(daoUserData.get(UserData.Email, ""), daoUserData.get(UserData.Password, ""));
+            user.reauthenticate(credential)
+                    .addOnCompleteListener(task -> user.delete()
+                            .addOnCompleteListener(task1 -> {
+                                if (task1.isSuccessful()) {
+                                    daoUserData.removeAll();
+                                    Toast.makeText(this, "Tu cuenta a sido eliminada carnal c:", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(this, Start_Activity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                                    finish();
+                                }
+                            }));
+            databaseReference.child(user.getUid()).removeValue();
+            storageReference.child(user.getUid() + "/images/ProfilePicture.jpg").delete();
+        });
         loadPicture();
         loadData();
     }
@@ -135,4 +162,5 @@ public class Account_Activity extends Activity {
             uploadPicture();
         }
     }
+
 }

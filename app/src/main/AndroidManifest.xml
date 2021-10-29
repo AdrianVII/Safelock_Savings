@@ -11,6 +11,8 @@
         android:roundIcon="@mipmap/logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SafelockSaving">
+        <activity android:name=".New_Budgets_Activity" android:exported="true"/>
+        <activity android:name=".New_Reminders_Activity" android:exported="true"/>
         <activity android:name=".Language_Activity" android:exported="true"/>
         <activity android:name=".Information_Activity" android:exported="true"/>
         <activity android:name=".Account_Activity" android:exported="true"/>
@@ -18,8 +20,9 @@
         <activity android:name=".Register_Activity" android:exported="true"/>
         <activity android:name=".Forgot_Activity" android:exported="true"/>
         <activity android:name=".Main_Activity" android:exported="true"/>
+        <activity android:name=".Start_Activity" android:exported="true"/>
         <!-- Principal -->
-        <activity android:name=".Start_Activity" android:exported="true">
+        <activity android:name=".Splash_Screen_Activity" android:exported="true">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER"/>
                 <action android:name="android.intent.action.MAIN"/>

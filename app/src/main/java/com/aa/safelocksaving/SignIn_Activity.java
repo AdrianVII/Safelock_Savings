@@ -10,10 +10,9 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-import com.aa.safelocksaving.dataOperation.Authentication;
+import com.aa.safelocksaving.data.Authentication;
+import com.aa.safelocksaving.operation.md5;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthEmailException;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
@@ -59,7 +58,7 @@ public class SignIn_Activity extends Activity {
     private void loginUser() {
         if (authentication.isCorrect(email, password, this)) {
             String emailText = email.getText().toString().trim();
-            String passwordText = password.getText().toString().trim();
+            String passwordText = md5.getMD5(password.getText().toString().trim());
             mAuth.signInWithEmailAndPassword(emailText, passwordText)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {

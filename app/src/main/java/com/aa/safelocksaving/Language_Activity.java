@@ -19,6 +19,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.os.ConfigurationCompat;
 
+import com.aa.safelocksaving.data.DAOConfigurationData;
+
 import java.util.Locale;
 
 public class Language_Activity extends AppCompatActivity {
@@ -26,8 +28,6 @@ public class Language_Activity extends AppCompatActivity {
     private Button btnAPPLY;
     private RadioButton rdbSPANISH;
     private RadioButton rdbENGLISH;
-    private SharedPreferences sharedPreferences;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,26 +40,17 @@ public class Language_Activity extends AppCompatActivity {
         btnAPPLY = findViewById(R.id.btnAPPLY);
         setCheck();
         btnBack.setOnClickListener(view -> onBackPressed());
-        btnAPPLY.setOnClickListener(view -> {
-            radioButtonChecked();
-        });
+        btnAPPLY.setOnClickListener(view ->  radioButtonChecked());
     }
 
     private void setCheck() {
-        sharedPreferences = getSharedPreferences("Configuration", Context.MODE_PRIVATE);
-        String language = sharedPreferences.getString("Language", "en");
-        if (language.equals("es")) rdbSPANISH.setChecked(true);
-        else if (language.equals("en")) rdbENGLISH.setChecked(true);
+        if (new DAOConfigurationData(this).getLanguage().equals("es")) rdbSPANISH.setChecked(true);
+        else if (new DAOConfigurationData(this).getLanguage().equals("en")) rdbENGLISH.setChecked(true);
     }
 
     private void radioButtonChecked() {
-        String language = "en";
-        if (rdbSPANISH.isChecked()) language = "es";
-        else if(rdbENGLISH.isChecked()) language = "en";
-        sharedPreferences = getSharedPreferences("Configuration", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("Language", language);
-        editor.apply();
+        if (rdbSPANISH.isChecked()) new DAOConfigurationData(this).updateLanguage("es");
+        else if(rdbENGLISH.isChecked()) new DAOConfigurationData(this).updateLanguage("en");
         Toast.makeText(this, getString(R.string.restartTheAppText), Toast.LENGTH_SHORT).show();
     }
 
