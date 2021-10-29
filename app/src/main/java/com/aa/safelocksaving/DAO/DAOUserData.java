@@ -1,8 +1,11 @@
-package com.aa.safelocksaving.data;
+package com.aa.safelocksaving.DAO;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+
+import com.aa.safelocksaving.data.User;
+import com.aa.safelocksaving.data.UserData;
 
 public class DAOUserData {
     private SharedPreferences sharedPreferences;

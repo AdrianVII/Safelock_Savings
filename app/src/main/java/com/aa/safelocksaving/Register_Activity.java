@@ -10,15 +10,13 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-import com.aa.safelocksaving.data.DAOUser;
-import com.aa.safelocksaving.data.DAOUserData;
+import com.aa.safelocksaving.DAO.DAOUser;
+import com.aa.safelocksaving.DAO.DAOUserData;
 import com.aa.safelocksaving.data.User;
 import com.aa.safelocksaving.data.Authentication;
 import com.aa.safelocksaving.operation.md5;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class Register_Activity extends Activity {
     private TextView btnBACK;

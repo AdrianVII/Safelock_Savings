@@ -11,7 +11,7 @@ import androidx.biometric.BiometricPrompt;
 import androidx.core.content.ContextCompat;
 
 import com.aa.safelocksaving.data.Authentication;
-import com.aa.safelocksaving.data.DAOConfigurationData;
+import com.aa.safelocksaving.DAO.DAOConfigurationData;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.concurrent.Executor;
@@ -27,7 +27,6 @@ public class Start_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        new DAOConfigurationData(this).setLanguage();
         authentication = new Authentication();
         mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.start_activity);

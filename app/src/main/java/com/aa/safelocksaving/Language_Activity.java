@@ -1,27 +1,15 @@
 package com.aa.safelocksaving;
 
-import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.os.ConfigurationCompat;
 
-import com.aa.safelocksaving.data.DAOConfigurationData;
-
-import java.util.Locale;
+import com.aa.safelocksaving.DAO.DAOConfigurationData;
 
 public class Language_Activity extends AppCompatActivity {
     private TextView btnBack;

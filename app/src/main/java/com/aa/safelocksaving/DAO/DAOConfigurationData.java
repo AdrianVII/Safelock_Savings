@@ -1,4 +1,4 @@
-package com.aa.safelocksaving.data;
+package com.aa.safelocksaving.DAO;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,6 +7,8 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 
 import androidx.core.os.ConfigurationCompat;
+
+import com.aa.safelocksaving.data.ConfigurationData;
 
 import java.util.Locale;
 

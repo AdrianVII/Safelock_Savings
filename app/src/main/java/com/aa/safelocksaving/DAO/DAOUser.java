@@ -1,5 +1,6 @@
-package com.aa.safelocksaving.data;
+package com.aa.safelocksaving.DAO;
 
+import com.aa.safelocksaving.data.User;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;

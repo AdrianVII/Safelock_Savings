@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_start_activity">
+    android:background="@drawable/background_start_activity"
+    android:fitsSystemWindows="true">
 
     <ImageView
         android:id="@+id/imageView"
@@ -27,8 +28,9 @@
         android:layout_marginBottom="152dp"
         android:text="@string/app_name"
         android:textColor="@color/white"
-        android:textSize="40sp"
+        android:textSize="60sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/rancho_regular"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
