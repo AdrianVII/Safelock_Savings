@@ -3,6 +3,7 @@ package com.aa.safelocksaving;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -10,10 +11,12 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.aa.safelocksaving.DAO.DAOPicture;
 import com.aa.safelocksaving.DAO.DAOUser;
 import com.aa.safelocksaving.DAO.DAOUserData;
 import com.aa.safelocksaving.data.User;
 import com.aa.safelocksaving.data.Authentication;
+import com.aa.safelocksaving.operation.OPBasics;
 import com.aa.safelocksaving.operation.md5;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

@@ -10,10 +10,14 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.aa.safelocksaving.DAO.DAOUserData;
 import com.aa.safelocksaving.data.Authentication;
+import com.aa.safelocksaving.data.User;
+import com.aa.safelocksaving.operation.OPBasics;
 import com.aa.safelocksaving.operation.md5;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseError;
 
 import java.util.Objects;
 
@@ -27,6 +31,7 @@ public class SignIn_Activity extends Activity {
     private EditText password;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
+    private User userData;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,8 +69,16 @@ public class SignIn_Activity extends Activity {
                         if (task.isSuccessful()) {
                             user = mAuth.getCurrentUser();
                             if (Objects.requireNonNull(user).isEmailVerified()) {
-                                startActivity(new Intent(this, Main_Activity.class));
-                                finish();
+                                new OPBasics().getUserData(new OPBasics.getDataListener() {
+                                    @Override
+                                    public void getUser(User user) {
+                                        new DAOUserData(getBaseContext()).add(user);
+                                        startActivity(new Intent(getBaseContext(), Main_Activity.class));
+                                        finish();
+                                    }
+                                    @Override
+                                    public void getError(DatabaseError error) { }
+                                });
                             } else {
                                 Toast.makeText(this, getString(R.string.pleaseCheckYourEmailText), Toast.LENGTH_SHORT).show();
                                 user.sendEmailVerification();

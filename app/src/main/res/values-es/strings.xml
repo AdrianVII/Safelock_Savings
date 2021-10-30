@@ -76,4 +76,7 @@
     <string name="descriptionText">Descripción</string>
     <string name="typeRemindersText">Tipo de Recordatorios</string>
     <string name="newBudgetsText">Nuevo Presupuesto</string>
+    <string name="yourAccountHasBeenDeletedText">Tu Cuenta Ha Sido Eliminada</string>
+    <string name="connectionCouldNotBeEstablishedText">No Se Pudo Establecer Conexión</string>
+    <string name="confirmText">Confirmar</string>
 </resources>

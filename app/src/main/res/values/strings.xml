@@ -44,7 +44,7 @@
     <string name="importantText">Important</string>
     <string name="veryImportantText">Very Important</string>
     <string name="okText">Ok</string>
-    <string name="cancelText">Cancelar</string>
+    <string name="cancelText">Cancel</string>
     <string name="nameIsRequiredText">Name is required</string>
     <string name="lastnameIsRequiredText">Lastname is required</string>
     <string name="emailIsRequiredText">Email is required</string>
@@ -84,4 +84,7 @@
     <string name="descriptionText">Description</string>
     <string name="typeRemindersText">Type Reminders</string>
     <string name="newBudgetsText">New Budgets</string>
+    <string name="yourAccountHasBeenDeletedText">Your Account Has Been Deleted</string>
+    <string name="connectionCouldNotBeEstablishedText">Connection Could Not Be Established</string>
+    <string name="confirmText">Confirm</string>
 </resources>

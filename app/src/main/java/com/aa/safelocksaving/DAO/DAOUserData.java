@@ -11,7 +11,7 @@ public class DAOUserData {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
-    public DAOUserData(Activity activity) {
+    public DAOUserData(Context activity) {
         sharedPreferences = activity.getSharedPreferences(UserData.UserData, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
     }
@@ -41,6 +41,8 @@ public class DAOUserData {
     public String get(String key, String defValue) {
         return sharedPreferences.getString(key, defValue);
     }
+
+    public String getFullName() { return String.format("%s %s", sharedPreferences.getString(UserData.Name, ""), sharedPreferences.getString(UserData.LastName, "")); }
 
     public void remove(String key) {
         editor.putString(key, "");

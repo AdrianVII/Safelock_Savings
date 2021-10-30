@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/SpinKitView.Circle"
+        app:SpinKit_Color="@color/blue_grey"
+        android:layout_marginVertical="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pleaseWait...Text"
+        android:textSize="20sp"
+        android:fontFamily="@font/poppins_regular"
+        android:layout_marginVertical="10dp"
+        android:textColor="@color/budget_green"/>
+
+</LinearLayout>
