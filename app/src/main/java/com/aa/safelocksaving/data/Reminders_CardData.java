@@ -1,18 +1,20 @@
 package com.aa.safelocksaving.data;
 
+import java.util.Date;
+
 public class Reminders_CardData {
     private String name;
     private double amount;
     private double minAmount;
     private double settlement;
-    private String cutoffDate;
-    private String deadline;
     private int importance;
     private int month;
+    private DateBasic cutoffDate;
+    private DateBasic deadline;
 
     public Reminders_CardData() {  }
 
-    public Reminders_CardData(String name, double amount, double minAmount, double settlement, String cutoffDate, String deadline, int importance, int month) {
+    public Reminders_CardData(String name, double amount, double minAmount, double settlement, DateBasic cutoffDate, DateBasic deadline, int importance, int month) {
         this.name = name;
         this.amount = amount;
         this.minAmount = minAmount;
@@ -55,19 +57,17 @@ public class Reminders_CardData {
         this.settlement = settlement;
     }
 
-    public String getCutoffDate() {
-        return cutoffDate;
-    }
+    public DateBasic getCutoffDate() { return cutoffDate; }
 
-    public void setCutoffDate(String cutoffDate) {
+    public void setCutoffDate(DateBasic cutoffDate) {
         this.cutoffDate = cutoffDate;
     }
 
-    public String getDeadline() {
+    public DateBasic getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(String deadline) {
+    public void setDeadline(DateBasic deadline) {
         this.deadline = deadline;
     }
 

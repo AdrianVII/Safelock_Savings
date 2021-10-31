@@ -1,4 +1,4 @@
-package com.aa.safelocksaving.operation;
+package com.aa.safelocksaving.Operation;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -23,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -92,6 +93,8 @@ public class OPBasics {
     }
 
     public Task<Void> addCard(Reminders_CardData reminders_cardData, String ID) { return new DAOUser().addCards(user.getUid(), reminders_cardData, ID); }
+
+    public DatabaseReference getCardsReminders() { return new DAOUser().get(user.getUid()).child("reminders"); }
 
     public void deleteUser(Activity activity, deleteUserListener listener) {
         reAuthenticate(activity).addOnCompleteListener(task -> {

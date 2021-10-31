@@ -54,11 +54,11 @@
             android:layout_alignBottom="@+id/rlt"
             android:layout_marginHorizontal="10dp">
             <Button
-                android:id="@+id/btnyes"
+                android:id="@+id/btnno"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_button"
-                android:text="@string/confirmText"
+                android:text="@string/cancelText"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="15sp"
@@ -69,11 +69,11 @@
                 android:layout_weight="1"/>
 
             <Button
-                android:id="@+id/btnno"
+                android:id="@+id/btnyes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_button"
-                android:text="@string/cancelText"
+                android:text="@string/confirmText"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="15sp"

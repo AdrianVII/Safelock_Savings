@@ -110,6 +110,7 @@
             android:textSize="18sp" />
 
         <View
+            android:id="@+id/importantColor"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_gravity="center"

@@ -1,10 +1,8 @@
-package com.aa.safelocksaving.operation;
+package com.aa.safelocksaving.Operation;
 
 import android.app.Activity;
 import android.widget.EditText;
-import android.widget.TabHost;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.aa.safelocksaving.Dialog.Dialog_Information;
 import com.aa.safelocksaving.R;
@@ -36,7 +34,7 @@ public class CheckData {
             return false;
         }
         if (important == 0) {
-            new Dialog_Information(activity, activity.getString(R.string.informationText), activity.getString(R.string.importanceIsNotSelectedText));
+            new Dialog_Information(activity, activity.getString(R.string.informationText), activity.getString(R.string.importanceIsNotSelectedText)).show();
             return false;
         }
         return true;

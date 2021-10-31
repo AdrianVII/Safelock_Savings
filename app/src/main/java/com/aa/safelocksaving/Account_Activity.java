@@ -1,7 +1,6 @@
 package com.aa.safelocksaving;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.aa.safelocksaving.DAO.DAOUserData;
 import com.aa.safelocksaving.Dialog.Dialog_Box;
 import com.aa.safelocksaving.data.UserData;
-import com.aa.safelocksaving.operation.OPBasics;
+import com.aa.safelocksaving.Operation.OPBasics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 

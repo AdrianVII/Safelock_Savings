@@ -25,7 +25,7 @@ public class Dialog_Information extends Dialog {
     public Dialog_Information(@NonNull Activity activity, String title, String message) {
         super(activity);
         this.activity = activity;
-        super.setContentView(R.layout.dialog_box);
+        super.setContentView(R.layout.dialog_information);
         super.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         Window window = super.getWindow();
         window.setGravity(Gravity.CENTER);

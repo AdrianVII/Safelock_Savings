@@ -5,7 +5,7 @@ public class User {
     private String lastname;
     private String email;
     private String password;
-    //private DataUser dataUser;
+    private Reminders reminders;
 
     public User() {
     }
@@ -49,9 +49,11 @@ public class User {
         this.password = password;
     }
 
-    /*public DataUser getDataUser() { return dataUser; }
+    public Reminders getReminders() {
+        return reminders;
+    }
 
-    public void setDataUser(DataUser dataUser) {
-        this.dataUser = dataUser;
-    }*/
+    public void setReminders(Reminders reminders) {
+        this.reminders = reminders;
+    }
 }

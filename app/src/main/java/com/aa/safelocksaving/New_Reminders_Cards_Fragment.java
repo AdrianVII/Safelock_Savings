@@ -14,20 +14,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.aa.safelocksaving.DAO.DAOUser;
-import com.aa.safelocksaving.DAO.DAOUserData;
-import com.aa.safelocksaving.Dialog.Progress_Alert_Dialog;
-import com.aa.safelocksaving.data.DataUser;
+import com.aa.safelocksaving.Dialog.Dialog_Important;
+import com.aa.safelocksaving.data.DateBasic;
 import com.aa.safelocksaving.data.Reminders_CardData;
-import com.aa.safelocksaving.data.User;
-import com.aa.safelocksaving.operation.CheckData;
-import com.aa.safelocksaving.operation.DatePicker;
-import com.aa.safelocksaving.operation.OPBasics;
-import com.google.android.gms.tasks.Task;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import com.aa.safelocksaving.Operation.CheckData;
+import com.aa.safelocksaving.Operation.DatePicker;
+import com.aa.safelocksaving.Operation.OPBasics;
 
 public class New_Reminders_Cards_Fragment extends Fragment {
     private EditText name;
@@ -39,6 +31,9 @@ public class New_Reminders_Cards_Fragment extends Fragment {
     private LinearLayout important;
     private EditText month;
     private Button btnNext;
+    private View importantColor;
+    private int color;
+    private DateBasic cutoffDate, deadlineDate;
 
     @Nullable
     @Override
@@ -53,6 +48,8 @@ public class New_Reminders_Cards_Fragment extends Fragment {
         important = view.findViewById(R.id.important);
         month = view.findViewById(R.id.month);
         btnNext = view.findViewById(R.id.btnNEXT);
+        importantColor = view.findViewById(R.id.importantColor);
+        color = 0;
         return view;
     }
 
@@ -60,28 +57,34 @@ public class New_Reminders_Cards_Fragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         cutoff.setOnClickListener(view -> {
-            new DatePicker(cutoff, getContext());
+            cutoffDate = new DatePicker(cutoff, getContext()).getDate();
         });
         deadline.setOnClickListener(view -> {
-            new DatePicker(deadline, getContext());
+            deadlineDate = new DatePicker(deadline, getContext()).getDate();
 
         });
         important.setOnClickListener(view -> {
-
+            new Dialog_Important(getActivity(), color -> {
+                this.color = color;
+                switch (color) {
+                    case 0: importantColor.setBackgroundResource(R.drawable.box_reminders); break;
+                    case 1: importantColor.setBackgroundColor(getContext().getColor(R.color.blue_grey_white)); break;
+                    case 2: importantColor.setBackgroundColor(getContext().getColor(R.color.orange_white)); break;
+                    case 3: importantColor.setBackgroundColor(getContext().getColor(R.color.orange_black)); break;
+                }
+            }).show();
         });
         btnNext.setOnClickListener(view -> upload());
     }
 
     private void upload() {
-        if (new CheckData(getActivity()).isCardCorrect(name, amount, deadline, 1, minAmount, settlement, cutoff, month)) {
+        if (new CheckData(getActivity()).isCardCorrect(name, amount, deadline, color, minAmount, settlement, cutoff, month)) {
             String nameText = name.getText().toString().trim();
             double amountText = Double.parseDouble(amount.getText().toString().trim());
-            String deadlineText = deadline.getText().toString().trim();
             double minAmountText = Double.parseDouble(minAmount.getText().toString().trim());
             double SettlementText = Double.parseDouble(settlement.getText().toString().trim());
-            String cutoffText = cutoff.getText().toString().trim();
             int monthText = Integer.parseInt(month.getText().toString().trim());
-            Reminders_CardData reminders_cardData = new Reminders_CardData(nameText, amountText, minAmountText, SettlementText, cutoffText, deadlineText, 0, monthText);
+            Reminders_CardData reminders_cardData = new Reminders_CardData(nameText, amountText, minAmountText, SettlementText, cutoffDate, deadlineDate, color, monthText);
             new OPBasics().addCard(reminders_cardData, String.valueOf(System.currentTimeMillis())).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     Toast.makeText(getContext(), getString(R.string.newCardHasBeenAddedText), Toast.LENGTH_SHORT).show();

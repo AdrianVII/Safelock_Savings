@@ -3,15 +3,15 @@ package com.aa.safelocksaving.data;
 public class Reminders_ShopData {
     private String name;
     private double amount;
-    private String cutoffDate;
-    private String deadline;
+    private DateBasic cutoffDate;
+    private DateBasic deadline;
     private String description;
     private int importance;
     private int month;
 
     public Reminders_ShopData(){ }
 
-    public Reminders_ShopData(String name, double amount, String cutoffDate, String deadline, String description, int importance, int month) {
+    public Reminders_ShopData(String name, double amount, DateBasic cutoffDate, DateBasic deadline, String description, int importance, int month) {
         this.name = name;
         this.amount = amount;
         this.cutoffDate = cutoffDate;
@@ -37,19 +37,19 @@ public class Reminders_ShopData {
         this.amount = amount;
     }
 
-    public String getCutoffDate() {
+    public DateBasic getCutoffDate() {
         return cutoffDate;
     }
 
-    public void setCutoffDate(String cutoffDate) {
+    public void setCutoffDate(DateBasic cutoffDate) {
         this.cutoffDate = cutoffDate;
     }
 
-    public String getDeadline() {
+    public DateBasic getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(String deadline) {
+    public void setDeadline(DateBasic deadline) {
         this.deadline = deadline;
     }
 

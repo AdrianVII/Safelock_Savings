@@ -22,6 +22,7 @@
         android:layout_marginTop="46dp">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/reminder_cards"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
