@@ -14,6 +14,7 @@ import com.aa.safelocksaving.DAO.DAOUser;
 import com.aa.safelocksaving.DAO.DAOUserData;
 import com.aa.safelocksaving.Dialog.Progress_Alert_Dialog;
 import com.aa.safelocksaving.R;
+import com.aa.safelocksaving.data.Reminders_CardData;
 import com.aa.safelocksaving.data.User;
 import com.aa.safelocksaving.data.UserData;
 import com.google.android.gms.tasks.Task;
@@ -89,6 +90,8 @@ public class OPBasics {
     public Task<Void> reAuthenticate(Activity activity) {
         return user.reauthenticate(EmailAuthProvider.getCredential(new DAOUserData(activity).get(UserData.Email, ""), new DAOUserData(activity).get(UserData.Password, "")));
     }
+
+    public Task<Void> addCard(Reminders_CardData reminders_cardData, String ID) { return new DAOUser().addCards(user.getUid(), reminders_cardData, ID); }
 
     public void deleteUser(Activity activity, deleteUserListener listener) {
         reAuthenticate(activity).addOnCompleteListener(task -> {

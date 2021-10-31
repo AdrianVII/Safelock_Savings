@@ -87,4 +87,16 @@
     <string name="yourAccountHasBeenDeletedText">Your Account Has Been Deleted</string>
     <string name="connectionCouldNotBeEstablishedText">Connection Could Not Be Established</string>
     <string name="confirmText">Confirm</string>
+    <string name="typeText">Type</string>
+    <string name="amountIsRequiredText">Amount Is Required</string>
+    <string name="dateIsRequieredText">Date Is Required</string>
+    <string name="importanceIsNotSelectedText">Importance Is Not Selected</string>
+    <string name="accountDeletionText">Account Deletion</string>
+    <string name="areYouSureToDeleteYourAccountText">Are You Sure To Delete Your Account?</string>
+    <string name="minimumAmountIsRequiredText">Minimum Amount Is Required</string>
+    <string name="settlementIsRequiredText">Settlement Is Required</string>
+    <string name="cutoffIsRequiredText">Cutoff Date Is Required</string>
+    <string name="theMonthIsRequiredText">The Month Is Required</string>
+    <string name="descriptionIsRequiredText">Description Is Required</string>
+    <string name="newCardHasBeenAddedText">New Card Has Been Added</string>
 </resources>

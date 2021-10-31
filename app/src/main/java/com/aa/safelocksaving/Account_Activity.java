@@ -50,7 +50,7 @@ public class Account_Activity extends AppCompatActivity {
         btnDELETEACC = findViewById(R.id.btnDELETEACC);
         imageView.setOnClickListener(view -> choosePicture());
         changepass.setOnClickListener(view -> { });
-        btnDELETEACC.setOnClickListener(view -> new Dialog_Box(this, "", "").OnActionButton(new Dialog_Box.OnPositiveClickListener() {
+        btnDELETEACC.setOnClickListener(view -> new Dialog_Box(this, getString(R.string.deleteAccountText), getString(R.string.areYouSureToDeleteYourAccountText)).OnActionButton(new Dialog_Box.OnPositiveClickListener() {
             @Override
             public void positiveClick(View view, Activity activity) {
                 new OPBasics().deleteUser(activity, task -> {

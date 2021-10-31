@@ -5,6 +5,7 @@ public class User {
     private String lastname;
     private String email;
     private String password;
+    //private DataUser dataUser;
 
     public User() {
     }
@@ -47,4 +48,10 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    /*public DataUser getDataUser() { return dataUser; }
+
+    public void setDataUser(DataUser dataUser) {
+        this.dataUser = dataUser;
+    }*/
 }

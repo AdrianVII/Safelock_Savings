@@ -79,4 +79,16 @@
     <string name="yourAccountHasBeenDeletedText">Tu Cuenta Ha Sido Eliminada</string>
     <string name="connectionCouldNotBeEstablishedText">No Se Pudo Establecer Conexión</string>
     <string name="confirmText">Confirmar</string>
+    <string name="typeText">Tipo</string>
+    <string name="amountIsRequiredText">Se Requirida Cantidad</string>
+    <string name="dateIsRequieredText">Se Requiere Fecha</string>
+    <string name="importanceIsNotSelectedText">La Importancia No Ha Sido Seleccionada</string>
+    <string name="areYouSureToDeleteYourAccountText">¿Estás Seguro de Eliminar Tu Cuenta?</string>
+    <string name="accountDeletionText">Eliminación De Cuenta</string>
+    <string name="minimumAmountIsRequiredText">Se Requiere Cantidad Minima</string>
+    <string name="settlementIsRequiredText">Se Requiere Liquidacion</string>
+    <string name="cutoffIsRequiredText">Se Requiere Fecha De Corte</string>
+    <string name="theMonthIsRequiredText">Se Requiere Las Mensualidades</string>
+    <string name="descriptionIsRequiredText">"Se Requiere Descripcion "</string>
+    <string name="newCardHasBeenAddedText">Nueva Trajeta Agregada</string>
 </resources>
