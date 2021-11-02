@@ -1,5 +1,6 @@
 package com.aa.safelocksaving.DAO;
 
+import com.aa.safelocksaving.data.CardItem;
 import com.aa.safelocksaving.data.Reminders_CardData;
 import com.aa.safelocksaving.data.User;
 import com.google.android.gms.tasks.Task;
@@ -24,8 +25,8 @@ public class DAOUser {
         return databaseReference.child(userID).updateChildren(user);
     }
 
-    public Task<Void> addCards(String userID, Reminders_CardData reminders_cardData, String ID) {
-        return databaseReference.child(userID).child("reminders").child("cards").child(ID).setValue(reminders_cardData);
+    public Task<Void> addRemindersCards(String userID, CardItem cardItem, String ID) {
+        return databaseReference.child(userID).child("reminders").child(ID).setValue(cardItem);
     }
 
     public DatabaseReference get(String userID) {

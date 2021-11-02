@@ -5,7 +5,6 @@ public class User {
     private String lastname;
     private String email;
     private String password;
-    private Reminders reminders;
 
     public User() {
     }
@@ -47,13 +46,5 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Reminders getReminders() {
-        return reminders;
-    }
-
-    public void setReminders(Reminders reminders) {
-        this.reminders = reminders;
     }
 }

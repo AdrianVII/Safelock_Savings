@@ -14,6 +14,7 @@ import com.aa.safelocksaving.DAO.DAOUser;
 import com.aa.safelocksaving.DAO.DAOUserData;
 import com.aa.safelocksaving.Dialog.Progress_Alert_Dialog;
 import com.aa.safelocksaving.R;
+import com.aa.safelocksaving.data.CardItem;
 import com.aa.safelocksaving.data.Reminders_CardData;
 import com.aa.safelocksaving.data.User;
 import com.aa.safelocksaving.data.UserData;
@@ -92,7 +93,7 @@ public class OPBasics {
         return user.reauthenticate(EmailAuthProvider.getCredential(new DAOUserData(activity).get(UserData.Email, ""), new DAOUserData(activity).get(UserData.Password, "")));
     }
 
-    public Task<Void> addCard(Reminders_CardData reminders_cardData, String ID) { return new DAOUser().addCards(user.getUid(), reminders_cardData, ID); }
+    public Task<Void> addRemindersCards(CardItem cardItem, String ID) { return new DAOUser().addRemindersCards(user.getUid(), cardItem, ID); }
 
     public DatabaseReference getCardsReminders() { return new DAOUser().get(user.getUid()).child("reminders"); }
 

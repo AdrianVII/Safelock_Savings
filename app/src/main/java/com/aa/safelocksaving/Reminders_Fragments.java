@@ -11,10 +11,12 @@ import androidx.annotation.FloatRange;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aa.safelocksaving.Operation.CardListAdapter;
 import com.aa.safelocksaving.Operation.OPBasics;
+import com.aa.safelocksaving.data.CardItem;
 import com.aa.safelocksaving.data.DataUser_Reminder;
 import com.aa.safelocksaving.data.Reminders_CardData;
 import com.aa.safelocksaving.data.User;
@@ -29,7 +31,6 @@ import java.util.List;
 public class Reminders_Fragments extends Fragment {
     private FloatingActionButton add;
     private RecyclerView reminder_cards;
-    private CardListAdapter cardListAdapter;
     private List<Reminders_CardData> cardData = new ArrayList<>();
 
     @Override
@@ -53,12 +54,20 @@ public class Reminders_Fragments extends Fragment {
 
     }
 
-    private void getCards() {
+    @Override
+    public void onResume() {
+        super.onResume();
         new OPBasics().getCardsReminders().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-
+                    List<CardItem> cardItems = new ArrayList<>();
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        cardItems.add(new CardItem(0, dataSnapshot.child("item").getValue(Reminders_CardData.class)));
+                    }
+                    reminder_cards.setHasFixedSize(true);
+                    reminder_cards.setLayoutManager(new LinearLayoutManager(getContext()));
+                    reminder_cards.setAdapter(new CardListAdapter(cardItems, getContext()));
                 }
             }
 

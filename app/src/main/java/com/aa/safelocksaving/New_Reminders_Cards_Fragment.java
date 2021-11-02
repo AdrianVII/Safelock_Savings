@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.aa.safelocksaving.Dialog.Dialog_Important;
+import com.aa.safelocksaving.data.CardItem;
 import com.aa.safelocksaving.data.DateBasic;
 import com.aa.safelocksaving.data.Reminders_CardData;
 import com.aa.safelocksaving.Operation.CheckData;
@@ -63,17 +64,23 @@ public class New_Reminders_Cards_Fragment extends Fragment {
             deadlineDate = new DatePicker(deadline, getContext()).getDate();
 
         });
-        important.setOnClickListener(view -> {
-            new Dialog_Important(getActivity(), color -> {
-                this.color = color;
-                switch (color) {
-                    case 0: importantColor.setBackgroundResource(R.drawable.box_reminders); break;
-                    case 1: importantColor.setBackgroundColor(getContext().getColor(R.color.blue_grey_white)); break;
-                    case 2: importantColor.setBackgroundColor(getContext().getColor(R.color.orange_white)); break;
-                    case 3: importantColor.setBackgroundColor(getContext().getColor(R.color.orange_black)); break;
-                }
-            }).show();
-        });
+        important.setOnClickListener(view -> new Dialog_Important(getActivity(), color -> {
+            this.color = color;
+            switch (color) {
+                case 0:
+                    importantColor.setBackgroundResource(R.drawable.box_reminders);
+                    break;
+                case 1:
+                    importantColor.setBackgroundColor(getContext().getColor(R.color.blue_grey_white));
+                    break;
+                case 2:
+                    importantColor.setBackgroundColor(getContext().getColor(R.color.orange_white));
+                    break;
+                case 3:
+                    importantColor.setBackgroundColor(getContext().getColor(R.color.orange_black));
+                    break;
+            }
+        }).show());
         btnNext.setOnClickListener(view -> upload());
     }
 
@@ -85,7 +92,7 @@ public class New_Reminders_Cards_Fragment extends Fragment {
             double SettlementText = Double.parseDouble(settlement.getText().toString().trim());
             int monthText = Integer.parseInt(month.getText().toString().trim());
             Reminders_CardData reminders_cardData = new Reminders_CardData(nameText, amountText, minAmountText, SettlementText, cutoffDate, deadlineDate, color, monthText);
-            new OPBasics().addCard(reminders_cardData, String.valueOf(System.currentTimeMillis())).addOnCompleteListener(task -> {
+            new OPBasics().addRemindersCards(new CardItem(0, reminders_cardData), String.valueOf(System.currentTimeMillis())).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     Toast.makeText(getContext(), getString(R.string.newCardHasBeenAddedText), Toast.LENGTH_SHORT).show();
                     getActivity().finish();

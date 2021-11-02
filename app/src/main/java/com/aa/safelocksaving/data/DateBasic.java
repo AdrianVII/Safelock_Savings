@@ -43,6 +43,6 @@ public class DateBasic {
     public String toString() {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Year, Month, Day);
-        return DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+        return DateFormat.getDateInstance(DateFormat.DATE_FIELD).format(calendar.getTime());
     }
 }
