@@ -72,20 +72,23 @@ public class New_Reminders_Store_Fragment extends Fragment {
 
     private void upload() {
         if (new CheckData(getActivity()).isStoreCorrect(nameEdit,amountEdit, deadlineText, color, cutoffDateText, descriptionEdit, monthEdit)) {
+            long ID = System.currentTimeMillis();
             new OPBasics().addRemindersCards(
                     new CardItem(
                             2,
                             new Reminders_ShopData(
+                                    ID,
                                     nameEdit.getText().toString().trim(),
                                     Double.parseDouble(amountEdit.getText().toString().trim()),
                                     cutoffDate,
                                     deadlineDate,
                                     descriptionEdit.getText().toString().trim(),
                                     color,
-                                    Integer.parseInt(monthEdit.getText().toString().trim())
+                                    Integer.parseInt(monthEdit.getText().toString().trim()),
+                                    1
                             )
                     ),
-                    String.valueOf(System.currentTimeMillis())
+                    String.valueOf(ID)
             ).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     Toast.makeText(getContext(), getString(R.string.newCardHasBeenAddedText), Toast.LENGTH_SHORT).show();

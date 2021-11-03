@@ -24,6 +24,7 @@
         android:elevation="1dp">
 
         <LinearLayout
+            android:background="@drawable/selector_menu_item"
             android:id="@+id/btnACCOUNT"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -55,6 +56,8 @@
             android:layout_marginHorizontal="10dp"/>
 
         <LinearLayout
+            android:background="@drawable/selector_menu_item"
+            android:id="@+id/Notification"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -85,6 +88,7 @@
             android:layout_marginHorizontal="10dp"/>
 
         <LinearLayout
+            android:background="@drawable/selector_menu_item"
             android:id="@+id/lang"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -116,6 +120,7 @@
             android:layout_marginHorizontal="10dp"/>
 
         <LinearLayout
+            android:background="@drawable/selector_menu_item"
             android:id="@+id/info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -147,6 +152,7 @@
             android:layout_marginHorizontal="10dp"/>
 
         <LinearLayout
+            android:background="@drawable/selector_menu_item"
             android:id="@+id/btnSWITCH"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

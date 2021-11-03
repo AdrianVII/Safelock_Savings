@@ -88,18 +88,21 @@ public class New_Reminders_Subscription_Fragments extends Fragment {
     }
     private void upload(){
         if (new CheckData(getActivity()).isSubscriptionCorrect(name,amount,Date,color)){
+            long ID = System.currentTimeMillis();
             new OPBasics().addRemindersCards(
                     new CardItem(
                             1,
                             new Reminders_SubscriptionData(
+                                    ID,
                                     name.getText().toString().trim(),
                                     Double.parseDouble(amount.getText().toString().trim()),
                                     DATE,
                                     color,
-                                    itemSelected
+                                    itemSelected,
+                                    1
                             )
                     ),
-                    String.valueOf(System.currentTimeMillis())
+                    String.valueOf(ID)
             ).addOnCompleteListener(task -> {
                 if (task.isSuccessful()){
                     Toast.makeText(getContext(), getString(R.string.newCardHasBeenAddedText), Toast.LENGTH_SHORT).show();

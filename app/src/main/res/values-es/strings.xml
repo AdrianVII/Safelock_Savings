@@ -52,7 +52,7 @@
     <string name="pleaseCheckYourEmailText">Porfavor, verifique su correo</string>
     <string name="failedToLogin">Error al iniciar sesión</string>
     <string name="hiText">Hola</string>
-    <string name="pleaseWait...Text">Por favor espere...</string>
+    <string name="pleaseWait...Text">Por favor espere…</string>
     <string name="editText">Editar</string>
     <string name="pauseText">Pausar</string>
     <string name="deleteText">Borrar</string>
@@ -96,4 +96,12 @@
     <string name="weeklyText">Semanal</string>
     <string name="monthlyText">Mensual</string>
     <string name="biweeklyText">Quincenal</string>
+    <string name="deletedCardText">Tarjeta Eliminada</string>
+    <string name="redoText">Rehacer</string>
+    <string name="editedCardText">Tarjeta Editada</string>
+    <string name="cardPausedText">Tarjeta Pausada</string>
+    <string name="noText">No</string>
+    <string name="resumeText">Reanudar</string>
+    <string name="cardResumeText">Tarjeta Reanudada</string>
+    <string name="undoText">Deshacer</string>
 </resources>

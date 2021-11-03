@@ -86,13 +86,38 @@ public class New_Reminders_Cards_Fragment extends Fragment {
 
     private void upload() {
         if (new CheckData(getActivity()).isCardCorrect(name, amount, deadline, color, minAmount, settlement, cutoff, month)) {
-            String nameText = name.getText().toString().trim();
+            /*String nameText = name.getText().toString().trim();
             double amountText = Double.parseDouble(amount.getText().toString().trim());
             double minAmountText = Double.parseDouble(minAmount.getText().toString().trim());
             double SettlementText = Double.parseDouble(settlement.getText().toString().trim());
             int monthText = Integer.parseInt(month.getText().toString().trim());
             Reminders_CardData reminders_cardData = new Reminders_CardData(nameText, amountText, minAmountText, SettlementText, cutoffDate, deadlineDate, color, monthText);
             new OPBasics().addRemindersCards(new CardItem(0, reminders_cardData), String.valueOf(System.currentTimeMillis())).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Toast.makeText(getContext(), getString(R.string.newCardHasBeenAddedText), Toast.LENGTH_SHORT).show();
+                    getActivity().finish();
+                }
+            });*/
+            long ID = System.currentTimeMillis();
+            new OPBasics().addRemindersCards(
+                    new CardItem(
+                            0,
+                            new Reminders_CardData(
+                                    ID,
+                                    name.getText().toString().trim(),
+                                    Double.parseDouble(amount.getText().toString().trim()),
+                                    Double.parseDouble(minAmount.getText().toString().trim()),
+                                    Double.parseDouble(settlement.getText().toString().trim()),
+                                    cutoffDate,
+                                    deadlineDate,
+                                    color,
+                                    Integer.parseInt(month.getText().toString().trim()),
+                                    1
+
+                            )
+                    ),
+                    String.valueOf(ID)
+            ).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     Toast.makeText(getContext(), getString(R.string.newCardHasBeenAddedText), Toast.LENGTH_SHORT).show();
                     getActivity().finish();

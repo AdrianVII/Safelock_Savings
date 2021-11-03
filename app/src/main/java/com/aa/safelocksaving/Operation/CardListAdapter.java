@@ -1,12 +1,15 @@
 package com.aa.safelocksaving.Operation;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -95,7 +98,7 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             titleText = itemView.findViewById(R.id.title);
             dateText = itemView.findViewById(R.id.DateNum);
             amountText = itemView.findViewById(R.id.amountNum);
-            img = itemView.findViewById(R.id.menu);
+            img = itemView.findViewById(R.id.menuCard);
             CardView = itemView.findViewById(R.id.linearLayoutCard);
 
             //All Data
@@ -113,8 +116,7 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             settlementNum.setText(String.valueOf(item.getSettlement()));
             cutoffDateText.setText(item.getDeadline().toString());
             monthNum.setText(String.valueOf(item.getMonth()));
-            setColor(item.getImportance(), CardView);
-
+            if(item.getStatus() != 2) setColor(item.getImportance(), CardView);
 
             CardView.setOnClickListener(view -> {
                 int v = (cardExpansion.getVisibility() == View.GONE) ? View.VISIBLE : View.GONE;
@@ -122,6 +124,62 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 cardExpansion.setVisibility(v);
                 //notifyItemChanged(getAdapterPosition());
                 notifyDataSetChanged();
+            });
+            img.setOnClickListener(view -> {
+                PopupMenu popupMenu = new PopupMenu(context, img);
+                if (item.getStatus() != 2) popupMenu.inflate(R.menu.menu_card);
+                else popupMenu.inflate(R.menu.menu_card_paused);
+                popupMenu.setOnMenuItemClickListener(menuItem -> {
+                    switch (menuItem.getItemId()) {
+                        case R.id.menuEdit:
+                            item.setStatus(3);
+                            Toast.makeText(context, context.getString(R.string.editedCardText), Toast.LENGTH_SHORT).show();
+                            return true;
+                        case R.id.menuStop:
+                            new OPBasics().updateRemindersStatus(item.getID(), 2).addOnCompleteListener(task -> {
+                                if (task.isSuccessful()) {
+                                    item.setStatus(2);
+                                    CardView.setBackgroundColor(context.getColor(R.color.Background_selector_item));
+                                    Toast.makeText(context, context.getString(R.string.cardPausedText), Toast.LENGTH_SHORT).show();
+                                    notifyDataSetChanged();
+                                }
+                            });
+                            return true;
+                        case R.id.menuResume:
+                            new OPBasics().updateRemindersStatus(item.getID(), 1).addOnCompleteListener(task -> {
+                                if (task.isSuccessful()) {
+                                    item.setStatus(1);
+                                    setColor(item.getImportance(), CardView);
+                                    Toast.makeText(context, context.getString(R.string.cardResumeText), Toast.LENGTH_SHORT).show();
+                                    notifyDataSetChanged();
+                                }
+                            });
+                            return true;
+                        case R.id.menuDelete:
+                            final int position = getAdapterPosition();
+                            CardItem auxItem = items.get(position);
+                            int auxStatus = item.getStatus();
+                            long id = item.getID();
+                            new OPBasics().updateRemindersStatus(id, 0).addOnCompleteListener(task -> {
+                                if (task.isSuccessful()) {
+                                    item.setStatus(0);
+                                    items.remove(position);
+                                    notifyItemRemoved(position);
+                                    new SnackBar_Action(context, 32, 32, view).showSBMargin(v -> {
+                                        new OPBasics().updateRemindersStatus(id, auxStatus).addOnCompleteListener(task1 -> {
+                                            if (task1.isSuccessful()) {
+                                                items.add(position, auxItem);
+                                                notifyItemInserted(position);
+                                            }
+                                        });
+                                    });
+                                }
+                            });
+                            return true;
+                    }
+                    return false;
+                });
+                popupMenu.show();
             });
 
         }
@@ -141,7 +199,7 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             titleText = itemView.findViewById(R.id.title);
             dateText = itemView.findViewById(R.id.DateNum);
             amountText = itemView.findViewById(R.id.amountNum);
-            img = itemView.findViewById(R.id.menu);
+            img = itemView.findViewById(R.id.menuCard);
             CardView = itemView.findViewById(R.id.linearLayoutCard);
             //AllData
             repeatText = itemView.findViewById(R.id.repeatText);
@@ -160,6 +218,39 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 subscriptionExpansion.setVisibility((subscriptionExpansion.getVisibility() == View.GONE) ? View.VISIBLE : View.GONE);
                 notifyDataSetChanged();
             });
+            img.setOnClickListener(view -> {
+                PopupMenu popupMenu = new PopupMenu(context, img);
+                popupMenu.inflate(R.menu.menu_card);
+                popupMenu.setOnMenuItemClickListener(menuItem -> {
+                    switch (menuItem.getItemId()) {
+                        case R.id.menuEdit:
+                            Toast.makeText(context, "Editatela c:", Toast.LENGTH_SHORT).show();
+                            return true;
+                        case R.id.menuStop:
+                            item.setStatus(2);
+                            CardView.setBackgroundColor(context.getColor(R.color.Background_selector_item));
+                            Toast.makeText(context, context.getString(R.string.cardPausedText), Toast.LENGTH_SHORT).show();
+                            return true;
+                        case R.id.menuDelete:
+                            final int position = getAdapterPosition();
+                            CardItem auxItem = items.get(position);
+                            item.setStatus(0);
+                            //Codigo para actualizarlo la base de datos
+                            items.remove(position);
+                            notifyItemRemoved(position);
+                            new SnackBar_Action(context, 32, 32, view).showSBMargin(v -> {
+                                items.add(position, auxItem);
+                                item.setStatus(1);
+                                //Codigo para actualizarlo la base de datos
+                                notifyItemInserted(position);
+                            });
+                            notifyDataSetChanged();
+                            return true;
+                    }
+                    return false;
+                });
+                popupMenu.show();
+            });
         }
     }
 
@@ -176,7 +267,7 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             titleText = itemView.findViewById(R.id.title);
             dateText = itemView.findViewById(R.id.DateNum);
             amountText = itemView.findViewById(R.id.amountNum);
-            img = itemView.findViewById(R.id.menu);
+            img = itemView.findViewById(R.id.menuCard);
             CardView = itemView.findViewById(R.id.linearLayoutCard);
             //AllData
             descriptionText = itemView.findViewById(R.id.descriptionText);
@@ -197,9 +288,41 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 shopExpansion.setVisibility((shopExpansion.getVisibility() == View.GONE) ? View.VISIBLE : View.GONE);
                 notifyDataSetChanged();
             });
+            img.setOnClickListener(view -> {
+                PopupMenu popupMenu = new PopupMenu(context, img);
+                popupMenu.inflate(R.menu.menu_card);
+                popupMenu.setOnMenuItemClickListener(menuItem -> {
+                    switch (menuItem.getItemId()) {
+                        case R.id.menuEdit:
+                            Toast.makeText(context, context.getString(R.string.editedCardText), Toast.LENGTH_SHORT).show();
+                            return true;
+                        case R.id.menuStop:
+                            item.setStatus(2);
+                            CardView.setBackgroundColor(context.getColor(R.color.Background_selector_item));
+                            Toast.makeText(context, context.getString(R.string.cardPausedText), Toast.LENGTH_SHORT).show();
+                            return true;
+                        case R.id.menuDelete:
+                            final int position = getAdapterPosition();
+                            CardItem auxItem = items.get(position);
+                            item.setStatus(0);
+                            //Codigo para actualizarlo la base de datos
+                            items.remove(position);
+                            notifyItemRemoved(position);
+                            new SnackBar_Action(context, 32, 32, view).showSBMargin(v -> {
+                                items.add(position, auxItem);
+                                item.setStatus(1);
+                                //Codigo para actualizarlo la base de datos
+                                notifyItemInserted(position);
+                            });
+                            notifyDataSetChanged();
+                            return true;
+                    }
+                    return false;
+                });
+                popupMenu.show();
+            });
         }
     }
-
 
     private void setColor(int color, LinearLayout card) {
         switch (color) {

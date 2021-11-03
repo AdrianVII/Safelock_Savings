@@ -8,10 +8,13 @@ public class Reminders_ShopData {
     private String description;
     private int importance;
     private int month;
+    private long ID;
+    private int Status;
 
     public Reminders_ShopData(){ }
 
-    public Reminders_ShopData(String name, double amount, DateBasic cutoffDate, DateBasic deadline, String description, int importance, int month) {
+    public Reminders_ShopData(long ID, String name, double amount, DateBasic cutoffDate, DateBasic deadline, String description, int importance, int month, int Status) {
+        this.ID = ID;
         this.name = name;
         this.amount = amount;
         this.cutoffDate = cutoffDate;
@@ -19,6 +22,23 @@ public class Reminders_ShopData {
         this.description = description;
         this.importance = importance;
         this.month = month;
+        this.Status = Status;
+    }
+
+    public int getStatus() {
+        return Status;
+    }
+
+    public void setStatus(int status) {
+        Status = status;
+    }
+
+    public long getID() {
+        return ID;
+    }
+
+    public void setID(long ID) {
+        this.ID = ID;
     }
 
     public String getName() {

@@ -113,4 +113,11 @@
     <string name="weeklyText">Weekly</string>
     <string name="monthlyText">Monthly</string>
     <string name="biweeklyText">Biweekly</string>
+    <string name="deletedCardText">Deleted Card</string>
+    <string name="redoText">Redo</string>
+    <string name="editedCardText">Edited Card</string>
+    <string name="cardPausedText">Card Paused</string>
+    <string name="resumeText">Resume</string>
+    <string name="cardResumeText">Card Resume</string>
+    <string name="undoText">Undo</string>
 </resources>

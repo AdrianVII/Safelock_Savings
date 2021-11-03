@@ -30,6 +30,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.HashMap;
+
 public class OPBasics {
     private FirebaseUser user;
     private StorageReference storageReference;
@@ -50,7 +52,6 @@ public class OPBasics {
     }
     public interface uploadPictureListener {
         void uploadPicture(Task<UploadTask.TaskSnapshot> task);
-        //void timeOutPicture();
     }
 
     public OPBasics () {
@@ -94,6 +95,12 @@ public class OPBasics {
     }
 
     public Task<Void> addRemindersCards(CardItem cardItem, String ID) { return new DAOUser().addRemindersCards(user.getUid(), cardItem, ID); }
+
+    public Task<Void> updateRemindersStatus(long ID, int Status) {
+        HashMap<String, Object> status = new HashMap<>();
+        status.put("status", Status);
+        return new DAOUser().updateStatus(user.getUid(), String.valueOf(ID), status);
+    }
 
     public DatabaseReference getCardsReminders() { return new DAOUser().get(user.getUid()).child("reminders"); }
 
