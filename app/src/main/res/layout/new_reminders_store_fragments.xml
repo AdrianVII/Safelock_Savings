@@ -6,6 +6,7 @@
     android:background="@color/white_background">
 
     <EditText
+        android:id="@+id/nameEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/nameText"
@@ -20,6 +21,7 @@
         android:layout_marginTop="15dp"/>
 
     <EditText
+        android:id="@+id/amountEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/amountText"
@@ -34,6 +36,7 @@
         android:layout_marginTop="9dp"/>
 
     <TextView
+        android:id="@+id/cutoffDateText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/cutoffDateText"
@@ -47,6 +50,7 @@
         android:textSize="16sp"/>
 
     <TextView
+        android:id="@+id/deadlineText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/deadlineText"
@@ -59,20 +63,23 @@
         android:maxLines="1"
         android:textSize="16sp"/>
 
-    <TextView
+    <EditText
+        android:id="@+id/descriptionEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/descriptionText"
+        android:hint="@string/descriptionText"
         android:layout_marginHorizontal="18dp"
         android:background="@drawable/background_edittext_reminders"
         android:layout_marginTop="9dp"
         android:padding="10dp"
         android:fontFamily="@font/montserrat_regular"
         android:textColor="@color/grey_white_spinner"
+        android:textColorHint="@color/grey_white_spinner"
         android:maxLines="4"
         android:textSize="16sp"/>
 
     <LinearLayout
+        android:id="@+id/importanceLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="18dp"
@@ -87,15 +94,17 @@
             android:textSize="18sp"
             android:padding="10dp"/>
         <View
+            android:id="@+id/importantColor"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:background="@drawable/box_reminders"
+            android:background="@drawable/box_important_unselected"
             android:padding="10dp"
             android:layout_gravity="center_vertical"/>
 
     </LinearLayout>
 
     <EditText
+        android:id="@+id/monthEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/monthsText"

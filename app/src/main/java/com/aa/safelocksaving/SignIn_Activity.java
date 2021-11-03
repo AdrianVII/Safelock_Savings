@@ -3,6 +3,7 @@ package com.aa.safelocksaving;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -58,6 +59,14 @@ public class SignIn_Activity extends Activity {
         });
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
+        password.setOnKeyListener((v, keyCode, event) -> {
+            if(event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER){
+                loginUser();
+                return true;
+
+            }
+            return false;
+        });
     }
 
     private void loginUser() {

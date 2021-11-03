@@ -19,7 +19,7 @@ import com.aa.safelocksaving.data.CardItem;
 import com.aa.safelocksaving.data.DateBasic;
 import com.aa.safelocksaving.data.Reminders_CardData;
 import com.aa.safelocksaving.Operation.CheckData;
-import com.aa.safelocksaving.Operation.DatePicker;
+import com.aa.safelocksaving.Operation.Date_Picker;
 import com.aa.safelocksaving.Operation.OPBasics;
 
 public class New_Reminders_Cards_Fragment extends Fragment {
@@ -58,26 +58,26 @@ public class New_Reminders_Cards_Fragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         cutoff.setOnClickListener(view -> {
-            cutoffDate = new DatePicker(cutoff, getContext()).getDate();
+            cutoffDate = new Date_Picker(cutoff, getContext()).getDate();
         });
         deadline.setOnClickListener(view -> {
-            deadlineDate = new DatePicker(deadline, getContext()).getDate();
+            deadlineDate = new Date_Picker(deadline, getContext()).getDate();
 
         });
         important.setOnClickListener(view -> new Dialog_Important(getActivity(), color -> {
             this.color = color;
             switch (color) {
                 case 0:
-                    importantColor.setBackgroundResource(R.drawable.box_reminders);
+                    importantColor.setBackgroundResource(R.drawable.box_important_unselected);
                     break;
                 case 1:
-                    importantColor.setBackgroundColor(getContext().getColor(R.color.blue_grey_white));
+                    importantColor.setBackgroundResource(R.drawable.box_important_less);
                     break;
                 case 2:
-                    importantColor.setBackgroundColor(getContext().getColor(R.color.orange_white));
+                    importantColor.setBackgroundResource(R.drawable.box_important_important);
                     break;
                 case 3:
-                    importantColor.setBackgroundColor(getContext().getColor(R.color.orange_black));
+                    importantColor.setBackgroundResource(R.drawable.box_important_very);
                     break;
             }
         }).show());

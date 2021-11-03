@@ -33,6 +33,14 @@
         <item>@string/shopText</item>
     </string-array>
 
+    <string-array name="repeatSubscriptions">
+        <item>@string/repeatSubscriptionsText</item>
+        <item>@string/weeklyText</item>
+        <item>@string/biweeklyText</item>
+        <item>@string/monthlyText</item>
+    </string-array>
+
+
     <string name="minAmountText">Minimum amount</string>
     <string name="settlementText">Settlement</string>
     <string name="cutoffDateText">Cutoff date</string>
@@ -99,4 +107,10 @@
     <string name="theMonthIsRequiredText">The Month Is Required</string>
     <string name="descriptionIsRequiredText">Description Is Required</string>
     <string name="newCardHasBeenAddedText">New Card Has Been Added</string>
+    <string name="yesText">Yes</string>
+    <string name="noText">No</string>
+    <string name="repeatSubscriptionsText">Repeat Subscriptions</string>
+    <string name="weeklyText">Weekly</string>
+    <string name="monthlyText">Monthly</string>
+    <string name="biweeklyText">Biweekly</string>
 </resources>

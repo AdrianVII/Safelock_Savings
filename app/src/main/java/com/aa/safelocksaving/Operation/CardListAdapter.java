@@ -1,7 +1,6 @@
 package com.aa.safelocksaving.Operation;
 
 import android.content.Context;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,14 +9,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.transition.AutoTransition;
-import androidx.transition.TransitionManager;
 
 import com.aa.safelocksaving.R;
 import com.aa.safelocksaving.data.CardItem;
-import com.aa.safelocksaving.data.DataUser_Reminder;
 import com.aa.safelocksaving.data.Reminders_CardData;
 import com.aa.safelocksaving.data.Reminders_ShopData;
 import com.aa.safelocksaving.data.Reminders_SubscriptionData;
@@ -120,10 +115,12 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             monthNum.setText(String.valueOf(item.getMonth()));
             setColor(item.getImportance(), CardView);
 
+
             CardView.setOnClickListener(view -> {
                 int v = (cardExpansion.getVisibility() == View.GONE) ? View.VISIBLE : View.GONE;
-                TransitionManager.beginDelayedTransition(CardView, new AutoTransition());
+                //TransitionManager.beginDelayedTransition(linearLayout, new AutoTransition());
                 cardExpansion.setVisibility(v);
+                //notifyItemChanged(getAdapterPosition());
                 notifyDataSetChanged();
             });
 
@@ -134,6 +131,9 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         private TextView titleText, dateText, amountText;
         private ImageView img;
         private LinearLayout CardView;
+        //AllData
+        private TextView repeatText;
+        private LinearLayout subscriptionExpansion;
 
         SubscriptionViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -143,12 +143,23 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             amountText = itemView.findViewById(R.id.amountNum);
             img = itemView.findViewById(R.id.menu);
             CardView = itemView.findViewById(R.id.linearLayoutCard);
+            //AllData
+            repeatText = itemView.findViewById(R.id.repeatText);
+            subscriptionExpansion = itemView.findViewById(R.id.subscriptionExpansion);
         }
         void setSubscriptionBind(@NonNull Reminders_SubscriptionData item) {
             titleText.setText(item.getName());
             dateText.setText(item.getDate().toString());
             amountText.setText(String.valueOf(item.getAmount()));
             setColor(item.getImportance(), CardView);
+            //All Data
+            repeatText.setText(
+                    (item.getRepeat() == 1)? context.getString(R.string.weeklyText): (item.getRepeat()== 2)? context.getString(R.string.biweeklyText): (item.getRepeat() == 3)? context.getString(R.string.monthlyText): context.getString(R.string.noText)
+            );
+            CardView.setOnClickListener(view -> {
+                subscriptionExpansion.setVisibility((subscriptionExpansion.getVisibility() == View.GONE) ? View.VISIBLE : View.GONE);
+                notifyDataSetChanged();
+            });
         }
     }
 
@@ -156,23 +167,39 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         private TextView titleText, dateText, amountText;
         private ImageView img;
         private LinearLayout CardView;
+        //AllData
+        private TextView descriptionText, cutoffDateText, monthNum;
+        private LinearLayout shopExpansion;
 
         ShopViewHolder(@NonNull View itemView) {
             super(itemView);
-
             titleText = itemView.findViewById(R.id.title);
             dateText = itemView.findViewById(R.id.DateNum);
             amountText = itemView.findViewById(R.id.amountNum);
             img = itemView.findViewById(R.id.menu);
             CardView = itemView.findViewById(R.id.linearLayoutCard);
+            //AllData
+            descriptionText = itemView.findViewById(R.id.descriptionText);
+            cutoffDateText = itemView.findViewById(R.id.cutoffDateText1);
+            monthNum = itemView.findViewById(R.id.monthNum1);
+            shopExpansion = itemView.findViewById(R.id.shopExpansion);
         }
         void setShopBind(@NonNull Reminders_ShopData item) {
             titleText.setText(item.getName());
             dateText.setText(item.getDeadline().toString());
             amountText.setText(String.valueOf(item.getAmount()));
             setColor(item.getImportance(), CardView);
+            //AllData
+            descriptionText.setText(item.getDescription());
+            cutoffDateText.setText(item.getCutoffDate().toString());
+            monthNum.setText(String.valueOf(item.getMonth()));
+            CardView.setOnClickListener(view -> {
+                shopExpansion.setVisibility((shopExpansion.getVisibility() == View.GONE) ? View.VISIBLE : View.GONE);
+                notifyDataSetChanged();
+            });
         }
     }
+
 
     private void setColor(int color, LinearLayout card) {
         switch (color) {

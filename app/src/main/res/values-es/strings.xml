@@ -91,4 +91,9 @@
     <string name="theMonthIsRequiredText">Se Requiere Las Mensualidades</string>
     <string name="descriptionIsRequiredText">"Se Requiere Descripcion "</string>
     <string name="newCardHasBeenAddedText">Nueva Trajeta Agregada</string>
+    <string name="yesText">Si</string>
+    <string name="repeatSubscriptionsText">Repetir Suscripciones</string>
+    <string name="weeklyText">Semanal</string>
+    <string name="monthlyText">Mensual</string>
+    <string name="biweeklyText">Quincenal</string>
 </resources>

@@ -114,7 +114,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_gravity="center"
-            android:background="@drawable/box_reminders"
+            android:background="@drawable/box_important_unselected"
             android:padding="10dp" />
 
     </LinearLayout>

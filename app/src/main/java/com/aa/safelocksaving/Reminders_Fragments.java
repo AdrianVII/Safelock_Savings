@@ -19,6 +19,8 @@ import com.aa.safelocksaving.Operation.OPBasics;
 import com.aa.safelocksaving.data.CardItem;
 import com.aa.safelocksaving.data.DataUser_Reminder;
 import com.aa.safelocksaving.data.Reminders_CardData;
+import com.aa.safelocksaving.data.Reminders_ShopData;
+import com.aa.safelocksaving.data.Reminders_SubscriptionData;
 import com.aa.safelocksaving.data.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
@@ -63,7 +65,11 @@ public class Reminders_Fragments extends Fragment {
                 if (snapshot.exists()) {
                     List<CardItem> cardItems = new ArrayList<>();
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        cardItems.add(new CardItem(0, dataSnapshot.child("item").getValue(Reminders_CardData.class)));
+                        switch (dataSnapshot.getValue(CardItem.class).getType()){
+                            case 0: cardItems.add(new CardItem(0, dataSnapshot.child("item").getValue(Reminders_CardData.class))); break;
+                            case 1: cardItems.add(new CardItem(1, dataSnapshot.child("item").getValue(Reminders_SubscriptionData.class))); break;
+                            case 2: cardItems.add(new CardItem(2, dataSnapshot.child("item").getValue(Reminders_ShopData.class))); break;
+                        }
                     }
                     reminder_cards.setHasFixedSize(true);
                     reminder_cards.setLayoutManager(new LinearLayoutManager(getContext()));

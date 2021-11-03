@@ -5,16 +5,16 @@ public class Reminders_SubscriptionData {
     private double amount;
     private DateBasic date;
     private int importance;
-    private int period;
+    private int repeat;
 
     public Reminders_SubscriptionData() {  }
 
-    public Reminders_SubscriptionData(String name, double amount, DateBasic date, int importance, int period) {
+    public Reminders_SubscriptionData(String name, double amount, DateBasic date, int importance, int repeat) {
         this.name = name;
         this.amount = amount;
         this.date = date;
         this.importance = importance;
-        this.period = period;
+        this.repeat = repeat;
     }
 
     public String getName() {
@@ -49,11 +49,11 @@ public class Reminders_SubscriptionData {
         this.importance = importance;
     }
 
-    public int getPeriod() {
-        return period;
+    public int getRepeat() {
+        return repeat;
     }
 
-    public void setPeriod(int period) {
-        this.period = period;
+    public void setRepeat(int repeat) {
+        this.repeat = repeat;
     }
 }

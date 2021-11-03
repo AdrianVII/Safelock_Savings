@@ -6,6 +6,7 @@
     android:background="@color/white_background">
 
     <EditText
+        android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/nameText"
@@ -20,6 +21,7 @@
         android:layout_marginTop="15dp"/>
 
     <EditText
+        android:id="@+id/amount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/amountText"
@@ -34,9 +36,10 @@
         android:layout_marginTop="9dp"/>
 
     <TextView
+        android:id="@+id/Date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/dateText"
+        android:text="@string/dateText"
         android:layout_marginHorizontal="18dp"
         android:background="@drawable/background_edittext_reminders"
         android:layout_marginTop="9dp"
@@ -47,6 +50,7 @@
         android:textSize="16sp"/>
 
     <LinearLayout
+        android:id="@+id/importantColor1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="18dp"
@@ -61,37 +65,51 @@
             android:padding="10dp"
             android:textSize="18sp"/>
 
-        <TextView
+        <View
+            android:id="@+id/importantColor"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:background="@drawable/box_reminders"
+            android:background="@drawable/box_important_unselected"
             android:padding="10dp"
             android:layout_gravity="center"/>
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/btnRepeat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="18dp"
         android:layout_marginTop="9dp"
         android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:background="@drawable/box_reminders"
-            android:padding="10dp"
-            android:layout_gravity="center"/>
-        <TextView
+        <CheckBox
+            android:id="@+id/repeat"
+            android:clickable="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/repeatText"
             android:fontFamily="@font/montserrat_regular"
             android:textSize="18sp"
-            android:padding="10dp"/>
+            android:padding="10dp"
+            android:textColor="@color/grey_white_spinner"/>
 
     </LinearLayout>
+
+    <Spinner
+        android:id="@+id/Spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="18dp"
+        android:background="@drawable/background_spinner"
+        android:entries="@array/repeatSubscriptions"
+        android:popupBackground="@drawable/background_spinner"
+        android:paddingVertical="12dp"
+        android:dropDownVerticalOffset="60dp"
+        android:popupElevation="20dp"
+        android:visibility="gone"/>
+
 
     <Space
         android:layout_width="match_parent"

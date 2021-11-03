@@ -9,12 +9,12 @@ import com.aa.safelocksaving.data.DateBasic;
 import java.text.DateFormat;
 import java.util.Calendar;
 
-public class DatePicker {
+public class Date_Picker {
     private int day;
     private int month;
     private int year;
 
-    public DatePicker(TextView textView, Context context) {
+    public Date_Picker(TextView textView, Context context) {
         final Calendar calendar = Calendar.getInstance();
         day = calendar.get(Calendar.DAY_OF_MONTH);
         month = calendar.get(Calendar.MONTH);
