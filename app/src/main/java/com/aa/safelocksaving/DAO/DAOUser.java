@@ -25,7 +25,7 @@ public class DAOUser {
         return databaseReference.child(userID).updateChildren(user);
     }
 
-    public Task<Void> updateStatus(String userID, String ID, HashMap<String, Object> Status) { return databaseReference.child(userID).child("reminders").child(ID).child("item").updateChildren(Status); }
+    public Task<Void> updateStatus(String userID, String ID, HashMap<String, Object> Status) { return databaseReference.child(userID).child("reminders").child(ID).updateChildren(Status); }
 
     public Task<Void> addRemindersCards(String userID, CardItem cardItem, String ID) { return databaseReference.child(userID).child("reminders").child(ID).setValue(cardItem); }
 

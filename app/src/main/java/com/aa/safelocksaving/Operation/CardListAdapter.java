@@ -116,7 +116,11 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             settlementNum.setText(String.valueOf(item.getSettlement()));
             cutoffDateText.setText(item.getDeadline().toString());
             monthNum.setText(String.valueOf(item.getMonth()));
-            if (items.get(getAdapterPosition()).getStatus() != 2) setColor(item.getImportance(), CardView);
+            if (items.get(getAdapterPosition()).getStatus() != 2){
+                setColor(item.getImportance(), CardView);
+            } else {
+                CardView.setBackgroundColor(context.getColor(R.color.Background_selector_item));
+            }
             CardView.setOnClickListener(view -> {
                 int v = (cardExpansion.getVisibility() == View.GONE) ? View.VISIBLE : View.GONE;
                 cardExpansion.setVisibility(v);
@@ -160,6 +164,11 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             setColor(item.getImportance(), CardView);
             //All Data
             repeatText.setText((item.getRepeat() == 1)? context.getString(R.string.weeklyText): (item.getRepeat()== 2)? context.getString(R.string.biweeklyText): (item.getRepeat() == 3)? context.getString(R.string.monthlyText): context.getString(R.string.noText));
+            if (items.get(getAdapterPosition()).getStatus() != 2){
+                setColor(item.getImportance(), CardView);
+            } else {
+                CardView.setBackgroundColor(context.getColor(R.color.Background_selector_item));
+            }
             CardView.setOnClickListener(view -> {
                 subscriptionExpansion.setVisibility((subscriptionExpansion.getVisibility() == View.GONE) ? View.VISIBLE : View.GONE);
                 notifyDataSetChanged();
@@ -203,6 +212,11 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             descriptionText.setText(item.getDescription());
             cutoffDateText.setText(item.getCutoffDate().toString());
             monthNum.setText(String.valueOf(item.getMonth()));
+            if (items.get(getAdapterPosition()).getStatus() != 2){
+                setColor(item.getImportance(), CardView);
+            } else {
+                CardView.setBackgroundColor(context.getColor(R.color.Background_selector_item));
+            }
             CardView.setOnClickListener(view -> {
                 shopExpansion.setVisibility((shopExpansion.getVisibility() == View.GONE) ? View.VISIBLE : View.GONE);
                 notifyDataSetChanged();
@@ -224,7 +238,7 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
-    private boolean menuStatus(MenuItem menuItem, LinearLayout CardView, int pos, long elementID, View view, int  importantColor) {
+    private boolean menuStatus(MenuItem menuItem, LinearLayout CardView, int pos, long elementID, View view, int importantColor) {
         switch (menuItem.getItemId()) {
             case R.id.menuEdit:
                 items.get(pos).setStatus(3);
@@ -264,6 +278,8 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                             new OPBasics().updateRemindersStatus(id, auxStatus).addOnCompleteListener(task1 -> {
                                 if (task1.isSuccessful()) {
                                     items.add(position, auxItem);
+                                    if (items.get(position).getStatus() == 2)
+                                        CardView.setBackgroundColor(context.getColor(R.color.Background_selector_item));
                                     notifyItemInserted(position);
                                 }
                             });
