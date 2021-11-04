@@ -10,11 +10,10 @@ public class Reminders_CardData {
     private DateBasic cutoffDate;
     private DateBasic deadline;
     private long ID;
-    private int Status;
 
     public Reminders_CardData() {  }
 
-    public Reminders_CardData(long ID, String name, double amount, double minAmount, double settlement, DateBasic cutoffDate, DateBasic deadline, int importance, int month, int Status) {
+    public Reminders_CardData(long ID, String name, double amount, double minAmount, double settlement, DateBasic cutoffDate, DateBasic deadline, int importance, int month) {
         this.ID = ID;
         this.name = name;
         this.amount = amount;
@@ -24,16 +23,6 @@ public class Reminders_CardData {
         this.deadline = deadline;
         this.importance = importance;
         this.month = month;
-        this.Status = Status;
-
-    }
-
-    public int getStatus() {
-        return Status;
-    }
-
-    public void setStatus(int status) {
-        Status = status;
     }
 
     public long getID() {

@@ -7,26 +7,16 @@ public class Reminders_SubscriptionData {
     private int importance;
     private int repeat;
     private long ID;
-    private int Status;
 
     public Reminders_SubscriptionData() {  }
 
-    public Reminders_SubscriptionData(long ID, String name, double amount, DateBasic date, int importance, int repeat, int Status) {
+    public Reminders_SubscriptionData(long ID, String name, double amount, DateBasic date, int importance, int repeat) {
         this.ID = ID;
         this.name = name;
         this.amount = amount;
         this.date = date;
         this.importance = importance;
         this.repeat = repeat;
-        this.Status = Status;
-    }
-
-    public int getStatus() {
-        return Status;
-    }
-
-    public void setStatus(int status) {
-        Status = status;
     }
 
     public long getID() {

@@ -111,10 +111,10 @@ public class New_Reminders_Cards_Fragment extends Fragment {
                                     cutoffDate,
                                     deadlineDate,
                                     color,
-                                    Integer.parseInt(month.getText().toString().trim()),
-                                    1
+                                    Integer.parseInt(month.getText().toString().trim())
 
-                            )
+                            ),
+                            1
                     ),
                     String.valueOf(ID)
             ).addOnCompleteListener(task -> {

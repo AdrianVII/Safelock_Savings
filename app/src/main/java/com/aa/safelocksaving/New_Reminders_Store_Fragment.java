@@ -84,9 +84,10 @@ public class New_Reminders_Store_Fragment extends Fragment {
                                     deadlineDate,
                                     descriptionEdit.getText().toString().trim(),
                                     color,
-                                    Integer.parseInt(monthEdit.getText().toString().trim()),
-                                    1
-                            )
+                                    Integer.parseInt(monthEdit.getText().toString().trim())
+
+                            ),
+                            1
                     ),
                     String.valueOf(ID)
             ).addOnCompleteListener(task -> {

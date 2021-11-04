@@ -66,9 +66,9 @@ public class Reminders_Fragments extends Fragment {
                     List<CardItem> cardItems = new ArrayList<>();
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         switch (dataSnapshot.getValue(CardItem.class).getType()){
-                            case 0: cardItems.add(new CardItem(0, dataSnapshot.child("item").getValue(Reminders_CardData.class))); break;
-                            case 1: cardItems.add(new CardItem(1, dataSnapshot.child("item").getValue(Reminders_SubscriptionData.class))); break;
-                            case 2: cardItems.add(new CardItem(2, dataSnapshot.child("item").getValue(Reminders_ShopData.class))); break;
+                            case 0: cardItems.add(new CardItem(0, dataSnapshot.child("item").getValue(Reminders_CardData.class), dataSnapshot.getValue(CardItem.class).getStatus())); break;
+                            case 1: cardItems.add(new CardItem(1, dataSnapshot.child("item").getValue(Reminders_SubscriptionData.class),dataSnapshot.getValue(CardItem.class).getStatus() )); break;
+                            case 2: cardItems.add(new CardItem(2, dataSnapshot.child("item").getValue(Reminders_ShopData.class),dataSnapshot.getValue(CardItem.class).getStatus())); break;
                         }
                     }
                     reminder_cards.setHasFixedSize(true);

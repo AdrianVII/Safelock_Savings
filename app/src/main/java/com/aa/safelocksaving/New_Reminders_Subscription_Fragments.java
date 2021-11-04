@@ -98,9 +98,10 @@ public class New_Reminders_Subscription_Fragments extends Fragment {
                                     Double.parseDouble(amount.getText().toString().trim()),
                                     DATE,
                                     color,
-                                    itemSelected,
-                                    1
-                            )
+                                    itemSelected
+
+                            ),
+                            1
                     ),
                     String.valueOf(ID)
             ).addOnCompleteListener(task -> {
