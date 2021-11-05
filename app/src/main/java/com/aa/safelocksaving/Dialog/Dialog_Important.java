@@ -26,7 +26,7 @@ public class Dialog_Important extends Dialog {
         super.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         Window window = super.getWindow();
         window.setGravity(Gravity.CENTER);
-        window.getAttributes().windowAnimations = R.anim.desplazamiento_arriba;
+        window.getAttributes().windowAnimations = R.anim.displacement_up;
         btnYes = super.findViewById(R.id.btnyes);
         btnNo = super.findViewById(R.id.btnno);
         r1 = super.findViewById(R.id.rdblessImpo);

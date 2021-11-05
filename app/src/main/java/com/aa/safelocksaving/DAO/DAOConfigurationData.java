@@ -24,8 +24,12 @@ public class DAOConfigurationData {
     }
 
     public void setLanguage() {
-        if (!sharedPreferences.contains(ConfigurationData.Language))
-            editor.putString(ConfigurationData.Language, ConfigurationCompat.getLocales(Resources.getSystem().getConfiguration()).toLanguageTags()).apply();
+        if (!sharedPreferences.contains(ConfigurationData.Language)) {
+            String lang = ConfigurationCompat.getLocales(Resources.getSystem().getConfiguration()).toLanguageTags();
+            String[] parts = lang.split("-");
+            lang = parts[0];
+            editor.putString(ConfigurationData.Language, lang).apply();
+        }
         else {
             Locale locale = new Locale(sharedPreferences.getString(ConfigurationData.Language, "en"));
             Locale.setDefault(locale);

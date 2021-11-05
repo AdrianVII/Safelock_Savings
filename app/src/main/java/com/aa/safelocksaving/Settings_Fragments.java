@@ -2,7 +2,10 @@ package com.aa.safelocksaving;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +28,7 @@ public class Settings_Fragments extends Fragment implements View.OnClickListener
     private LinearLayout btnSWITCH;
     private LinearLayout info;
     private LinearLayout lang;
+    private LinearLayout notification;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -36,6 +40,7 @@ public class Settings_Fragments extends Fragment implements View.OnClickListener
         info = view.findViewById(R.id.info);
         lang = view.findViewById(R.id.lang);
         btnSWITCH = view.findViewById(R.id.btnSWITCH);
+        notification = view.findViewById(R.id.Notification);
         setSwitchBiometric();
         return view;
     }
@@ -48,6 +53,7 @@ public class Settings_Fragments extends Fragment implements View.OnClickListener
         info.setOnClickListener(this);
         lang.setOnClickListener(this);
         btnSIGNOUT.setOnClickListener(this);
+        notification.setOnClickListener(this);
         switchBiometric.setOnCheckedChangeListener((buttonView, isChecked) -> controlBiometric(isChecked));
     }
 
@@ -64,6 +70,25 @@ public class Settings_Fragments extends Fragment implements View.OnClickListener
                 getActivity().finish();
             }
             break;
+            case R.id.Notification:
+                Intent intent = new Intent();
+                intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
+                /*intent.putExtra("app_package", getContext().getPackageName());
+                intent.putExtra("app_uid", getContext().getApplicationInfo().uid);*/
+                //intent.putExtra("android.provider.extra.APP_PACKAGE", getContext().getPackageName());
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    intent.setAction(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
+                    intent.putExtra(Settings.EXTRA_APP_PACKAGE, getContext().getPackageName());
+                } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+                    intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
+                    intent.putExtra("app_package", getContext().getPackageName());
+                    intent.putExtra("app_uid", getContext().getApplicationInfo().uid);
+                } else {
+                    intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                    intent.addCategory(Intent.CATEGORY_DEFAULT);
+                    intent.setData(Uri.parse("package:" + getContext().getPackageName()));
+                }
+                startActivity(intent);
         }
     }
 

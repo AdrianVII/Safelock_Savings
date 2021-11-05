@@ -83,7 +83,7 @@
     <string name="amountIsRequiredText">Se Requirida Cantidad</string>
     <string name="dateIsRequieredText">Se Requiere Fecha</string>
     <string name="importanceIsNotSelectedText">La Importancia No Ha Sido Seleccionada</string>
-    <string name="areYouSureToDeleteYourAccountText">¿Estás Seguro de Eliminar Tu Cuenta?</string>
+    <string name="areYouSureToDeleteYourAccountText">¿Estás Seguro De Eliminar Tu Cuenta?</string>
     <string name="accountDeletionText">Eliminación De Cuenta</string>
     <string name="minimumAmountIsRequiredText">Se Requiere Cantidad Minima</string>
     <string name="settlementIsRequiredText">Se Requiere Liquidacion</string>
@@ -104,4 +104,10 @@
     <string name="resumeText">Reanudar</string>
     <string name="cardResumeText">Tarjeta Reanudada</string>
     <string name="undoText">Deshacer</string>
+    <string name="areYouSureToChangeYourPasswordText">¿Estás Seguro De Cambiar Tu Contraseña?</string>
+    <string name="enterNewPasswordText">Ingresa Nueva Contraseña</string>
+    <string name="sendEmailToChangePasswordText">Enviar Correo Para Cambiar Contraseña</string>
+    <string name="changeProfilePictureText">Cambiar Foto De Perfil</string>
+    <string name="folderText">Archivo</string>
+    <string name="cameraText">Camara</string>
 </resources>

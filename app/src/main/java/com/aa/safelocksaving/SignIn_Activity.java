@@ -72,7 +72,7 @@ public class SignIn_Activity extends Activity {
     private void loginUser() {
         if (authentication.isCorrect(email, password, this)) {
             String emailText = email.getText().toString().trim();
-            String passwordText = md5.getMD5(password.getText().toString().trim());
+            String passwordText = password.getText().toString().trim();
             mAuth.signInWithEmailAndPassword(emailText, passwordText)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {

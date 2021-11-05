@@ -3,6 +3,7 @@ package com.aa.safelocksaving;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -57,6 +58,14 @@ public class Register_Activity extends Activity {
         });
         btnNEXT = findViewById(R.id.btnNEXT);
         btnNEXT.setOnClickListener(view -> createUser());
+        confirm_pass.setOnKeyListener((v, keyCode, event) -> {
+            if(event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER){
+                createUser();
+                return true;
+
+            }
+            return false;
+        });
     }
 
     private void createUser() {
@@ -64,16 +73,17 @@ public class Register_Activity extends Activity {
             String nameText = name.getText().toString();
             String lastnameText = lastname.getText().toString();
             String emailText = email.getText().toString();
-            String passwordText = md5.getMD5(password.getText().toString());
+            String passwordText = password.getText().toString();
             mAuth.createUserWithEmailAndPassword(emailText, passwordText)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             user = mAuth.getCurrentUser();
-                            User dataUser = new User(nameText, lastnameText, emailText, passwordText);
+                            String pass = md5.getMD5(password.getText().toString());
+                            User dataUser = new User(nameText, lastnameText, emailText, pass);
                             daoUser.add(dataUser, user.getUid()).addOnCompleteListener(task1 -> {
                                 if (task1.isSuccessful()) {
                                     user.sendEmailVerification();
-                                    daoUserData.add(dataUser); //Guarda la informacion en el telefono
+                                    daoUserData.add(dataUser);
                                     Toast.makeText(this, getString(R.string.pleaseCheckYourEmailText), Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(this, SignIn_Activity.class));
                                     finish();

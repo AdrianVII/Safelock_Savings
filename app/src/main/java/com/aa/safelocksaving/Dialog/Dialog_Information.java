@@ -4,7 +4,6 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Dialog;
 import android.view.Gravity;
-import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
@@ -29,7 +28,7 @@ public class Dialog_Information extends Dialog {
         super.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         Window window = super.getWindow();
         window.setGravity(Gravity.CENTER);
-        window.getAttributes().windowAnimations = R.anim.desplazamiento_arriba;
+        window.getAttributes().windowAnimations = R.anim.displacement_up;
         btnYes = super.findViewById(R.id.btnyes);
 
         textTitle = super.findViewById(R.id.title);

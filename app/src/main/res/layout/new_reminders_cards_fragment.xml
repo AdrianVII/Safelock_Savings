@@ -5,134 +5,149 @@
     android:background="@color/white_background"
     android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/name"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="18dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/background_edittext_reminders"
-        android:fontFamily="@font/montserrat_regular"
-        android:hint="@string/nameText"
-        android:inputType="textPersonName"
-        android:maxLines="1"
-        android:padding="10dp"
-        android:textColor="@color/grey_white_spinner"
-        android:textColorHint="@color/grey_white_spinner" />
+        android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/amount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="18dp"
-        android:layout_marginTop="9dp"
-        android:background="@drawable/background_edittext_reminders"
-        android:fontFamily="@font/montserrat_regular"
-        android:hint="@string/amountText"
-        android:inputType="numberDecimal"
-        android:maxLines="1"
-        android:padding="10dp"
-        android:textColor="@color/grey_white_spinner"
-        android:textColorHint="@color/grey_white_spinner" />
-
-    <EditText
-        android:id="@+id/miniAmount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="18dp"
-        android:layout_marginTop="9dp"
-        android:background="@drawable/background_edittext_reminders"
-        android:fontFamily="@font/montserrat_regular"
-        android:hint="@string/minAmountText"
-        android:inputType="numberDecimal"
-        android:maxLines="1"
-        android:padding="10dp"
-        android:textColor="@color/grey_white_spinner"
-        android:textColorHint="@color/grey_white_spinner" />
-
-    <EditText
-        android:id="@+id/settlement"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="18dp"
-        android:layout_marginTop="9dp"
-        android:background="@drawable/background_edittext_reminders"
-        android:fontFamily="@font/montserrat_regular"
-        android:hint="@string/settlementText"
-        android:inputType="numberDecimal"
-        android:maxLines="1"
-        android:padding="10dp"
-        android:textColor="@color/grey_white_spinner"
-        android:textColorHint="@color/grey_white_spinner" />
-
-    <TextView
-        android:id="@+id/cutoff"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="18dp"
-        android:layout_marginTop="9dp"
-        android:background="@drawable/background_edittext_reminders"
-        android:fontFamily="@font/montserrat_regular"
-        android:maxLines="1"
-        android:padding="10dp"
-        android:text="@string/cutoffDateText"
-        android:textColor="@color/grey_white_spinner"
-        android:textSize="16sp" />
-
-    <TextView
-        android:id="@+id/deadline"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="18dp"
-        android:layout_marginTop="9dp"
-        android:background="@drawable/background_edittext_reminders"
-        android:fontFamily="@font/montserrat_regular"
-        android:maxLines="1"
-        android:padding="10dp"
-        android:text="@string/deadlineText"
-        android:textColor="@color/grey_white_spinner"
-        android:textSize="16sp" />
-
-    <LinearLayout
-        android:id="@+id/important"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="18dp"
-        android:layout_marginTop="9dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_regular"
-            android:padding="10dp"
-            android:text="@string/importanceText"
-            android:textSize="18sp" />
+            android:orientation="vertical">
 
-        <View
-            android:id="@+id/importantColor"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_gravity="center"
-            android:background="@drawable/box_important_unselected"
-            android:padding="10dp" />
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="18dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/background_edittext_reminders"
+                android:fontFamily="@font/montserrat_regular"
+                android:hint="@string/nameText"
+                android:inputType="textPersonName"
+                android:maxLines="1"
+                android:padding="10dp"
+                android:textColor="@color/grey_white_spinner"
+                android:textColorHint="@color/grey_white_spinner" />
 
-    </LinearLayout>
+            <EditText
+                android:id="@+id/amount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="18dp"
+                android:layout_marginTop="9dp"
+                android:background="@drawable/background_edittext_reminders"
+                android:fontFamily="@font/montserrat_regular"
+                android:hint="@string/amountText"
+                android:inputType="numberDecimal"
+                android:maxLines="1"
+                android:padding="10dp"
+                android:textColor="@color/grey_white_spinner"
+                android:textColorHint="@color/grey_white_spinner" />
 
-    <EditText
-        android:id="@+id/month"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="18dp"
-        android:layout_marginTop="9dp"
-        android:background="@drawable/background_edittext_reminders"
-        android:fontFamily="@font/montserrat_regular"
-        android:hint="@string/monthsText"
-        android:inputType="number"
-        android:maxLines="1"
-        android:padding="10dp"
-        android:textColor="@color/grey_white_spinner"
-        android:textColorHint="@color/grey_white_spinner" />
+            <EditText
+                android:id="@+id/miniAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="18dp"
+                android:layout_marginTop="9dp"
+                android:background="@drawable/background_edittext_reminders"
+                android:fontFamily="@font/montserrat_regular"
+                android:hint="@string/minAmountText"
+                android:inputType="numberDecimal"
+                android:maxLines="1"
+                android:padding="10dp"
+                android:textColor="@color/grey_white_spinner"
+                android:textColorHint="@color/grey_white_spinner" />
+
+            <EditText
+                android:id="@+id/settlement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="18dp"
+                android:layout_marginTop="9dp"
+                android:background="@drawable/background_edittext_reminders"
+                android:fontFamily="@font/montserrat_regular"
+                android:hint="@string/settlementText"
+                android:inputType="numberDecimal"
+                android:maxLines="1"
+                android:padding="10dp"
+                android:textColor="@color/grey_white_spinner"
+                android:textColorHint="@color/grey_white_spinner" />
+
+            <TextView
+                android:id="@+id/cutoff"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="18dp"
+                android:layout_marginTop="9dp"
+                android:background="@drawable/background_edittext_reminders"
+                android:fontFamily="@font/montserrat_regular"
+                android:maxLines="1"
+                android:padding="10dp"
+                android:text="@string/cutoffDateText"
+                android:textColor="@color/grey_white_spinner"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/deadline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="18dp"
+                android:layout_marginTop="9dp"
+                android:background="@drawable/background_edittext_reminders"
+                android:fontFamily="@font/montserrat_regular"
+                android:maxLines="1"
+                android:padding="10dp"
+                android:text="@string/deadlineText"
+                android:textColor="@color/grey_white_spinner"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:id="@+id/important"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="18dp"
+                android:layout_marginTop="9dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:padding="10dp"
+                    android:text="@string/importanceText"
+                    android:textSize="18sp" />
+
+                <View
+                    android:id="@+id/importantColor"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/box_important_unselected"
+                    android:padding="10dp" />
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/month"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="18dp"
+                android:layout_marginTop="9dp"
+                android:background="@drawable/background_edittext_reminders"
+                android:fontFamily="@font/montserrat_regular"
+                android:hint="@string/monthsText"
+                android:inputType="number"
+                android:maxLines="1"
+                android:padding="10dp"
+                android:textColor="@color/grey_white_spinner"
+                android:textColorHint="@color/grey_white_spinner" />
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
 
     <Space
         android:layout_width="match_parent"

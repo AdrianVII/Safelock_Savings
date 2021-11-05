@@ -120,4 +120,10 @@
     <string name="resumeText">Resume</string>
     <string name="cardResumeText">Card Resume</string>
     <string name="undoText">Undo</string>
+    <string name="areYouSureToChangeYourPasswordText">Are You Sure To Change Your Password?</string>
+    <string name="enterNewPasswordText">Enter New Password</string>
+    <string name="sendEmailToChangePasswordText">Send Email To Change Password</string>
+    <string name="changeProfilePictureText">Change Profile Picture</string>
+    <string name="folderText">Folder</string>
+    <string name="cameraText">Camera</string>
 </resources>

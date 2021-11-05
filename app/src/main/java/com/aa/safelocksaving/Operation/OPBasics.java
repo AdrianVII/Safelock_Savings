@@ -90,8 +90,8 @@ public class OPBasics {
         });
     }
 
-    public Task<Void> reAuthenticate(Activity activity) {
-        return user.reauthenticate(EmailAuthProvider.getCredential(new DAOUserData(activity).get(UserData.Email, ""), new DAOUserData(activity).get(UserData.Password, "")));
+    public Task<Void> reAuthenticate(Activity activity, String password) {
+        return user.reauthenticate(EmailAuthProvider.getCredential(new DAOUserData(activity).get(UserData.Email, ""), password));
     }
 
     public Task<Void> addRemindersCards(CardItem cardItem, String ID) { return new DAOUser().addRemindersCards(user.getUid(), cardItem, ID); }
@@ -105,7 +105,7 @@ public class OPBasics {
     public DatabaseReference getCardsReminders() { return new DAOUser().get(user.getUid()).child("reminders"); }
 
     public void deleteUser(Activity activity, deleteUserListener listener) {
-        reAuthenticate(activity).addOnCompleteListener(task -> {
+        reAuthenticate(activity, new DAOUserData(activity).get(UserData.Password, "")).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 new DAOUser().remove(user.getUid()).addOnCompleteListener(task1 -> {
                     if (task1.isSuccessful()) {

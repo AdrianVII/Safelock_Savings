@@ -1,16 +1,12 @@
 package com.aa.safelocksaving;
 
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.util.Pair;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -26,8 +22,8 @@ public class Splash_Screen_Activity extends AppCompatActivity {
         new DAOConfigurationData(this).setLanguage();
         setContentView(R.layout.splash_screen_activity);
         countDownTimer = new MyCountDownTimer(2000, 1000);
-        Animation animation1 = AnimationUtils.loadAnimation(this, R.anim.desplazamiento_arriba);
-        Animation animation2 = AnimationUtils.loadAnimation(this, R.anim.desplazamiento_abajo);
+        Animation animation1 = AnimationUtils.loadAnimation(this, R.anim.displacement_up);
+        Animation animation2 = AnimationUtils.loadAnimation(this, R.anim.displacement_down);
 
         TextView textView = findViewById(R.id.textView);
         ImageView imageView = findViewById(R.id.imageView);

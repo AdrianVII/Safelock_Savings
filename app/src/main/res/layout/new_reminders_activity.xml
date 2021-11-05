@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/newReminderText"
-        android:textSize="28sp"
+        android:textSize="25sp"
         android:fontFamily="@font/poppins_regular"
         android:layout_marginHorizontal="26dp"
         android:textColor="@color/grey"/>

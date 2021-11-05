@@ -175,7 +175,8 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             });
             img.setOnClickListener(view -> {
                 PopupMenu popupMenu = new PopupMenu(context, img);
-                popupMenu.inflate(R.menu.menu_card);
+                if (items.get(getAdapterPosition()).getStatus() != 2) popupMenu.inflate(R.menu.menu_card);
+                else popupMenu.inflate(R.menu.menu_card_paused);
                 popupMenu.setOnMenuItemClickListener(menuItem -> menuStatus(menuItem, CardView, getAdapterPosition(), item.getID(), view, item.getImportance()));
                 popupMenu.show();
             });
@@ -223,7 +224,8 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             });
             img.setOnClickListener(view -> {
                 PopupMenu popupMenu = new PopupMenu(context, img);
-                popupMenu.inflate(R.menu.menu_card);
+                if (items.get(getAdapterPosition()).getStatus() != 2) popupMenu.inflate(R.menu.menu_card);
+                else popupMenu.inflate(R.menu.menu_card_paused);
                 popupMenu.setOnMenuItemClickListener(menuItem -> menuStatus(menuItem, CardView, getAdapterPosition(), item.getID(), view, item.getImportance()));
                 popupMenu.show();
             });
@@ -267,20 +269,19 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             case R.id.menuDelete:
                 final int position = pos;
                 CardItem auxItem = items.get(position);
-                int auxStatus = items.get(pos).getStatus();
+                int auxStatus = auxItem.getStatus();
                 long id = elementID;
                 new OPBasics().updateRemindersStatus(id, 0).addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        items.get(pos).setStatus(0);
                         items.remove(position);
                         notifyItemRemoved(position);
                         new SnackBar_Action(context, 32, 32, view).showSBMargin(v -> {
                             new OPBasics().updateRemindersStatus(id, auxStatus).addOnCompleteListener(task1 -> {
                                 if (task1.isSuccessful()) {
                                     items.add(position, auxItem);
-                                    if (items.get(position).getStatus() == 2)
-                                        CardView.setBackgroundColor(context.getColor(R.color.Background_selector_item));
                                     notifyItemInserted(position);
+                                    if (auxItem.getStatus() == 2)
+                                        CardView.setBackgroundColor(context.getColor(R.color.Background_selector_item));
                                 }
                             });
                         });
