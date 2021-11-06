@@ -14,6 +14,7 @@ import com.aa.safelocksaving.DAO.DAOUser;
 import com.aa.safelocksaving.DAO.DAOUserData;
 import com.aa.safelocksaving.Dialog.Progress_Alert_Dialog;
 import com.aa.safelocksaving.R;
+import com.aa.safelocksaving.data.Budgets_Data;
 import com.aa.safelocksaving.data.CardItem;
 import com.aa.safelocksaving.data.Reminders_CardData;
 import com.aa.safelocksaving.data.User;
@@ -96,6 +97,8 @@ public class OPBasics {
 
     public Task<Void> addRemindersCards(CardItem cardItem, String ID) { return new DAOUser().addRemindersCards(user.getUid(), cardItem, ID); }
 
+    public Task<Void> addBudgetsCards(Budgets_Data budgetsData, String ID) { return new DAOUser().addBudgetsCards(user.getUid(), budgetsData, ID); }
+
     public Task<Void> updateRemindersStatus(long ID, int Status) {
         HashMap<String, Object> status = new HashMap<>();
         status.put("status", Status);
@@ -103,6 +106,8 @@ public class OPBasics {
     }
 
     public DatabaseReference getCardsReminders() { return new DAOUser().get(user.getUid()).child("reminders"); }
+
+    public DatabaseReference getCardsBudgets() { return new DAOUser().get(user.getUid()).child("budgets"); }
 
     public void deleteUser(Activity activity, deleteUserListener listener) {
         reAuthenticate(activity, new DAOUserData(activity).get(UserData.Password, "")).addOnCompleteListener(task -> {

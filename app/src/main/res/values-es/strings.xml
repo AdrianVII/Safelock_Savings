@@ -110,4 +110,25 @@
     <string name="changeProfilePictureText">Cambiar Foto De Perfil</string>
     <string name="folderText">Archivo</string>
     <string name="cameraText">Camara</string>
+    <string name="totalToPayText">Total A Pagar : $</string>
+    <string name="typeBudgetsText">Tipo de Presupuesto</string>
+    <string name="addText">Agregar</string>
+    <string name="januaryText">Enero</string>
+    <string name="februaryText">Febrero</string>
+    <string name="marchText">Marzo</string>
+    <string name="aprilText">Abril</string>
+    <string name="mayText">Mayo</string>
+    <string name="juneText">Junio</string>
+    <string name="julyText">Julio</string>
+    <string name="augustText">Agosto</string>
+    <string name="septemberText">Septiembre</string>
+    <string name="octoberText">Octubre</string>
+    <string name="novemberText">Noviembre</string>
+    <string name="decemberText">Diciembre</string>
+    <string name="yearText">Año</string>
+    <string name="newReportText">Nuevo Reporte</string>
+    <string name="viewText">Ver</string>
+    <string name="shareText">Compartir</string>
+    <string name="downloadText">Descargar</string>
+    <string name="isRequiredText">Se Requiere</string>
 </resources>

@@ -33,7 +33,7 @@ import java.util.List;
 public class Reminders_Fragments extends Fragment {
     private FloatingActionButton add;
     private RecyclerView reminder_cards;
-    private List<Reminders_CardData> cardData = new ArrayList<>();
+    //private List<Reminders_CardData> cardData = new ArrayList<>();
 
     @Override
     public void onAttach(@NonNull Context context) {

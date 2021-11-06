@@ -40,6 +40,34 @@
         <item>@string/monthlyText</item>
     </string-array>
 
+    <string-array name="TypeBudgets">
+        <item>@string/typeBudgetsText</item>
+        <item>@string/cardText</item>
+        <item>@string/subscriptionText</item>
+        <item>@string/addText</item>
+    </string-array>
+
+    <string-array name="Months">
+        <item>@string/januaryText</item>
+        <item>@string/februaryText</item>
+        <item>@string/marchText</item>
+        <item>@string/aprilText</item>
+        <item>@string/mayText</item>
+        <item>@string/juneText</item>
+        <item>@string/julyText</item>
+        <item>@string/augustText</item>
+        <item>@string/septemberText</item>
+        <item>@string/octoberText</item>
+        <item>@string/novemberText</item>
+        <item>@string/decemberText</item>
+    </string-array>
+
+    <string-array name="Years">
+        <item>@string/yearText</item>
+        <item>@string/a2021Text</item>
+    </string-array>
+
+
 
     <string name="minAmountText">Minimum amount</string>
     <string name="settlementText">Settlement</string>
@@ -126,4 +154,27 @@
     <string name="changeProfilePictureText">Change Profile Picture</string>
     <string name="folderText">Folder</string>
     <string name="cameraText">Camera</string>
+    <string name="totalToPayText">Total To Pay : $</string>
+    <string name="zeroText" translatable="false">0</string>
+    <string name="typeBudgetsText">Type Budgets</string>
+    <string name="addText">Add</string>
+    <string name="januaryText">January</string>
+    <string name="februaryText">February</string>
+    <string name="marchText">March</string>
+    <string name="aprilText">April</string>
+    <string name="mayText">May</string>
+    <string name="juneText">June</string>
+    <string name="julyText">July</string>
+    <string name="augustText">August</string>
+    <string name="septemberText">September</string>
+    <string name="octoberText">October</string>
+    <string name="novemberText">November</string>
+    <string name="decemberText">December</string>
+    <string name="a2021Text" translatable="false">2021</string>
+    <string name="yearText">Year</string>
+    <string name="newReportText">New Report</string>
+    <string name="viewText">View</string>
+    <string name="shareText">Share</string>
+    <string name="downloadText">Download</string>
+    <string name="isRequiredText">Is Required</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.aa.safelocksaving.Operation;
 
 import android.app.Activity;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -92,6 +93,28 @@ public class CheckData {
             month.requestFocus();
             return false;
         }
+        return true;
+    }
+
+    public boolean isBudgetCorrect(EditText name, EditText amount, int spinner, EditText add) {
+        if (name.getText().toString().trim().isEmpty()) {
+            name.setError(activity.getString(R.string.nameIsRequiredText));
+            name.requestFocus();
+            return false;
+        }
+        if (amount.getText().toString().trim().isEmpty()) {
+            amount.setError(activity.getString(R.string.amountIsRequiredText));
+            amount.requestFocus();
+            return false;
+        }
+        if (spinner == 3) {
+            add.setVisibility(View.VISIBLE);
+            if (add.getText().toString().trim().isEmpty()) {
+                add.setError(activity.getString(R.string.isRequiredText));
+                add.requestFocus();
+                return false;
+            }
+        } else add.setVisibility(View.GONE);
         return true;
     }
 

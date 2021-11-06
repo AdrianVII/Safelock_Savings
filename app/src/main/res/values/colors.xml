@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- Custom colors -->
+    <color name="white_background_sheet">#EFEDED</color>
     <color name="white_background">#F3F3F3</color> <!-- Background -->
     <color name="grey">#686868</color> <!--Text general -->
     <color name="blue_grey_white">#2D8890</color> <!-- EditText Login, Register **Esto no es BLUE**  -->
@@ -28,7 +29,10 @@
     <color name="imagen_color">#4DB6AC</color>
     <color name="line">#E0E0E0</color>
     <color name="Background_selector_item">#77C5C4C4</color>
+    <color name="Background_reports_months">#20ABB1</color>
+
 
     <color name="pink">#c6419e</color>
     <color name="yellow">#e5a818</color>
+    <color name="black_transparent">#4D000000</color>
 </resources>

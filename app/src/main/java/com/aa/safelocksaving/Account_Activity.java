@@ -1,14 +1,9 @@
 package com.aa.safelocksaving;
 
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.aa.safelocksaving.DAO.DAOUserData;
-import com.aa.safelocksaving.Dialog.Dialog_Bottom_Sheet;
+import com.aa.safelocksaving.Dialog.Dialog_Bottom_Sheet_Fragment;
 import com.aa.safelocksaving.Dialog.Dialog_Box;
 import com.aa.safelocksaving.Dialog.Dialog_Change_Password;
 import com.aa.safelocksaving.data.Authentication;
@@ -28,11 +23,6 @@ import com.aa.safelocksaving.data.UserData;
 import com.aa.safelocksaving.Operation.OPBasics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -103,7 +93,7 @@ public class Account_Activity extends AppCompatActivity {
 
     private void choosePicture() {
         //startActivityForResult(new Intent().setType("image/*").setAction(Intent.ACTION_GET_CONTENT), REQUEST_CODE_IMAGE);
-        new Dialog_Bottom_Sheet(this, new Dialog_Bottom_Sheet.OnClickListener() {
+        /*new Dialog_Bottom_Sheet(this, new Dialog_Bottom_Sheet.OnClickListener() {
             @Override
             public void OnClickFolder(View view) {
                 startActivityForResult(new Intent().setType("image/*").setAction(Intent.ACTION_GET_CONTENT), REQUEST_CODE_IMAGE);
@@ -114,7 +104,19 @@ public class Account_Activity extends AppCompatActivity {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent,REQUEST_CODE_CAMERA);
             }
-        }).show();
+        }).show();*/
+        new Dialog_Bottom_Sheet_Fragment(new Dialog_Bottom_Sheet_Fragment.OnClickListener() {
+            @Override
+            public void OnClickFolder(View view) {
+                startActivityForResult(new Intent().setType("image/*").setAction(Intent.ACTION_GET_CONTENT), REQUEST_CODE_IMAGE);
+            }
+
+            @Override
+            public void OnClickCamera(View view) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent,REQUEST_CODE_CAMERA);
+            }
+        }).show(getSupportFragmentManager(), Dialog_Bottom_Sheet_Fragment.TAG);
     }
 
     @Override

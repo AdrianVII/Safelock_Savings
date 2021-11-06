@@ -73,7 +73,6 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/Type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/typeText"
@@ -82,7 +81,7 @@
                 android:fontFamily="@font/montserrat_regular"/>
 
             <TextView
-                android:id="@+id/Type1"
+                android:id="@+id/Type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/threePointsText"

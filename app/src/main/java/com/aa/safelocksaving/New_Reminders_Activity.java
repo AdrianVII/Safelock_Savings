@@ -15,9 +15,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 public class New_Reminders_Activity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private TextView btnBack;
-    private New_Reminders_Cards_Fragment new_reminders_cards_fragment = new New_Reminders_Cards_Fragment();
-    private New_Reminders_Store_Fragment new_reminders_store_fragment = new New_Reminders_Store_Fragment();
-    private New_Reminders_Subscription_Fragments new_reminders_subscription_fragments = new New_Reminders_Subscription_Fragments();
     private Spinner spinner;
     private Fragment fragmentAux;
 
@@ -39,9 +36,9 @@ public class New_Reminders_Activity extends AppCompatActivity implements Adapter
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         switch (position) {
             case 0: removeFragment(); break;
-            case 1: loadFragments(new_reminders_cards_fragment); break;
-            case 2: loadFragments(new_reminders_subscription_fragments); break;
-            case 3: loadFragments(new_reminders_store_fragment); break;
+            case 1: loadFragments(new New_Reminders_Cards_Fragment()); break;
+            case 2: loadFragments(new New_Reminders_Subscription_Fragments()); break;
+            case 3: loadFragments(new New_Reminders_Store_Fragment()); break;
         }
     }
 

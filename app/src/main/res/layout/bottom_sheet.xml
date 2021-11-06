@@ -28,7 +28,9 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
+            <soup.neumorphism.NeumorphImageView
+                style="@style/Widget.Neumorph.ImageView"
+                android:padding="20dp"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:src="@drawable/ic_folder" />
@@ -54,7 +56,9 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
+            <soup.neumorphism.NeumorphImageView
+                style="@style/Widget.Neumorph.ImageView"
+                android:padding="20dp"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:src="@drawable/ic_camera" />
