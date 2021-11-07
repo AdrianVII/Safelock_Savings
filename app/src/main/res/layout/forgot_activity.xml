@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -27,6 +28,11 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:orientation="vertical">
+        <soup.neumorphism.NeumorphCardView
+            style="@style/Widget.Neumorph.CardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:neumorph_shapeType="pressed">
         <EditText
             android:id="@+id/email"
             android:layout_width="match_parent"
@@ -35,10 +41,11 @@
             android:inputType="textEmailAddress"
             android:textColorHint="@color/white_green"
             android:textColor="@color/blue_grey_white"
-            android:background="@drawable/background_edittext_form"
+            android:background="@android:color/transparent"
             android:padding="10dp"
             android:fontFamily="@font/roboto_medium"
             android:maxLines="1"/>
+        </soup.neumorphism.NeumorphCardView>
 
     </LinearLayout>
     <Space

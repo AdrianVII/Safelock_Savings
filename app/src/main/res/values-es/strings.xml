@@ -109,7 +109,7 @@
     <string name="sendEmailToChangePasswordText">Enviar Correo Para Cambiar Contraseña</string>
     <string name="changeProfilePictureText">Cambiar Foto De Perfil</string>
     <string name="folderText">Archivo</string>
-    <string name="cameraText">Camara</string>
+    <string name="cameraText">Cámara</string>
     <string name="totalToPayText">Total A Pagar : $</string>
     <string name="typeBudgetsText">Tipo de Presupuesto</string>
     <string name="addText">Agregar</string>
@@ -131,4 +131,6 @@
     <string name="shareText">Compartir</string>
     <string name="downloadText">Descargar</string>
     <string name="isRequiredText">Se Requiere</string>
+    <string name="areYouSureToLogoutText">¿Estás seguro de cerrar sesión?</string>
+    <string name="logoutText">Cerrar sesión</string>
 </resources>

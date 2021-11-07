@@ -177,4 +177,6 @@
     <string name="shareText">Share</string>
     <string name="downloadText">Download</string>
     <string name="isRequiredText">Is Required</string>
+    <string name="areYouSureToLogoutText">Are You Sure To Logout?</string>
+    <string name="logoutText">Logout</string>
 </resources>

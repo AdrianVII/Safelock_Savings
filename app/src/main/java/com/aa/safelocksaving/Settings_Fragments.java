@@ -1,6 +1,8 @@
 package com.aa.safelocksaving;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -17,6 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
+import com.aa.safelocksaving.Dialog.Dialog_Box;
 import com.aa.safelocksaving.data.Authentication;
 import com.aa.safelocksaving.DAO.DAOConfigurationData;
 
@@ -65,11 +68,21 @@ public class Settings_Fragments extends Fragment implements View.OnClickListener
             case R.id.btnSWITCH: switchBiometric.setChecked(!switchBiometric.isChecked()); break;
             case R.id.info: startActivity(new Intent(getContext(), Information_Activity.class)); break;
             case R.id.lang: startActivity(new Intent(getContext(), Language_Activity.class)); break;
-            case R.id.btnSIGNOUT: if (authentication.logoutUser()) {
-                startActivity(new Intent(getActivity(), Start_Activity.class));
-                getActivity().finish();
-            }
-            break;
+            case R.id.btnSIGNOUT: new Dialog_Box(getActivity(),getString(R.string.logoutText), getString(R.string.areYouSureToLogoutText)).OnActionButton(new Dialog_Box.OnPositiveClickListener(){
+
+                @Override
+                public void positiveClick(View view, Activity activity) {
+                    if (authentication.logoutUser()) {
+                        startActivity(new Intent(getActivity(), Start_Activity.class));
+                        getActivity().finish();
+                    }
+                }
+
+                @Override
+                public void negativeClick(View view) {
+
+                }
+            });break;
             case R.id.Notification:
                 Intent intent = new Intent();
                 intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");

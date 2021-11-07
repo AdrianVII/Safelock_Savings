@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.aa.safelocksaving.Operation.CardListAdapter;
 import com.aa.safelocksaving.Operation.OPBasics;
+import com.aa.safelocksaving.Operation.ViewAnimation;
 import com.aa.safelocksaving.data.CardItem;
 import com.aa.safelocksaving.data.DataUser_Reminder;
 import com.aa.safelocksaving.data.Reminders_CardData;
@@ -65,7 +66,7 @@ public class Reminders_Fragments extends Fragment {
                 if (snapshot.exists()) {
                     List<CardItem> cardItems = new ArrayList<>();
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        if(dataSnapshot.getValue(CardItem.class).getStatus() !=0){
+                        if (dataSnapshot.getValue(CardItem.class).getStatus() != 0) {
                             switch (dataSnapshot.getValue(CardItem.class).getType()) {
                                 case 0:
                                     cardItems.add(new CardItem(0, dataSnapshot.child("item").getValue(Reminders_CardData.class), dataSnapshot.getValue(CardItem.class).getStatus()));
@@ -79,9 +80,26 @@ public class Reminders_Fragments extends Fragment {
                             }
                         }
                     }
+                    float addY = add.getTranslationY();
                     reminder_cards.setHasFixedSize(true);
                     reminder_cards.setLayoutManager(new LinearLayoutManager(getContext()));
                     reminder_cards.setAdapter(new CardListAdapter(cardItems, getContext()));
+                    reminder_cards.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+                        @Override
+                        public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                            super.onScrollStateChanged(recyclerView, newState);
+                            ViewAnimation.showUpAnimation(add, addY);
+                        }
+
+                        @Override
+                        public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                            super.onScrolled(recyclerView, dx, dy);
+                            if (dy > 0 || dy < 0 && add.isShown()) {
+                                ViewAnimation.showDownAnimation(add);
+                            }
+                        }
+                    });
                 }
             }
 

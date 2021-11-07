@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.aa.safelocksaving.Operation.BudgetCardListAdapter;
 import com.aa.safelocksaving.Operation.CardListAdapter;
 import com.aa.safelocksaving.Operation.OPBasics;
+import com.aa.safelocksaving.Operation.ViewAnimation;
 import com.aa.safelocksaving.data.Budgets_Data;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
@@ -60,6 +61,8 @@ public class Budgets_Fragments extends Fragment {
                     for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
                         items.add(dataSnapshot.getValue(Budgets_Data.class));
                     }
+                    float paymentY = payment.getTranslationY();
+                    float addY = add.getTranslationY();
                     budgets_cards.setHasFixedSize(true);
                     budgets_cards.setLayoutManager(new LinearLayoutManager(getContext()));
                     budgets_cards.setAdapter(new BudgetCardListAdapter(items, getContext()));
@@ -68,17 +71,21 @@ public class Budgets_Fragments extends Fragment {
                         public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                             super.onScrollStateChanged(recyclerView, newState);
                             if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                                add.show();
-                                payment.setVisibility(View.VISIBLE);
+                                /*add.show();
+                                payment.setVisibility(View.VISIBLE);*/
+                                ViewAnimation.showUpAnimation(add, addY);
+                                ViewAnimation.showUpAnimation(payment, paymentY);
                             }
                         }
 
                         @Override
                         public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                             super.onScrolled(recyclerView, dx, dy);
-                            if (dy > 0 || dy > 0 && add.isShown()) {
-                                add.hide();
-                                payment.setVisibility(View.GONE);
+                            if (dy > 0 || dy < 0 && add.isShown()) {
+                                /*add.hide();
+                                payment.setVisibility(View.GONE);*/
+                                ViewAnimation.showDownAnimation(add);
+                                ViewAnimation.showDownAnimation(payment);
                             }
                         }
                     });

@@ -92,19 +92,6 @@ public class Account_Activity extends AppCompatActivity {
     }
 
     private void choosePicture() {
-        //startActivityForResult(new Intent().setType("image/*").setAction(Intent.ACTION_GET_CONTENT), REQUEST_CODE_IMAGE);
-        /*new Dialog_Bottom_Sheet(this, new Dialog_Bottom_Sheet.OnClickListener() {
-            @Override
-            public void OnClickFolder(View view) {
-                startActivityForResult(new Intent().setType("image/*").setAction(Intent.ACTION_GET_CONTENT), REQUEST_CODE_IMAGE);
-            }
-
-            @Override
-            public void OnClickCamera(View view) {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent,REQUEST_CODE_CAMERA);
-            }
-        }).show();*/
         new Dialog_Bottom_Sheet_Fragment(new Dialog_Bottom_Sheet_Fragment.OnClickListener() {
             @Override
             public void OnClickFolder(View view) {
