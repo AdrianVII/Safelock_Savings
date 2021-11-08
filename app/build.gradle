@@ -47,4 +47,5 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-storage:7.2.0'
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
     implementation 'com.github.fornewid:neumorphism:0.3.0'
+    implementation 'com.github.dhaval2404:imagepicker-support:1.7.1'
 }

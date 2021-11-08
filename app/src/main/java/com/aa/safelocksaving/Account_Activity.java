@@ -21,6 +21,7 @@ import com.aa.safelocksaving.Dialog.Dialog_Change_Password;
 import com.aa.safelocksaving.data.Authentication;
 import com.aa.safelocksaving.data.UserData;
 import com.aa.safelocksaving.Operation.OPBasics;
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -100,8 +101,10 @@ public class Account_Activity extends AppCompatActivity {
 
             @Override
             public void OnClickCamera(View view) {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent,REQUEST_CODE_CAMERA);
+                ImagePicker.Companion.with(Account_Activity.this)
+                        .cameraOnly()
+                        .crop()
+                        .start(REQUEST_CODE_CAMERA);
             }
         }).show(getSupportFragmentManager(), Dialog_Bottom_Sheet_Fragment.TAG);
     }
@@ -114,54 +117,7 @@ public class Account_Activity extends AppCompatActivity {
             imageView.setImageURI(image);
             uploadPicture();
         } else if (requestCode == REQUEST_CODE_CAMERA && resultCode == RESULT_OK) {
-            /*try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), image);
-                imageView.setImageBitmap(bitmap);
-                String[] proj = {MediaStore.Images.Media.DATA};
-                Cursor cursor = managedQuery(image, proj, null, null, null);
-                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                cursor.moveToFirst();
-                image = Uri.parse(cursor.getString(column_index));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }*/
-            //Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-            //ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-            //bitmap.compress(Bitmap.CompressFormat.JPEG,100,bytes);
-            //String path = MediaStore.Images.Media.insertImage(getApplicationContext().getContentResolver() ,bitmap ,"Profile_Picture.jpg",null);
-
-            /*String filename = "Profile_Picture.jpg";
-            String baseDirectory = String.format("%s/SafeLock_Savings", Environment.DIRECTORY_PICTURES);
-            try {
-                ContentValues values = new ContentValues();
-                values.put(MediaStore.Images.ImageColumns.DISPLAY_NAME, filename);
-                values.put(MediaStore.Images.ImageColumns.MIME_TYPE, "image/jpeg");
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    values.put(MediaStore.Images.ImageColumns.RELATIVE_PATH, baseDirectory);
-                    values.put(MediaStore.Images.ImageColumns.IS_PENDING, true);
-                } else {
-                    String fullpath = String.format("%s/%s/%s",
-                            Environment.getExternalStorageDirectory(),
-                            baseDirectory,
-                            filename);
-                    values.put(MediaStore.Images.ImageColumns.DATA, fullpath);
-                }
-                Uri uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-                if (uri != null) {
-                    OutputStream fos = getContentResolver().openOutputStream(uri);
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-                    fos.flush();
-                    fos.close();
-                    image = uri;
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                        values.clear();
-                        values.put(MediaStore.Images.ImageColumns.IS_PENDING, false);
-                        getContentResolver().update(uri, values, null, null);
-                    }
-                }
-            } catch (IOException ioe) { ioe.printStackTrace(); }*/
-
-            //image = Uri.parse(path);
+            image = data.getData();
             imageView.setImageURI(image);
             uploadPicture();
         }
