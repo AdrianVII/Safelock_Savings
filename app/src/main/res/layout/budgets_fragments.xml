@@ -23,6 +23,7 @@
         android:paddingVertical="18dp">
 
         <EditText
+            android:id="@+id/paymentNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -48,7 +49,33 @@
             android:layout_height="match_parent" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:visibility="invisible"
+            android:id="@+id/trash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:layout_marginBottom="150dp"
+            android:layout_marginRight="20dp"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/ic_trash"
+            android:tint="#146c75"
+            app:borderWidth="0dp"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:visibility="invisible"
             android:id="@+id/add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:layout_marginBottom="90dp"
+            android:layout_marginRight="20dp"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/ic_round_add_24"
+            android:tint="#146c75"
+            app:borderWidth="0dp"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/open"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"

@@ -54,7 +54,10 @@ public class Reminders_Fragments extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         add.setOnClickListener(view -> startActivity(new Intent(getContext(), New_Reminders_Activity.class)));
+        add.setOnLongClickListener(v -> {
 
+            return false;
+        });
     }
 
     @Override

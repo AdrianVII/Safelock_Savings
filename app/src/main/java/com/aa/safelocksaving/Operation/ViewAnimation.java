@@ -31,6 +31,7 @@ final public class ViewAnimation {
     }
 
     static  public void showScaleAlphaShow(View view, float X, float Y) {
+        view.setVisibility(View.VISIBLE);
         view.animate()
                 .scaleX(X)
                 .scaleY(Y)

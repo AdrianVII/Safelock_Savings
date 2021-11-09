@@ -32,10 +32,20 @@ public class DAOUser {
 
     public Task<Void> addBudgetsCards(String userID, Budgets_Data budgetsData, String ID) { return databaseReference.child(userID).child("budgets").child(ID).setValue(budgetsData); }
 
+    public Task<Void> updateBudgetsCard(String userID, String ID, HashMap<String, Object> budget) { return databaseReference.child(userID).child("budgets").child(ID).updateChildren(budget); }
+
+    //public DatabaseReference addAllBudgetsCards(String userID) { return databaseReference.child(userID).child("budgets"); }
+
+    public Task<Void> removeBudget(String userID, String ID) { return databaseReference.child(userID).child("budgets").child(ID).removeValue(); }
+
+    public Task<Void> addAllBudgetsCards(String userID, List<Budgets_Data> budgetsDataList) { return databaseReference.child(userID).child("budgets").setValue(budgetsDataList); }
+
     public DatabaseReference get(String userID) {
         return databaseReference.child(userID);
     }
 
     public Task<Void> remove(String userID) { return databaseReference.child(userID).removeValue(); }
+
+    public Task<Void> removeAllBudgets(String userID) { return databaseReference.child(userID).child("budgets").removeValue(); }
 
 }

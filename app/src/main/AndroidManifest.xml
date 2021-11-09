@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SafelockSaving">
+        <activity android:name=".Budgets_Edit_Card" android:exported="true"/>
         <activity android:name=".New_Budgets_Activity" android:exported="true"/>
         <activity android:name=".New_Reminders_Activity" android:exported="true"/>
         <activity android:name=".Language_Activity" android:exported="true"/>

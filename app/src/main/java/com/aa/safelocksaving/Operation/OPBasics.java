@@ -19,6 +19,7 @@ import com.aa.safelocksaving.data.CardItem;
 import com.aa.safelocksaving.data.Reminders_CardData;
 import com.aa.safelocksaving.data.User;
 import com.aa.safelocksaving.data.UserData;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,6 +33,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class OPBasics {
     private FirebaseUser user;
@@ -99,6 +101,26 @@ public class OPBasics {
 
     public Task<Void> addBudgetsCards(Budgets_Data budgetsData, String ID) { return new DAOUser().addBudgetsCards(user.getUid(), budgetsData, ID); }
 
+    public Task<Void> updateBudgetsCard(String ID, HashMap<String, Object> budget) { return new DAOUser().updateBudgetsCard(user.getUid(), ID, budget); }
+
+    /*public void addAllBudgetsCards(List<Budgets_Data> budgetsDataList) {
+        for (int i = 0; i < budgetsDataList.size(); i++) {
+            new DAOUser().addAllBudgetsCards(user.getUid()).child(String.valueOf(budgetsDataList.get(i).getID())).setValue(budgetsDataList).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+
+                }
+            });
+
+        }
+    }*/
+
+    public Task<Void> addAllBudgetsCards(List<Budgets_Data> budgetsDataList) {
+        return new DAOUser().addAllBudgetsCards(user.getUid(), budgetsDataList);
+    }
+
+    public Task<Void> removeBudgetsCard(long ID) { return new DAOUser().removeBudget(user.getUid(), String.valueOf(ID)); }
+
     public Task<Void> updateRemindersStatus(long ID, int Status) {
         HashMap<String, Object> status = new HashMap<>();
         status.put("status", Status);
@@ -124,6 +146,8 @@ public class OPBasics {
             }
         });
     }
+
+    public Task<Void> removeAllBudgets() { return new DAOUser().removeAllBudgets(user.getUid()); }
 
     class MyCountDownTimer extends CountDownTimer {
         String message;

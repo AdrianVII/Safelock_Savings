@@ -179,4 +179,8 @@
     <string name="isRequiredText">Is Required</string>
     <string name="areYouSureToLogoutText">Are You Sure To Logout?</string>
     <string name="logoutText">Logout</string>
+    <string name="newUpdateAvailableText">New Update Available</string>
+    <string name="updateText">Update</string>
+    <string name="currentVersionText">Current Version</string>
+    <string name="lastVersionText">Last Version</string>
 </resources>

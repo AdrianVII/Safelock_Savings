@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.aa.safelocksaving.DAO.DAOConfigurationData;
+import com.aa.safelocksaving.Operation.CheckUpdate;
 
 public class Splash_Screen_Activity extends AppCompatActivity {
     private MyCountDownTimer countDownTimer;
@@ -30,12 +31,13 @@ public class Splash_Screen_Activity extends AppCompatActivity {
 
         textView.setAnimation(animation2);
         imageView.setAnimation(animation1);
-
-        new Handler().postDelayed(() -> {
-            Intent intent = new Intent(getBaseContext(), Start_Activity.class);
-            startActivity(intent);
-            countDownTimer.start();
-        }, 2000);
+        new CheckUpdate(this, () -> {
+            new Handler().postDelayed(() -> {
+                    Intent intent = new Intent(getBaseContext(), Start_Activity.class);
+                    startActivity(intent);
+                    countDownTimer.start();
+            }, 2000);
+        });
     }
 
     class MyCountDownTimer extends CountDownTimer {

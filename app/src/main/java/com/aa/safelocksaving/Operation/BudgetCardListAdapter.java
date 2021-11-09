@@ -1,16 +1,20 @@
 package com.aa.safelocksaving.Operation;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.aa.safelocksaving.Budgets_Edit_Card;
+import com.aa.safelocksaving.DAO.DAOUser;
 import com.aa.safelocksaving.R;
 import com.aa.safelocksaving.data.Budgets_Data;
 
@@ -18,11 +22,22 @@ import java.util.List;
 
 public class BudgetCardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Budgets_Data> items;
+    //private List<Budgets_Data> auxItems;
     private Context context;
 
     public BudgetCardListAdapter(List<Budgets_Data> items, Context context) {
         this.items = items;
         this.context = context;
+    }
+
+    public void removeAll() {
+        //auxItems = items;
+        new OPBasics().removeAllBudgets().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                items.clear();
+                notifyDataSetChanged();
+            }
+        });
     }
 
     @NonNull
@@ -67,10 +82,44 @@ public class BudgetCardListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             title.setText(item.getName().trim());
             amount.setText(String.valueOf(item.getAmount()));
             type.setText(item.getType().trim());
-
-
+            menu.setOnClickListener(view -> {
+                PopupMenu popupMenu = new PopupMenu(context, menu);
+                popupMenu.inflate(R.menu.menu_budgets_card);
+                popupMenu.setOnMenuItemClickListener(menuItem -> {
+                    switch (menuItem.getItemId()) {
+                        case R.id.menuEdit:
+                            Intent intent = new Intent(context, Budgets_Edit_Card.class);
+                            intent.putExtra("id",item.getID());
+                            intent.putExtra("name", item.getName());
+                            intent.putExtra("amount", item.getAmount());
+                            intent.putExtra("type", item.getType());
+                            context.startActivity(intent);
+                            return true;
+                        case R.id.menuDelete:
+                            final int position = getAdapterPosition();
+                            Budgets_Data auxItem = item;
+                            long id = item.getID();
+                            new OPBasics().removeBudgetsCard(id).addOnCompleteListener(task -> {
+                                if (task.isSuccessful()) {
+                                    items.remove(position);
+                                    notifyItemRemoved(position);
+                                    new SnackBar_Action(context, 32, 32, view).showSBMargin(v -> {
+                                        new OPBasics().addBudgetsCards(auxItem, String.valueOf(id)).addOnCompleteListener(task1 -> {
+                                            items.add(position, auxItem);
+                                            notifyItemInserted(position);
+                                        });
+                                    });
+                                }
+                            });
+                            return true;
+                    }
+                    return false;
+                });
+                popupMenu.show();
+            });
         }
 
     }
+
 
 }

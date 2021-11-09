@@ -133,4 +133,8 @@
     <string name="isRequiredText">Se Requiere</string>
     <string name="areYouSureToLogoutText">¿Estás seguro de cerrar sesión?</string>
     <string name="logoutText">Cerrar sesión</string>
+    <string name="newUpdateAvailableText">Actualización Disponible</string>
+    <string name="updateText">Actualizar</string>
+    <string name="currentVersionText">Version Actual</string>
+    <string name="lastVersionText">Ultima Version</string>
 </resources>
