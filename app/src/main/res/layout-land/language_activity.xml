@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_background"
+    android:fitsSystemWindows="true">
+
+    <TextView
+        android:id="@+id/btnBack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/backText"
+        android:padding="10dp"
+        android:fontFamily="@font/roboto_regular"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/languageText"
+        android:textSize="40sp"
+        android:fontFamily="@font/poppins_regular"
+        android:layout_marginHorizontal="26dp"
+        android:textColor="@color/grey"/>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginTop="30dp"
+        android:elevation="1dp">
+
+        <RadioButton
+            android:id="@+id/rdbSPANISH"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/spanishText"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line"
+            android:layout_marginHorizontal="10dp"/>
+
+        <RadioButton
+            android:id="@+id/rdbENGLISH"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/englishText"/>
+
+    </RadioGroup>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <Button
+        android:id="@+id/btnAPPLY"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/applyChangesText"
+        android:textAllCaps="false"
+        android:fontFamily="@font/roboto_regular"
+        android:textColor="@color/black"
+        android:background="@drawable/settings_button_background"
+        android:layout_marginHorizontal="19dp"
+        android:layout_marginBottom="10dp"/>
+
+</LinearLayout>

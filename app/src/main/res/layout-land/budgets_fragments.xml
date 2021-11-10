@@ -13,15 +13,14 @@
         android:fontFamily="@font/poppins_regular"
         android:text="@string/budgetsText"
         android:textColor="@color/grey"
-        android:textSize="40sp" />
+        android:textSize="25sp" />
 
     <soup.neumorphism.NeumorphCardView
-        android:id="@+id/paymentButton"
         style="@style/Widget.Neumorph.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="19dp"
-        android:paddingVertical="18dp">
+        android:paddingVertical="10dp">
 
         <EditText
             android:id="@+id/paymentNumber"
@@ -34,7 +33,7 @@
             android:inputType="numberDecimal"
             android:layout_marginTop="5dp"
             android:textColor="@color/grey_white_spinner"
-            android:textSize="26sp"
+            android:textSize="19sp"
             android:background="@android:color/transparent"/>
 
     </soup.neumorphism.NeumorphCardView>
@@ -47,7 +46,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="30dp"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:visibility="invisible"
@@ -55,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right|bottom"
-            android:layout_marginBottom="150dp"
+            android:layout_marginBottom="124dp"
             android:layout_marginRight="20dp"
             android:backgroundTint="@color/white"
             android:src="@drawable/ic_trash"
@@ -68,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right|bottom"
-            android:layout_marginBottom="90dp"
+            android:layout_marginBottom="74dp"
             android:layout_marginRight="20dp"
             android:backgroundTint="@color/white"
             android:src="@drawable/ic_round_add_24"
@@ -94,7 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginBottom="10dp"
-            android:padding="20dp"
+            android:padding="15dp"
             app:neumorph_backgroundColor="@color/white_background"
             app:neumorph_shadowColorLight="@android:color/transparent"
             app:neumorph_shadowColorDark="@color/Background_selector_item">
@@ -112,7 +112,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:text="@string/totalToPayText"
                     android:textColor="@color/grey_white_spinner"
-                    android:textSize="20sp" />
+                    android:textSize="17sp" />
 
                 <TextView
                     android:id="@+id/PriceTotal"
@@ -121,7 +121,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:text="@string/zeroText"
                     android:textColor="@color/grey_white_spinner"
-                    android:textSize="20sp" />
+                    android:textSize="17sp" />
             </LinearLayout>
 
         </soup.neumorphism.NeumorphCardView>

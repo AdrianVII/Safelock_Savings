@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Safelock Saving</string>
+    <string name="app_name">Safelock Savings</string>
     <string name="backText">Regresar</string>
     <string name="loginText">Iniciar Sesión</string>
     <string name="userText">Usuario</string>
