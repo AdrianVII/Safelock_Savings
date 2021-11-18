@@ -3,19 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="10dp"
     android:animateLayoutChanges="true"
-    app:cardUseCompatPadding="true"
     app:cardBackgroundColor="@android:color/transparent"
-    app:cardElevation="0dp">
+    app:cardCornerRadius="10dp"
+    app:cardElevation="0dp"
+    app:cardUseCompatPadding="true">
 
     <LinearLayout
         android:id="@+id/linearLayoutCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/blue_grey"
-        android:padding="30dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="30dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,16 +26,17 @@
                 android:id="@+id/title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_medium"
                 android:text="@string/titleText"
                 android:textColor="@color/white"
-                android:textSize="20sp"
-                android:fontFamily="@font/poppins_medium"
-                android:layout_weight="1"/>
+                android:textSize="20sp" />
+
             <ImageView
                 android:id="@+id/menuCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_menu_card"/>
+                android:src="@drawable/ic_menu_card" />
 
         </LinearLayout>
 
@@ -49,20 +50,28 @@
                 android:id="@+id/Date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
                 android:text="@string/dateText"
                 android:textColor="@color/white"
-                android:textSize="18sp"
-                android:fontFamily="@font/montserrat_regular"/>
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
+                android:text=":"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/DateNum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:fontFamily="@font/montserrat_regular"
                 android:text="@string/threePointsText"
                 android:textColor="@color/white"
-                android:textSize="18sp"
-                android:layout_marginHorizontal="10dp"
-                android:fontFamily="@font/montserrat_regular"/>
+                android:textSize="18sp" />
 
         </LinearLayout>
 
@@ -75,20 +84,28 @@
                 android:id="@+id/amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
                 android:text="@string/amountText"
                 android:textColor="@color/white"
-                android:textSize="18sp"
-                android:fontFamily="@font/montserrat_regular"/>
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
+                android:text=":"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/amountNum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:fontFamily="@font/montserrat_regular"
                 android:text="@string/threePointsText"
                 android:textColor="@color/white"
-                android:textSize="18sp"
-                android:layout_marginHorizontal="10dp"
-                android:fontFamily="@font/montserrat_regular"/>
+                android:textSize="18sp" />
 
         </LinearLayout>
 
@@ -107,20 +124,28 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
                     android:text="@string/minAmountText"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/montserrat_regular"/>
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text=":"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/minAmountNum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:fontFamily="@font/montserrat_regular"
                     android:text="@string/threePointsText"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:layout_marginHorizontal="10dp"
-                    android:fontFamily="@font/montserrat_regular"/>
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -132,20 +157,28 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
                     android:text="@string/settlementText"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/montserrat_regular"/>
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text=":"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/settlementNum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:fontFamily="@font/montserrat_regular"
                     android:text="@string/threePointsText"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:layout_marginHorizontal="10dp"
-                    android:fontFamily="@font/montserrat_regular"/>
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -157,20 +190,28 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
                     android:text="@string/cutoffDateText"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/montserrat_regular"/>
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text=":"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/cutoffDateText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:fontFamily="@font/montserrat_regular"
                     android:text="@string/threePointsText"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:layout_marginHorizontal="10dp"
-                    android:fontFamily="@font/montserrat_regular"/>
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -182,20 +223,28 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
                     android:text="@string/monthsText"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/montserrat_regular"/>
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text=":"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/monthNum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:fontFamily="@font/montserrat_regular"
                     android:text="@string/threePointsText"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:layout_marginHorizontal="10dp"
-                    android:fontFamily="@font/montserrat_regular"/>
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -216,20 +265,28 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
                     android:text="@string/repeatText"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/montserrat_regular"/>
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text=":"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/repeatText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:fontFamily="@font/montserrat_regular"
                     android:text="@string/threePointsText"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:layout_marginHorizontal="10dp"
-                    android:fontFamily="@font/montserrat_regular"/>
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -250,20 +307,28 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
                     android:text="@string/cutoffDateText"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/montserrat_regular"/>
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text=":"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/cutoffDateText1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:fontFamily="@font/montserrat_regular"
                     android:text="@string/threePointsText"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:layout_marginHorizontal="10dp"
-                    android:fontFamily="@font/montserrat_regular"/>
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -275,20 +340,28 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
                     android:text="@string/descriptionText"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/montserrat_regular"/>
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text=":"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/descriptionText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:fontFamily="@font/montserrat_regular"
                     android:text="@string/threePointsText"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:layout_marginHorizontal="10dp"
-                    android:fontFamily="@font/montserrat_regular"/>
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -300,25 +373,53 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
                     android:text="@string/monthsText"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/montserrat_regular"/>
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text=":"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/monthNum1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:fontFamily="@font/montserrat_regular"
                     android:text="@string/threePointsText"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:layout_marginHorizontal="10dp"
-                    android:fontFamily="@font/montserrat_regular"/>
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/importantColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="@string/veryImportantText"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+        </LinearLayout>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

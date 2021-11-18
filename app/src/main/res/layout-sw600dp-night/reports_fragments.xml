@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_night"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="26dp"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="@string/reportText"
+        android:textColor="@color/text_color"
+        android:textSize="50sp" />
+
+    <soup.neumorphism.NeumorphCardView
+        style="@style/Widget.Neumorph.CardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="30dp"
+        app:neumorph_backgroundColor="@color/bottom_night"
+        app:neumorph_shadowColorDark="@color/shadow"
+        app:neumorph_shadowColorLight="@android:color/transparent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="18dp"
+                android:background="@android:color/transparent"
+                android:dropDownVerticalOffset="60dp"
+                android:entries="@array/Months"
+                android:paddingVertical="12dp"
+                android:popupBackground="@drawable/background_spinner_night"
+                android:popupElevation="20dp"
+                android:theme="@style/text" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <Spinner
+                android:id="@+id/year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="18dp"
+                android:background="@android:color/transparent"
+                android:dropDownVerticalOffset="60dp"
+                android:entries="@array/Years"
+                android:paddingVertical="12dp"
+                android:popupBackground="@drawable/background_spinner_night"
+                android:popupElevation="20dp"
+                android:theme="@style/text" />
+        </LinearLayout>
+    </soup.neumorphism.NeumorphCardView>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/report_card"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/download"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="150dp"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/ic_download"
+            android:tint="#146c75"
+            android:visibility="invisible"
+            app:borderWidth="0dp"
+            app:maxImageSize="40dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="90dp"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/ic_share"
+            android:tint="#146c75"
+            android:visibility="invisible"
+            app:borderWidth="0dp"
+            app:maxImageSize="40dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/open"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/ic_round_add_24"
+            android:tint="#146c75"
+            app:borderWidth="0dp"
+            app:maxImageSize="40dp" />
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+</LinearLayout>

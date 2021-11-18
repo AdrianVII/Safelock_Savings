@@ -6,6 +6,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -39,7 +40,7 @@ public class Budgets_Edit_Card extends AppCompatActivity {
         Id = bundle.getLong("id");
         title.setText(bundle.getString("name"));
         name.setText(bundle.getString("name"));
-        amount.setText(bundle.getString("amount"));
+        amount.setText(String.valueOf(bundle.getDouble("amount")));
         type.setText(bundle.getString("type"));
     }
 
@@ -58,5 +59,21 @@ public class Budgets_Edit_Card extends AppCompatActivity {
                 }
             });
         });
+    }
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("name", name.getText().toString());
+        outState.putString("amount", amount.getText().toString());
+        outState.putString("type", type.getText().toString());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        name.setText(savedInstanceState.getString("email"));
+        amount.setText(savedInstanceState.getString("amount"));
+        type.setText(savedInstanceState.getString("type"));
+
     }
 }

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+       android:backgroundTint="@color/background_night"
+        android:background="@drawable/background_dialog">
+
+        <LinearLayout
+            android:id="@+id/rlt"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_light"
+                android:text="@string/importanceText"
+                android:textSize="25sp"
+                android:textColor="@color/white"/>
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:elevation="0dp">
+
+                <RadioButton
+                    android:id="@+id/rdblessImpo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/radiobutton_lessimportant_night"
+                    android:fontFamily="@font/montserrat_light"
+                    android:paddingHorizontal="10dp"
+                    android:text="@string/lessImportantText"
+                    android:textSize="19sp"
+                    android:textColor="@color/white"/>
+
+                <RadioButton
+                    android:id="@+id/rdbImportant"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:button="@drawable/radiobutton_important_night"
+                    android:fontFamily="@font/montserrat_light"
+                    android:paddingHorizontal="10dp"
+                    android:text="@string/importantText"
+                    android:textSize="19sp"
+                    android:textColor="@color/white"/>
+
+                <RadioButton
+                    android:id="@+id/rdbVeryImpo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:button="@drawable/radiobutton_veryimportant_night"
+                    android:fontFamily="@font/montserrat_light"
+                    android:paddingHorizontal="10dp"
+                    android:text="@string/veryImportantText"
+                    android:textSize="19sp"
+                    android:textColor="@color/white"/>
+
+            </RadioGroup>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding = "5dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <soup.neumorphism.NeumorphButton
+                    android:id="@+id/btnno"
+                    style="@style/Widget.Neumorph.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="@string/cancelText"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:neumorph_backgroundColor="@color/bottom_night"
+                    app:neumorph_shadowColorDark="@color/shadow"
+                    app:neumorph_shadowColorLight="@android:color/transparent"/>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <soup.neumorphism.NeumorphButton
+                    android:id="@+id/btnyes"
+                    style="@style/Widget.Neumorph.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="@string/confirmText"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:neumorph_backgroundColor="@color/bottom_night"
+                    app:neumorph_shadowColorDark="@color/shadow"
+                    app:neumorph_shadowColorLight="@android:color/transparent"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

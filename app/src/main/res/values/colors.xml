@@ -33,6 +33,29 @@
     <color name="dark_grey">#5B8E8D8D</color>
     <color name="red_black">#FF8787</color>
 
+    <color name="pause">#77C5C4C4</color>
+    <color name="delete">#B7FF4343</color>
+    <color name="resume">#B766C56A</color>
+
+    <!-- Night Mode -->
+    <color name="background_night">#161B21</color>
+    <color name="menu">#0E1B29</color>
+    <color name="bottom_night">#495A6E</color>
+    <color name="bottom_night2">#4271A1</color>
+    <color name="text_color">#A7CDFA</color>
+    <color name="color_switch">#8EADD4</color>
+    <color name="icon">#2A517A</color>
+    <color name="shadow">#384554</color>
+    <color name="shadow2">#18293B</color>
+    <color name="delete_night">#B7B10404</color>
+
+
+
+    <!-- Cards Night Mode -->
+    <color name="important">#9FC2ED</color>
+    <color name="veryimportant">#495A6E</color>
+    <color name="lessimportant">#2A517A</color>
+
 
     <color name="pink">#c6419e</color>
     <color name="yellow">#e5a818</color>

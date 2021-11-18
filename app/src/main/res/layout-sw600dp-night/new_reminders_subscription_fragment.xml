@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_night"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="18dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/background_edittext_reminders"
+        android:backgroundTint="@color/lessimportant"
+        android:fontFamily="@font/montserrat_regular"
+        android:hint="@string/nameText"
+        android:inputType="textPersonName"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="25sp" />
+
+    <EditText
+        android:id="@+id/amount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="18dp"
+        android:layout_marginTop="9dp"
+        android:background="@drawable/background_edittext_reminders"
+        android:backgroundTint="@color/lessimportant"
+        android:fontFamily="@font/montserrat_regular"
+        android:hint="@string/amountText"
+        android:inputType="numberDecimal"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/Date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="18dp"
+        android:layout_marginTop="9dp"
+        android:background="@drawable/background_edittext_reminders"
+        android:backgroundTint="@color/lessimportant"
+        android:fontFamily="@font/montserrat_regular"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:text="@string/dateText"
+        android:textColor="@color/white"
+        android:textSize="25sp" />
+
+    <LinearLayout
+        android:id="@+id/importantColor1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="18dp"
+        android:layout_marginTop="9dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_regular"
+            android:padding="10dp"
+            android:text="@string/importanceText"
+            android:textColor="@color/white"
+            android:textSize="25sp" />
+
+        <View
+            android:id="@+id/importantColor"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:background="@drawable/box_important_unselected_night"
+            android:padding="10dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btnRepeat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="18dp"
+        android:layout_marginTop="9dp"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/repeat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:fontFamily="@font/montserrat_regular"
+            android:padding="10dp"
+            android:text="@string/repeatText"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:theme="@style/colored_checkbox" />
+
+    </LinearLayout>
+
+    <Spinner
+        android:id="@+id/Spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="18dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/background_spinner_night"
+        android:dropDownVerticalOffset="60dp"
+        android:entries="@array/repeatSubscriptions"
+        android:paddingVertical="12dp"
+        android:popupBackground="@drawable/background_spinner_night"
+        android:popupElevation="20dp"
+        android:visibility="gone"
+        android:theme="@style/text"/>
+
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/btnNEXT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/background_button"
+            android:backgroundTint="@color/bottom_night"
+            android:paddingHorizontal="25dp"
+            android:text="@string/nextButton"
+            android:textColor="@color/white"
+            android:textSize="25sp" />
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@drawable/background_signin_biometric_activity">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageView"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="120dp"
+        android:layout_marginBottom="15dp"
+        android:src="@drawable/user" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="@string/nameText"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="27sp" />
+
+    <TextView
+        android:id="@+id/days"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="@string/goodMorningText"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+    <soup.neumorphism.NeumorphImageView
+        style="@style/Widget.Neumorph.Button"
+        android:id="@+id/biometric"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="90dp"
+        android:padding="15dp"
+        app:neumorph_backgroundColor="@color/bottom_night2"
+        app:neumorph_shadowColorLight="@android:color/transparent"
+        app:neumorph_shadowColorDark="@color/shadow2"
+        android:src="@drawable/ic_fingerprint" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/btnSIGNOUT"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="@string/signOutText"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:layout_marginBottom="10dp"
+        android:textSize="18sp" />
+
+
+</LinearLayout>

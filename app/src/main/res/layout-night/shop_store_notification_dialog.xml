@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center"
+    android:layout_marginHorizontal="20dp"
+    android:background="@color/lessimportant"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/didYouMakeThePaymentText"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="19sp" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/secondTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/whatMethodDidYouUseText"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <soup.neumorphism.NeumorphButton
+                android:id="@+id/yes"
+                style="@style/Widget.Neumorph.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/yesText"
+                app:neumorph_backgroundColor="@color/bottom_night"
+                app:neumorph_shadowColorDark="@color/shadow"
+                app:neumorph_shadowColorLight="@android:color/transparent"/>
+
+            <soup.neumorphism.NeumorphButton
+                android:id="@+id/no"
+                style="@style/Widget.Neumorph.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/noText"
+                android:textColor="@color/white"
+                app:neumorph_backgroundColor="@color/bottom_night"
+                app:neumorph_shadowColorDark="@color/shadow"
+                app:neumorph_shadowColorLight="@android:color/transparent"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:visibility="gone"
+                android:id="@+id/Spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="18dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/background_spinner_night"
+                android:dropDownVerticalOffset="60dp"
+                android:entries="@array/PaymentType"
+                android:paddingVertical="9dp"
+                android:popupBackground="@drawable/background_spinner_night"
+                android:popupElevation="20dp"
+                android:theme="@style/text"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/titlePayment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/amountPaidText"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <EditText
+                android:visibility="gone"
+                android:id="@+id/EditAddAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/amountPaidText"
+                android:textAlignment="center"
+                android:backgroundTint="@color/bottom_night"
+                android:padding="5dp"
+                android:background="@drawable/background_edittext_reminders"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/signo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="$"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/paymentText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/amountPaidText"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

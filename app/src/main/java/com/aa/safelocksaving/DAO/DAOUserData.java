@@ -11,8 +11,8 @@ public class DAOUserData {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
-    public DAOUserData(Context activity) {
-        sharedPreferences = activity.getSharedPreferences(UserData.UserData, Context.MODE_PRIVATE);
+    public DAOUserData(Context context) {
+        sharedPreferences = context.getSharedPreferences(UserData.UserData, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
     }
 
@@ -38,9 +38,7 @@ public class DAOUserData {
         editor.apply();
     }
 
-    public String get(String key, String defValue) {
-        return sharedPreferences.getString(key, defValue);
-    }
+    public String get(String key, String defValue) { return sharedPreferences.getString(key, defValue); }
 
     public String getFullName() { return String.format("%s %s", sharedPreferences.getString(UserData.Name, ""), sharedPreferences.getString(UserData.LastName, "")); }
 
@@ -50,11 +48,11 @@ public class DAOUserData {
     }
 
     public void removeAll() {
-        editor.putString(UserData.Name, "");
-        editor.putString(UserData.LastName, "");
-        editor.putString(UserData.Picture, "");
-        editor.putString(UserData.Email, "");
-        editor.putString(UserData.Password, "");
+        editor.remove(UserData.Name);
+        editor.remove(UserData.LastName);
+        editor.remove(UserData.Picture);
+        editor.remove(UserData.Email);
+        editor.remove(UserData.Password);
         editor.apply();
     }
 

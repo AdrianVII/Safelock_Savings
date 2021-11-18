@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aa.safelocksaving.DAO.DAOBudgets;
+import com.aa.safelocksaving.DAO.DAOConfigurationData;
 import com.aa.safelocksaving.Operation.BudgetCardListAdapter;
 import com.aa.safelocksaving.Operation.OPBasics;
 import com.aa.safelocksaving.Operation.SnackBar_Action;
@@ -33,6 +34,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +48,8 @@ public class Budgets_Fragments extends Fragment {
     private TextView PriceTotal;
     private RecyclerView budgets_cards;
     private NeumorphCardView payment;
+    private NeumorphCardView paymentButton;
+
     private boolean isOpen = false;
     private Animation fabOpen;
     private Animation fabClose;
@@ -61,6 +65,7 @@ public class Budgets_Fragments extends Fragment {
         payment = view.findViewById(R.id.payment);
         paymentNumber = view.findViewById(R.id.paymentNumber);
         PriceTotal = view.findViewById(R.id.PriceTotal);
+        paymentButton = view.findViewById(R.id.paymentButton);
         trash = view.findViewById(R.id.trash);
         open = view.findViewById(R.id.open);
         fabOpen = AnimationUtils.loadAnimation(getContext(), R.anim.fab_open);
@@ -71,20 +76,24 @@ public class Budgets_Fragments extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            paymentNumber.setText(savedInstanceState.getString("number"));
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        paymentButton.setOnClickListener(view -> paymentNumber.requestFocus());
         add.setOnClickListener(view -> {
             startActivity(new Intent(getContext(), New_Budgets_Activity.class));
         });
         open.setOnClickListener(view -> {
             animateFab();
         });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        paymentNumber.setText(String.valueOf(new DAOBudgets(getActivity()).getAmount()));
+        paymentNumber.setText(String.valueOf(new DAOBudgets(requireActivity()).getAmount()));
         new OPBasics().getCardsBudgets().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -110,7 +119,7 @@ public class Budgets_Fragments extends Fragment {
                         @Override
                         public void onTextChanged(CharSequence s, int start, int before, int count) {
                             if (!paymentNumber.getText().toString().isEmpty()) {
-                                new DAOBudgets(getActivity()).setAmount(Long.parseLong(paymentNumber.getText().toString()));
+                                new DAOBudgets(requireActivity()).setAmount(Long.parseLong(paymentNumber.getText().toString()));
                             }
                             sum(items);
                         }
@@ -125,6 +134,7 @@ public class Budgets_Fragments extends Fragment {
                         budgetCardListAdapter.removeAll();
                         paymentNumber.setText("");
                         /*new SnackBar_Action(getContext(), 32, 32, view).showSBMargin(v -> {
+                            budgetCardListAdapter.recoveryAll();
                             new OPBasics().addAllBudgetsCards(auxItem);
                             budgets_cards.setAdapter(new BudgetCardListAdapter(auxItem, getContext()));
                         });*/
@@ -193,12 +203,26 @@ public class Budgets_Fragments extends Fragment {
         }
         PriceTotal.setText(String.valueOf(sum));
         if (paymentNumber.getText().toString().isEmpty()) {
-            paymentNumber.setError("Metele una cantidad, pobre c:");
+            paymentNumber.setError("Metele una cantidad:");
             paymentNumber.requestFocus();
             return;
         }
+
         if (sum > Double.parseDouble(paymentNumber.getText().toString())) {
-            payment.setBackgroundColor(getContext().getColor(R.color.red_black));
-        } else payment.setBackgroundColor(getContext().getColor(R.color.white_background));
+            if (!new DAOConfigurationData(getContext()).verifyNightMode()) {
+                payment.setBackgroundColor(getContext().getColor(R.color.red_black));
+            } else payment.setBackgroundColor(getContext().getColor(R.color.delete_night));
+        } else {
+            if (!new DAOConfigurationData(getContext()).verifyNightMode()) {
+                payment.setBackgroundColor(getContext().getColor(R.color.white_background));
+            }else payment.setBackgroundColor(getContext().getColor(R.color.bottom_night));
+        }
     }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("number", paymentNumber.getText().toString());
+    }
+
 }

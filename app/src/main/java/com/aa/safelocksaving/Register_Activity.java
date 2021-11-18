@@ -9,7 +9,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.aa.safelocksaving.DAO.DAOUser;
 import com.aa.safelocksaving.DAO.DAOUserData;
@@ -19,7 +21,7 @@ import com.aa.safelocksaving.Operation.md5;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class Register_Activity extends Activity {
+public class Register_Activity extends AppCompatActivity {
     private TextView btnBACK;
     private TextView btnSIGNIN;
     private Authentication authentication;
@@ -98,5 +100,24 @@ public class Register_Activity extends Activity {
         super.onBackPressed();
         startActivity(new Intent(this, Start_Activity.class));
     }
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("name", name.getText().toString());
+        outState.putString("last", lastname.getText().toString());
+        outState.putString("email", email.getText().toString());
+        outState.putString("password", password.getText().toString());
+        outState.putString("confirm", confirm_pass.getText().toString());
+    }
 
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        name.setText(savedInstanceState.getString("name"));
+        lastname.setText(savedInstanceState.getString("last"));
+        email.setText(savedInstanceState.getString("email"));
+        password.setText(savedInstanceState.getString("password"));
+        confirm_pass.setText(savedInstanceState.getString("confirm"));
+
+    }
 }

@@ -9,9 +9,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.aa.safelocksaving.DAO.DAOUserData;
+import com.aa.safelocksaving.Dialog.Progress_Alert_Dialog;
 import com.aa.safelocksaving.data.Authentication;
 import com.aa.safelocksaving.data.User;
 import com.aa.safelocksaving.Operation.OPBasics;
@@ -22,7 +25,7 @@ import com.google.firebase.database.DatabaseError;
 
 import java.util.Objects;
 
-public class SignIn_Activity extends Activity {
+public class SignIn_Activity extends AppCompatActivity {
     private TextView btnFORGOT;
     private TextView btnBACK;
     private TextView btnREGISTER;
@@ -32,7 +35,6 @@ public class SignIn_Activity extends Activity {
     private EditText password;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
-    private User userData;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,6 +72,8 @@ public class SignIn_Activity extends Activity {
     }
 
     private void loginUser() {
+        Progress_Alert_Dialog alertDialog = new Progress_Alert_Dialog(this);
+        alertDialog.start();
         if (authentication.isCorrect(email, password, this)) {
             String emailText = email.getText().toString().trim();
             String passwordText = password.getText().toString().trim();
@@ -82,25 +86,45 @@ public class SignIn_Activity extends Activity {
                                     @Override
                                     public void getUser(User user) {
                                         new DAOUserData(getBaseContext()).add(user);
+                                        alertDialog.dismiss();
                                         startActivity(new Intent(getBaseContext(), Main_Activity.class));
                                         finish();
                                     }
                                     @Override
-                                    public void getError(DatabaseError error) { }
+                                    public void getError(DatabaseError error) { alertDialog.dismiss(); }
                                 });
                             } else {
+                                alertDialog.dismiss();
                                 Toast.makeText(this, getString(R.string.pleaseCheckYourEmailText), Toast.LENGTH_SHORT).show();
                                 user.sendEmailVerification();
                                 authentication.logoutUser(mAuth);
                             }
                         } else {
+                            alertDialog.dismiss();
                             email.setText("");
                             password.setText("");
                             email.requestFocus();
                             Toast.makeText(this, getString(R.string.invalidEmailOrPasswordText), Toast.LENGTH_SHORT).show();
                         }
-                    });
+                    }).addOnFailureListener(e -> {
+                startActivity(new Intent(getBaseContext(),Not_Conection_Activity.class));
+            });
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("email", email.getText().toString());
+        outState.putString("password", password.getText().toString());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        email.setText(savedInstanceState.getString("email"));
+        password.setText(savedInstanceState.getString("password"));
+
     }
 
     @Override

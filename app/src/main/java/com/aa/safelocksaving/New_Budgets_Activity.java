@@ -9,6 +9,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -76,5 +77,22 @@ public class New_Budgets_Activity extends AppCompatActivity implements AdapterVi
                 }
             });
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("name", editName.getText().toString());
+        outState.putString("amount", editAmount.getText().toString());
+        outState.putString("add", editAdd.getText().toString());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        editName.setText(savedInstanceState.getString("name"));
+        editAmount.setText(savedInstanceState.getString("amount"));
+        editAdd.setText(savedInstanceState.getString("add"));
+
     }
 }

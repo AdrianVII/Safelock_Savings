@@ -2,6 +2,7 @@ package com.aa.safelocksaving.Operation;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,7 @@ import java.util.List;
 
 public class BudgetCardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Budgets_Data> items;
-    //private List<Budgets_Data> auxItems;
+    private List<Budgets_Data> auxItems;
     private Context context;
 
     public BudgetCardListAdapter(List<Budgets_Data> items, Context context) {
@@ -31,13 +32,7 @@ public class BudgetCardListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
     public void removeAll() {
-        //auxItems = items;
-        new OPBasics().removeAllBudgets().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                items.clear();
-                notifyDataSetChanged();
-            }
-        });
+
     }
 
     @NonNull

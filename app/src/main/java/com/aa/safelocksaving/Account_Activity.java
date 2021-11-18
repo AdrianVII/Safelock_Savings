@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.aa.safelocksaving.DAO.DAOUserData;
 import com.aa.safelocksaving.Dialog.Dialog_Bottom_Sheet_Fragment;
 import com.aa.safelocksaving.Dialog.Dialog_Box;
+import com.aa.safelocksaving.Dialog.Dialog_Change_Name;
 import com.aa.safelocksaving.Dialog.Dialog_Change_Password;
 import com.aa.safelocksaving.data.Authentication;
 import com.aa.safelocksaving.data.UserData;
@@ -35,8 +36,7 @@ public class Account_Activity extends AppCompatActivity {
     private TextView btnBack;
     private Button btnDELETEACC;
     private LinearLayout changepass;
-    private FirebaseAuth mAuth;
-    private FirebaseUser user;
+    private LinearLayout nameEdit;
     private CircleImageView imageView;
     private static final int REQUEST_CODE_IMAGE = 100;
     private static final int REQUEST_CODE_CAMERA = 101;
@@ -45,14 +45,13 @@ public class Account_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mAuth = FirebaseAuth.getInstance();
-        user = mAuth.getCurrentUser();
         setContentView(R.layout.account_activity);
         btnBack = findViewById(R.id.btnBACK);
         btnBack.setOnClickListener( view -> onBackPressed());
         email = findViewById(R.id.email);
         name =findViewById(R.id.name);
         changepass = findViewById(R.id.changepass);
+        nameEdit = findViewById(R.id.nameEdit);
         imageView = findViewById(R.id.imageView);
         btnDELETEACC = findViewById(R.id.btnDELETEACC);
         imageView.setOnClickListener(view -> choosePicture());
@@ -61,6 +60,7 @@ public class Account_Activity extends AppCompatActivity {
                 startActivity(new Intent(getBaseContext(), Start_Activity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
             }
         }).show());
+        nameEdit.setOnClickListener(view -> new Dialog_Change_Name(this, () -> loadData()).show());
         btnDELETEACC.setOnClickListener(view -> new Dialog_Box(this, getString(R.string.deleteAccountText), getString(R.string.areYouSureToDeleteYourAccountText)).OnActionButton(new Dialog_Box.OnPositiveClickListener() {
             @Override
             public void positiveClick(View view, Activity activity) {

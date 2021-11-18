@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/newBudgetsText"
-        android:textSize="40sp"
+        android:textSize="32sp"
         android:fontFamily="@font/poppins_regular"
         android:layout_marginHorizontal="26dp"
         android:textColor="@color/grey"/>

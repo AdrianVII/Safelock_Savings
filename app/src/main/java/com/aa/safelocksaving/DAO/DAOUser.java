@@ -18,13 +18,9 @@ public class DAOUser {
         databaseReference = FirebaseDatabase.getInstance().getReference("Users");
     }
 
-    public Task<Void> add(User user, String userID) {
-        return databaseReference.child(userID).setValue(user);
-    }
+    public Task<Void> add(User user, String userID) { return databaseReference.child(userID).setValue(user); }
 
-    public Task<Void> update(HashMap<String, Object> user, String userID) {
-        return databaseReference.child(userID).updateChildren(user);
-    }
+    public Task<Void> update(HashMap<String, Object> user, String userID) { return databaseReference.child(userID).updateChildren(user); }
 
     public Task<Void> updateStatus(String userID, String ID, HashMap<String, Object> Status) { return databaseReference.child(userID).child("reminders").child(ID).updateChildren(Status); }
 
@@ -33,8 +29,6 @@ public class DAOUser {
     public Task<Void> addBudgetsCards(String userID, Budgets_Data budgetsData, String ID) { return databaseReference.child(userID).child("budgets").child(ID).setValue(budgetsData); }
 
     public Task<Void> updateBudgetsCard(String userID, String ID, HashMap<String, Object> budget) { return databaseReference.child(userID).child("budgets").child(ID).updateChildren(budget); }
-
-    //public DatabaseReference addAllBudgetsCards(String userID) { return databaseReference.child(userID).child("budgets"); }
 
     public Task<Void> removeBudget(String userID, String ID) { return databaseReference.child(userID).child("budgets").child(ID).removeValue(); }
 
@@ -48,4 +42,9 @@ public class DAOUser {
 
     public Task<Void> removeAllBudgets(String userID) { return databaseReference.child(userID).child("budgets").removeValue(); }
 
+    public Task<Void> updateCard(String userID, String ID, HashMap<String, Object> card) { return databaseReference.child(userID).child("reminders").child(ID).child("item").updateChildren(card); }
+
+    public Task<Void> updateDate(String userID, String ID, String dateID, HashMap<String, Object> card) { return databaseReference.child(userID).child("reminders").child(ID).child("item").child(dateID).updateChildren(card); }
+
 }
+

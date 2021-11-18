@@ -47,6 +47,14 @@
         <item>@string/addText</item>
     </string-array>
 
+    <string-array name="PaymentType">
+        <item>@string/paymentTypeText</item>
+        <item>@string/settlementText</item>
+        <item>@string/defaultAmountText</item>
+        <item>@string/minAmountText</item>
+        <item>@string/addQuantityText</item>
+    </string-array>
+
     <string-array name="Months">
         <item>@string/januaryText</item>
         <item>@string/februaryText</item>
@@ -183,4 +191,30 @@
     <string name="updateText">Update</string>
     <string name="currentVersionText">Current Version</string>
     <string name="lastVersionText">Last Version</string>
+    <string name="nightModeText">Night Mode</string>
+    <string name="acceptText">Accept</string>
+    <string name="didYouMakeThePaymentText">Did You Make The Payment?</string>
+    <string name="cancelledText">Cancelled</string>
+    <string name="whatMethodDidYouUseText">What Method Did You Use To Make The Payment?</string>
+    <string name="paymentTypeText">Payment Type</string>
+    <string name="addQuantityText">Add Quantity</string>
+    <string name="defaultAmountText">Default Amount</string>
+    <string name="amountPaidText">Amount Paid</string>
+    <string name="areYouSureYouWantToDeleteEverythingFromBudgetsText">Are You Sure You Want To Delete Everything From Budgets?</string>
+    <string name="ifYouDeleteEverythingYouWillNotBeAbleToUndoThisActionText">If You Delete Everything,You Will Not Be Able To Undo This Action</string>
+    <string name="fingerprintText">Fingerprint</string>
+    <string name="goodMorningText">Good Morning!</string>
+    <string name="goodAfternoonText">Good Afternoon!</string>
+    <string name="goodNightText">Good Night!</string>
+    <string name="toPayText">To Pay</string>
+    <string name="nextPaymentOfText">Next payment of</string>
+    <string name="theAmountOfText">The amount of $</string>
+    <string name="channelForRemindersText">Channel for Reminders</string>
+    <string name="infoText">This application was born as a project of the educational experience Technologies and Mobile Applications of University Computer Engineering Veracruzana, is intended to help remind them of their payments to said Users who find it difficult to remember such payments.</string>
+    <string name="membersText">Members</string>
+    <string name="membersNameText">Alexis Yadir Alvarado and Cimar Adriana Villalba</string>
+    <string name="versionText">Version</string>
+    <string name="uploadingText">Uploading ...</string>
+    <string name="twopointsText" translatable="false">:</string>
+    <string name="renameText">Rename</string>
 </resources>

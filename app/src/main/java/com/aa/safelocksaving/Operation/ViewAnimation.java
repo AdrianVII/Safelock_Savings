@@ -21,23 +21,5 @@ final public class ViewAnimation {
                 .start();
     }
 
-    static public void showScaleAlphaHide(View view) {
-        view.animate()
-                .scaleY(0.0f)
-                .scaleX(0.0f)
-                .alpha(0.0f)
-                .setDuration(100).withEndAction(() -> view.setVisibility(View.GONE))
-                .start();
-    }
-
-    static  public void showScaleAlphaShow(View view, float X, float Y) {
-        view.setVisibility(View.VISIBLE);
-        view.animate()
-                .scaleX(X)
-                .scaleY(Y)
-                .alpha(1.0f)
-                .setDuration(100)
-                .start();
-    }
 
 }

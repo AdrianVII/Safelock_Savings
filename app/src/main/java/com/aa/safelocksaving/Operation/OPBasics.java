@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import com.aa.safelocksaving.DAO.DAOPicture;
 import com.aa.safelocksaving.DAO.DAOUser;
 import com.aa.safelocksaving.DAO.DAOUserData;
+import com.aa.safelocksaving.Dialog.Dialog_Update;
+import com.aa.safelocksaving.Dialog.Dialog_Upload;
 import com.aa.safelocksaving.Dialog.Progress_Alert_Dialog;
 import com.aa.safelocksaving.R;
 import com.aa.safelocksaving.data.Budgets_Data;
@@ -38,11 +40,10 @@ import java.util.List;
 public class OPBasics {
     private FirebaseUser user;
     private StorageReference storageReference;
-    private Progress_Alert_Dialog progressAlertDialog;
+    private Dialog_Upload progressAlertDialog;
     private MyCountDownTimer countDownTimer;
     private final long Timer = 1000 * 30;
 
-    //Interfaces
     public interface getDataListener {
         void getUser(User user);
         void getError(DatabaseError error);
@@ -82,7 +83,7 @@ public class OPBasics {
     }
 
     public void uploadPicture(Uri img, uploadPictureListener listener, Activity activity) {
-        progressAlertDialog = new Progress_Alert_Dialog(activity);
+        progressAlertDialog = new Dialog_Upload(activity);
         progressAlertDialog.start();
         countDownTimer.setMessage(activity.getString(R.string.connectionCouldNotBeEstablishedText), activity);
         countDownTimer.start();
@@ -92,6 +93,10 @@ public class OPBasics {
             listener.uploadPicture(task);
         });
     }
+
+    public Task<Void> updateCard(long ID, HashMap<String, Object> card) { return new DAOUser().updateCard(user.getUid(), String.valueOf(ID), card); }
+
+    public Task<Void> updateDate(long ID, String dateID, HashMap<String, Object> date) { return new DAOUser().updateDate(user.getUid(), String.valueOf(ID), dateID, date); }
 
     public Task<Void> reAuthenticate(Activity activity, String password) {
         return user.reauthenticate(EmailAuthProvider.getCredential(new DAOUserData(activity).get(UserData.Email, ""), password));
@@ -103,21 +108,6 @@ public class OPBasics {
 
     public Task<Void> updateBudgetsCard(String ID, HashMap<String, Object> budget) { return new DAOUser().updateBudgetsCard(user.getUid(), ID, budget); }
 
-    /*public void addAllBudgetsCards(List<Budgets_Data> budgetsDataList) {
-        for (int i = 0; i < budgetsDataList.size(); i++) {
-            new DAOUser().addAllBudgetsCards(user.getUid()).child(String.valueOf(budgetsDataList.get(i).getID())).setValue(budgetsDataList).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-
-                }
-            });
-
-        }
-    }*/
-
-    public Task<Void> addAllBudgetsCards(List<Budgets_Data> budgetsDataList) {
-        return new DAOUser().addAllBudgetsCards(user.getUid(), budgetsDataList);
-    }
 
     public Task<Void> removeBudgetsCard(long ID) { return new DAOUser().removeBudget(user.getUid(), String.valueOf(ID)); }
 
@@ -149,6 +139,8 @@ public class OPBasics {
 
     public Task<Void> removeAllBudgets() { return new DAOUser().removeAllBudgets(user.getUid()); }
 
+    public Task<Void> updateUser(HashMap<String, Object> data) { return new DAOUser().update(data, user.getUid()); }
+
     class MyCountDownTimer extends CountDownTimer {
         String message;
         Activity activity;
@@ -167,3 +159,4 @@ public class OPBasics {
     }
 
 }
+

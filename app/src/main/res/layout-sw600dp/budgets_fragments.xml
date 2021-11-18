@@ -16,6 +16,7 @@
         android:textSize="50sp" />
 
     <soup.neumorphism.NeumorphCardView
+        android:id="@+id/paymentButton"
         style="@style/Widget.Neumorph.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

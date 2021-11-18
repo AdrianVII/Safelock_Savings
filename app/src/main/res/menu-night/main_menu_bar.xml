@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menuReminders"
+        android:title="@string/remindersText"
+        android:icon="@drawable/ic_reminders_menu_bar"
+        app:cnb_iconColor="@color/white"
+        app:cnb_backgroundColor="#225887"/>
+
+    <item
+        android:id="@+id/menuBudgets"
+        android:title="@string/budgetsText"
+        android:icon="@drawable/ic_budgets_menu_bar"
+        app:cnb_iconColor="@color/white"
+        app:cnb_backgroundColor="#3281C7" />
+
+    <item
+        android:id="@+id/menuReport"
+        android:title="@string/reportText"
+        android:icon="@drawable/ic_report_menu_bar"
+        app:cnb_iconColor="@color/white"
+        app:cnb_backgroundColor="#1A4266"/>
+
+    <item
+        android:id="@+id/menuSettings"
+        android:title="@string/settingsText"
+        android:icon="@drawable/ic_settings_menu_bar"
+        app:cnb_iconColor="@color/white"
+        app:cnb_backgroundColor="#1D4B73"/>
+
+</menu>

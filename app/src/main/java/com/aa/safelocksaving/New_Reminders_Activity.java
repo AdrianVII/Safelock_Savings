@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.aa.safelocksaving.DAO.DAOConfigurationData;
+
 public class New_Reminders_Activity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private TextView btnBack;
     private Spinner spinner;
@@ -26,7 +28,10 @@ public class New_Reminders_Activity extends AppCompatActivity implements Adapter
         btnBack.setOnClickListener(view -> onBackPressed());
 
         spinner = findViewById(R.id.Spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.typeReminders, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter;
+        if (!new DAOConfigurationData(this).verifyNightMode()) {
+         adapter= ArrayAdapter.createFromResource(this, R.array.typeReminders, android.R.layout.simple_spinner_item);
+        }else  adapter = ArrayAdapter.createFromResource(this, R.array.typeReminders, R.layout.spinner_text_color);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);

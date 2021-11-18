@@ -48,4 +48,7 @@ dependencies {
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
     implementation 'com.github.fornewid:neumorphism:0.3.0'
     implementation 'com.github.dhaval2404:imagepicker-support:1.7.1'
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+    implementation 'com.github.xabaras:RecyclerViewSwipeDecorator:1.3'
+    implementation "com.airbnb.android:lottie:4.2.1"
 }

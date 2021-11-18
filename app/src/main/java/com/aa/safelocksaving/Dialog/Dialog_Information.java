@@ -17,9 +17,6 @@ public class Dialog_Information extends Dialog {
     private TextView textTitle, textMessage;
     private Activity activity;
 
-    /*public interface OnPositiveClickListener {
-        void positiveClick(View view, Activity activity);
-    }*/
 
     public Dialog_Information(@NonNull Activity activity, String title, String message) {
         super(activity);
@@ -30,7 +27,6 @@ public class Dialog_Information extends Dialog {
         window.setGravity(Gravity.CENTER);
         window.getAttributes().windowAnimations = R.anim.displacement_up;
         btnYes = super.findViewById(R.id.btnyes);
-
         textTitle = super.findViewById(R.id.title);
         textMessage = super.findViewById(R.id.message);
         textTitle.setText(title);
@@ -38,10 +34,7 @@ public class Dialog_Information extends Dialog {
         super.setCancelable(false);
         window.setLayout(ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
         btnYes.setOnClickListener(view -> super.dismiss());
-        //show();
+
     }
 
-    /*public void OnActionButton(Dialog_Box.OnPositiveClickListener listener) {
-        btnYes.setOnClickListener(view -> listener.positiveClick(view, this.activity));
-    }*/
 }

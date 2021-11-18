@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_regular"
         android:text="@string/backText"
-        android:textSize="15sp"/>
+        android:textSize="15sp"
+        android:padding="10dp"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -26,7 +27,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1">
 
         <LinearLayout

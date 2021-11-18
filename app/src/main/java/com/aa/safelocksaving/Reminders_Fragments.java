@@ -1,28 +1,31 @@
 package com.aa.safelocksaving;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
-import androidx.annotation.FloatRange;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.aa.safelocksaving.Operation.AlarmOp;
 import com.aa.safelocksaving.Operation.CardListAdapter;
 import com.aa.safelocksaving.Operation.OPBasics;
 import com.aa.safelocksaving.Operation.ViewAnimation;
 import com.aa.safelocksaving.data.CardItem;
-import com.aa.safelocksaving.data.DataUser_Reminder;
 import com.aa.safelocksaving.data.Reminders_CardData;
 import com.aa.safelocksaving.data.Reminders_ShopData;
 import com.aa.safelocksaving.data.Reminders_SubscriptionData;
-import com.aa.safelocksaving.data.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,10 +34,13 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
+
 public class Reminders_Fragments extends Fragment {
     private FloatingActionButton add;
     private RecyclerView reminder_cards;
-    //private List<Reminders_CardData> cardData = new ArrayList<>();
+    private List<CardItem> cardItems;
+    private CardListAdapter cardListAdapter;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -50,24 +56,16 @@ public class Reminders_Fragments extends Fragment {
         return view;
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        add.setOnClickListener(view -> startActivity(new Intent(getContext(), New_Reminders_Activity.class)));
-        add.setOnLongClickListener(v -> {
-
-            return false;
-        });
-    }
 
     @Override
     public void onResume() {
         super.onResume();
+        add.setOnClickListener(view -> startActivity(new Intent(getContext(), New_Reminders_Activity.class)));
         new OPBasics().getCardsReminders().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    List<CardItem> cardItems = new ArrayList<>();
+                    cardItems = new ArrayList<>();
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         if (dataSnapshot.getValue(CardItem.class).getStatus() != 0) {
                             switch (dataSnapshot.getValue(CardItem.class).getType()) {
@@ -83,10 +81,13 @@ public class Reminders_Fragments extends Fragment {
                             }
                         }
                     }
+                    if (cardItems.size() == 0) new AlarmOp(getContext()).cancelAllAlarms();
                     float addY = add.getTranslationY();
                     reminder_cards.setHasFixedSize(true);
                     reminder_cards.setLayoutManager(new LinearLayoutManager(getContext()));
-                    reminder_cards.setAdapter(new CardListAdapter(cardItems, getContext()));
+                    new ItemTouchHelper(swipe).attachToRecyclerView(reminder_cards);
+                    cardListAdapter = new CardListAdapter(cardItems, getContext());
+                    reminder_cards.setAdapter(cardListAdapter);
                     reminder_cards.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
                         @Override
@@ -112,4 +113,56 @@ public class Reminders_Fragments extends Fragment {
             }
         });
     }
+
+    ItemTouchHelper.SimpleCallback swipe = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @SuppressLint("NotifyDataSetChanged")
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            LinearLayout CardView = viewHolder.itemView.findViewById(R.id.linearLayoutCard);
+            int position = viewHolder.getAdapterPosition();
+            if (direction == ItemTouchHelper.RIGHT)
+                cardListAdapter.removeElement(position, cardListAdapter.getID(position), CardView, CardView);
+            else if (direction == ItemTouchHelper.LEFT)
+                cardListAdapter.pause_resume(position, cardListAdapter.getID(position), CardView, cardListAdapter.getImportantColor(position));
+        }
+
+        @Override
+        public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+            RecyclerViewSwipeDecorator.Builder builder = new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+            int position = viewHolder.getAdapterPosition();
+            if (position > -1) {
+                if (!cardListAdapter.isPaused(position)) {
+                    builder
+                            .addSwipeLeftBackgroundColor(ContextCompat.getColor(requireContext(), R.color.pause))
+                            .addSwipeLeftActionIcon(R.drawable.ic_pause)
+                            .addSwipeLeftLabel(getString(R.string.pauseText))
+                            .setSwipeLeftLabelColor(ContextCompat.getColor(requireContext(), R.color.white));
+                } else {
+                    builder
+                            .addSwipeLeftBackgroundColor(ContextCompat.getColor(requireContext(), R.color.resume))
+                            .addSwipeLeftActionIcon(R.drawable.ic_resume)
+                            .addSwipeLeftLabel(getString(R.string.resumeText))
+                            .setSwipeLeftLabelColor(ContextCompat.getColor(requireContext(), R.color.white));
+                }
+
+                builder
+                        .addSwipeRightBackgroundColor(ContextCompat.getColor(requireContext(), R.color.delete))
+                        .addSwipeRightActionIcon(R.drawable.ic_baseline_delete_outline_24)
+                        .addSwipeRightLabel(getString(R.string.deleteText))
+                        .setSwipeRightLabelColor(ContextCompat.getColor(requireContext(), R.color.white));
+
+                builder
+                        .create()
+                        .decorate();
+            }
+            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+        }
+    };
+
 }
+

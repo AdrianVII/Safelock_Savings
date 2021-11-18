@@ -13,4 +13,8 @@
         android:id="@+id/menuDelete"
         android:title="@string/deleteText"/>
 
+    <item
+        android:id="@+id/payment"
+        android:title="@string/toPayText"/>
+
 </menu>

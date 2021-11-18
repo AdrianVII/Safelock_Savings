@@ -34,7 +34,8 @@
         android:popupBackground="@drawable/background_spinner"
         android:paddingVertical="12dp"
         android:dropDownVerticalOffset="60dp"
-        android:popupElevation="20dp"/>
+        android:popupElevation="20dp"
+        android:layout_marginBottom="15dp"/>
 
     <FrameLayout
         android:id="@+id/fragment"

@@ -23,6 +23,11 @@ public class DAOConfigurationData {
         editor = sharedPreferences.edit();
     }
 
+    public DAOConfigurationData(Context context) {
+        sharedPreferences = context.getSharedPreferences(ConfigurationData.Configuration, Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+    }
+
     public void setLanguage() {
         if (!sharedPreferences.contains(ConfigurationData.Language)) {
             String lang = ConfigurationCompat.getLocales(Resources.getSystem().getConfiguration()).toLanguageTags();
@@ -41,12 +46,18 @@ public class DAOConfigurationData {
 
     public boolean verifyBiometric() { return sharedPreferences.getBoolean(ConfigurationData.Biometric, false); }
 
+    public boolean verifyNightMode() { return sharedPreferences.getBoolean(ConfigurationData.NightMode, false); }
+
     public String getLanguage() { return sharedPreferences.getString(ConfigurationData.Language, "en"); }
 
     public void updateLanguage(String data) { editor.putString(ConfigurationData.Language, data).apply(); }
 
     public void updateBiometric(boolean data) { editor.putBoolean(ConfigurationData.Biometric, data).apply(); }
 
+    public void updateNightMode(boolean data) { editor.putBoolean(ConfigurationData.NightMode, data).apply(); }
+
     public boolean getBiometric() { return sharedPreferences.getBoolean(ConfigurationData.Biometric,false); }
+
+    public boolean getNightMode() { return sharedPreferences.getBoolean(ConfigurationData.NightMode,false); }
 
 }

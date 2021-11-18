@@ -46,15 +46,11 @@ public class CheckUpdate {
                     appData = snapshot.getValue(AppData.class);
                     try {
                         String currentVersion = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0).versionName;
-                        int currentVersionCode = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0).versionCode;
                         if (!currentVersion.equals(appData.getLastVersion())) {
-                            if (currentVersionCode < appData.getLastVersionCode()) {
                                 new Dialog_Update(activity, appData.getLastVersion(), currentVersion, new Dialog_Update.onClickListener() {
                                     @Override
                                     public void onUpdateClick(View view) {
-                                        storageReference.child("SafeLock-Savings.apk").getDownloadUrl().addOnSuccessListener(uri -> {
-                                            downloadUpdate(uri, appData.getLastVersion());
-                                        });
+                                        storageReference.child("SafeLock-Savings.apk").getDownloadUrl().addOnSuccessListener(uri -> downloadUpdate(uri, appData.getLastVersion()));
                                     }
 
                                     @Override
@@ -63,7 +59,6 @@ public class CheckUpdate {
                                     }
                                 });
 
-                            }
                         } else {
                             listener.noUpdate();
                         }
@@ -85,7 +80,6 @@ public class CheckUpdate {
         DownloadManager manager = (DownloadManager) activity.getSystemService(Context.DOWNLOAD_SERVICE);
         DownloadManager.Request request = new DownloadManager.Request(uri);
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-        //request.setDestinationInExternalFilesDir(activity, Environment.DIRECTORY_DOWNLOADS, String.format("SafeLock-Savings_%s.apk", version));
         request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, String.format("SafeLock-Savings_%s.apk", version));
         manager.enqueue(request);
     }

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="26dp"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="@string/budgetsText"
+        android:textColor="@color/text_color"
+        android:textSize="25sp" />
+
+    <soup.neumorphism.NeumorphCardView
+        android:id="@+id/paymentButton"
+        style="@style/Widget.Neumorph.CardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="19dp"
+        android:paddingVertical="10dp"
+        app:neumorph_backgroundColor="@color/bottom_night"
+        app:neumorph_shadowColorDark="@color/shadow"
+        app:neumorph_shadowColorLight="@android:color/transparent">
+
+        <EditText
+            android:id="@+id/paymentNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/poppins_medium"
+            android:hint="@string/zeroText"
+            android:textColorHint="@color/white"
+            android:inputType="numberDecimal"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/white"
+            android:textSize="19sp"
+            android:background="@android:color/transparent"/>
+
+    </soup.neumorphism.NeumorphCardView>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="30dp"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:visibility="invisible"
+            android:id="@+id/trash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:layout_marginBottom="124dp"
+            android:layout_marginRight="20dp"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/ic_trash"
+            android:tint="#146c75"
+            app:borderWidth="0dp"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:visibility="invisible"
+            android:id="@+id/add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:layout_marginBottom="74dp"
+            android:layout_marginRight="20dp"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/ic_round_add_24"
+            android:tint="#146c75"
+            app:borderWidth="0dp"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/open"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/ic_round_add_24"
+            android:tint="#146c75"
+            app:borderWidth="0dp" />
+
+        <soup.neumorphism.NeumorphCardView
+            android:id="@+id/payment"
+            style="@style/Widget.Neumorph.CardView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="10dp"
+            android:padding="15dp"
+            app:neumorph_backgroundColor="@color/bottom_night"
+            app:neumorph_shadowColorDark="@color/shadow"
+            app:neumorph_shadowColorLight="@android:color/transparent">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/totalToPayText"
+                    android:textColor="@color/white"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/PriceTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/zeroText"
+                    android:textColor="@color/white"
+                    android:textSize="17sp" />
+            </LinearLayout>
+
+        </soup.neumorphism.NeumorphCardView>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</LinearLayout>

@@ -193,6 +193,42 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/btnSWITCHNightMode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_menu_item"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_mode_night" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/roboto_regular"
+                    android:padding="5dp"
+                    android:text="@string/nightModeText"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchNightMode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="5dp"
+                    android:padding="5dp"
+                    android:theme="@style/BrandedSwitch.control" />
+
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 
@@ -201,11 +237,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="19dp"
-        android:layout_marginBottom="10dp"
         android:layout_marginTop="9dp"
-        android:textSize="15sp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/settings_button_background"
         android:fontFamily="@font/roboto_regular"
         android:text="@string/signOutText"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        android:textSize="15sp" />
 </LinearLayout>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_night"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/btnBack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_regular"
+        android:padding="10dp"
+        android:text="@string/backText"
+        android:textColor="@color/text_color" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="26dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/newReminderText"
+            android:textColor="@color/text_color"
+            android:textSize="25sp" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/menuCard"
+            android:layout_width="34dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_more_night" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/Type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="18dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/background_spinner_night"
+        android:padding="12dp"
+        android:popupBackground="@drawable/background_spinner_night"
+        android:popupElevation="20dp"
+        android:text="@string/typeRemindersText"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+    <FrameLayout
+        android:id="@+id/fragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+
+</LinearLayout>

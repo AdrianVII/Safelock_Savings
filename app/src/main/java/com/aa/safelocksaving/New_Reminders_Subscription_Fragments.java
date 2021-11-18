@@ -18,12 +18,18 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.aa.safelocksaving.Dialog.Dialog_Important;
+import com.aa.safelocksaving.Dialog.Dialog_Upload;
 import com.aa.safelocksaving.Operation.CheckData;
 import com.aa.safelocksaving.Operation.Date_Picker;
+import com.aa.safelocksaving.Operation.ImportantColor;
 import com.aa.safelocksaving.Operation.OPBasics;
 import com.aa.safelocksaving.data.CardItem;
 import com.aa.safelocksaving.data.DateBasic;
 import com.aa.safelocksaving.data.Reminders_SubscriptionData;
+
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
 
 public class New_Reminders_Subscription_Fragments extends Fragment {
     private EditText name;
@@ -38,6 +44,17 @@ public class New_Reminders_Subscription_Fragments extends Fragment {
     private DateBasic DATE;
     private int color;
     private int itemSelected;
+    private boolean edit = false;
+    private Dialog_Upload upload;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            name.setText(savedInstanceState.getString("name"));
+            amount.setText(savedInstanceState.getString("amount"));
+        }
+    }
 
     @Nullable
     @Override
@@ -52,42 +69,95 @@ public class New_Reminders_Subscription_Fragments extends Fragment {
         btnRepeat = view.findViewById(R.id.btnRepeat);
         spinner = view.findViewById(R.id.Spinner);
         btnNEXT = view.findViewById(R.id.btnNEXT);
+        upload = new Dialog_Upload(requireActivity());
         color = 0;
+        if (getArguments() != null) setAllData();
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) { itemSelected = position; }
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                itemSelected = position;
+            }
+
             @Override
-            public void onNothingSelected(AdapterView<?> parent) { itemSelected = 0; }
+            public void onNothingSelected(AdapterView<?> parent) {
+                itemSelected = 0;
+            }
         });
         return view;
+    }
+
+    private void setAllData() {
+        Calendar calendar = Calendar.getInstance();
+        edit = true;
+        Bundle bundle = getArguments();
+        name.setText(bundle.getString("name"));
+        amount.setText(String.valueOf(bundle.getDouble("amount")));
+        calendar.set(bundle.getInt("yearCutoffDate"), bundle.getInt("monthCutoffDate"), bundle.getInt("dayCutoffDate"));
+        Date.setText(DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime()));
+        setColor(bundle.getInt("importance"));
+        if (bundle.getInt("repeat") > 0) {
+            repeat.setChecked(true);
+            spinner.setVisibility(View.VISIBLE);
+        }
+        spinner.setSelection(bundle.getInt("repeat"));
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        Date.setOnClickListener(view -> DATE = new Date_Picker(Date, getContext()).getDate());
-        importantcolor1.setOnClickListener(view -> {
-            new Dialog_Important(getActivity(),color ->{
-                this.color = color;
-                switch (color){
-                    case 0: importantcolor.setBackgroundResource(R.drawable.box_important_unselected); break;
-                    case 1: importantcolor.setBackgroundResource(R.drawable.box_important_less); break;
-                    case 2: importantcolor.setBackgroundResource(R.drawable.box_important_important); break;
-                    case 3: importantcolor.setBackgroundResource(R.drawable.box_important_very); break;
-                }
-            }).show();
+        Date.setOnClickListener(view -> new Date_Picker(Date, getContext(), (day, month, year) -> DATE = new DateBasic(day, month, year)));
 
-        });
+        importantcolor1.setOnClickListener(view -> new Dialog_Important(getActivity(), color -> setColor(color)).show());
         btnNEXT.setOnClickListener(view -> {
-            upload();
+            if (edit) upgrade(getArguments().getLong("id"));
+            else upload();
         });
-        btnRepeat.setOnClickListener(view ->{
+        btnRepeat.setOnClickListener(view -> {
             repeat.setChecked(!repeat.isChecked());
-            spinner.setVisibility((repeat.isChecked())? View.VISIBLE : View.GONE);
+            spinner.setVisibility((repeat.isChecked()) ? View.VISIBLE : View.GONE);
         });
     }
-    private void upload(){
-        if (new CheckData(getActivity()).isSubscriptionCorrect(name,amount,Date,color)){
+
+    private void setColor(int color) {
+        this.color = color;
+        new ImportantColor(getActivity(), importantcolor, color);
+    }
+
+    private void upgrade(long ID) {
+        if (new CheckData(getActivity()).isSubscriptionCorrect(name, amount, Date, color)) {
+            upload.start();
+            HashMap<String, Object> card = new HashMap<>();
+            card.put("name", name.getText().toString());
+            card.put("amount", Double.parseDouble(amount.getText().toString()));
+            card.put("importance", color);
+            card.put("repeat", itemSelected);
+            new OPBasics().updateCard(ID, card).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    HashMap<String, Object> date = new HashMap<>();
+                    date.put("day", DATE.getDay());
+                    date.put("month", DATE.getMonth());
+                    date.put("year", DATE.getYear());
+                    new OPBasics().updateDate(ID, "date", date).addOnCompleteListener(task1 -> {
+                        upload.dismiss();
+                        if (task1.isSuccessful()) {
+                            Toast.makeText(getContext(), getString(R.string.editedCardText), Toast.LENGTH_SHORT).show();
+                            requireActivity().finish();
+                        }
+                    }).addOnFailureListener(e -> {
+                        upload.dismiss();
+                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    });
+                }
+            }).addOnFailureListener(e -> {
+                upload.dismiss();
+                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            });
+        }
+    }
+
+    private void upload() {
+        if (new CheckData(getActivity()).isSubscriptionCorrect(name, amount, Date, color)) {
+            upload.start();
             long ID = System.currentTimeMillis();
             new OPBasics().addRemindersCards(
                     new CardItem(
@@ -99,17 +169,27 @@ public class New_Reminders_Subscription_Fragments extends Fragment {
                                     DATE,
                                     color,
                                     itemSelected
-
                             ),
                             1
                     ),
                     String.valueOf(ID)
             ).addOnCompleteListener(task -> {
-                if (task.isSuccessful()){
+                upload.dismiss();
+                if (task.isSuccessful()) {
                     Toast.makeText(getContext(), getString(R.string.newCardHasBeenAddedText), Toast.LENGTH_SHORT).show();
-                    getActivity().finish();
+                    requireActivity().finish();
                 }
+            }).addOnFailureListener(e -> {
+                upload.dismiss();
+                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
             });
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("name", name.getText().toString());
+        outState.putString("amount", amount.getText().toString());
     }
 }
