@@ -27,51 +27,45 @@ public class Dialog_Shop_Store_Notification extends Dialog {
     private NeumorphButton cancel;
     private Spinner spinner;
     private EditText editTextAmount;
-    private Activity activity;
 
-    private interface onButtonClickListener {
-        void onYesClick(View view);
-
-        void onNoClick(View view);
-
-        void onAcceptClick(View view);
-
-        void onCancelClick(View view);
+    public interface onButtonClickListener {
+        void OnYesClick(View view);
+        void OnNoClick(View view);
+        void OnAcceptClick(View view);
+        void OnCancelClick(View view);
     }
 
-    public Dialog_Shop_Store_Notification(@NonNull Activity activity, onButtonClickListener listener) {
-        super(activity);
-        this.activity = activity;
-        super.setContentView(R.layout.subcription_notification_dialog);
-        super.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        Window window = super.getWindow();
+    public Dialog_Shop_Store_Notification(@NonNull Context context, onButtonClickListener listener) {
+        super(context);
+        setContentView(R.layout.shop_store_notification_dialog);
+        getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        Window window = getWindow();
         window.setGravity(Gravity.CENTER);
-        yes = super.findViewById(R.id.yes);
-        no = super.findViewById(R.id.no);
-        accept = super.findViewById(R.id.accept);
-        cancel = super.findViewById(R.id.cancel);
-        title = super.findViewById(R.id.title);
-        secondTitle = super.findViewById(R.id.secondTitle);
-        titlePayment = super.findViewById(R.id.titlePayment);
-        paymentText = super.findViewById(R.id.paymentText);
-        spinner = super.findViewById(R.id.Spinner);
-        editTextAmount = super.findViewById(R.id.EditAddAmount);
+        yes = findViewById(R.id.yes);
+        no = findViewById(R.id.no);
+        accept = findViewById(R.id.accept);
+        cancel = findViewById(R.id.cancel);
+        title = findViewById(R.id.title);
+        secondTitle = findViewById(R.id.secondTitle);
+        titlePayment = findViewById(R.id.titlePayment);
+        paymentText = findViewById(R.id.paymentText);
+        spinner = findViewById(R.id.Spinner);
+        editTextAmount = findViewById(R.id.EditAddAmount);
         yes.setOnClickListener(view -> {
-            listener.onYesClick(view);
+            listener.OnYesClick(view);
             dismiss();
         });
         no.setOnClickListener(view -> {
-            listener.onNoClick(view);
+            listener.OnNoClick(view);
             dismiss();
         });
         accept.setOnClickListener(view -> {
-            listener.onAcceptClick(view);
+            listener.OnAcceptClick(view);
             dismiss();
         });
         cancel.setOnClickListener(view -> {
-            listener.onCancelClick(view);
+            listener.OnCancelClick(view);
             dismiss();
         });
-
     }
 }

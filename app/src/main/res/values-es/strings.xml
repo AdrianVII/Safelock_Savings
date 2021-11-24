@@ -139,7 +139,7 @@
     <string name="lastVersionText">Ultima Version</string>
     <string name="nightModeText">Modo Oscuro</string>
     <string name="acceptText">Aceptar</string>
-    <string name="didYouMakeThePaymentText">Realizaste El Pago?</string>
+    <string name="didYouMakeThePaymentText">¿Realizaste el pago?</string>
     <string name="cancelledText">Cancelado</string>
     <string name="whatMethodDidYouUseText">Cuál Metodo Utilizaste Para Realizar El Pago?</string>
     <string name="paymentTypeText">Tipo De Pago</string>

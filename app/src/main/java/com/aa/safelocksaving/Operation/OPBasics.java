@@ -18,6 +18,7 @@ import com.aa.safelocksaving.Dialog.Progress_Alert_Dialog;
 import com.aa.safelocksaving.R;
 import com.aa.safelocksaving.data.Budgets_Data;
 import com.aa.safelocksaving.data.CardItem;
+import com.aa.safelocksaving.data.DateBasic;
 import com.aa.safelocksaving.data.Reminders_CardData;
 import com.aa.safelocksaving.data.User;
 import com.aa.safelocksaving.data.UserData;
@@ -38,10 +39,10 @@ import java.util.HashMap;
 import java.util.List;
 
 public class OPBasics {
-    private FirebaseUser user;
+    private final FirebaseUser user;
     private StorageReference storageReference;
     private Dialog_Upload progressAlertDialog;
-    private MyCountDownTimer countDownTimer;
+    private final MyCountDownTimer countDownTimer;
     private final long Timer = 1000 * 30;
 
     public interface getDataListener {
@@ -115,6 +116,14 @@ public class OPBasics {
         HashMap<String, Object> status = new HashMap<>();
         status.put("status", Status);
         return new DAOUser().updateStatus(user.getUid(), String.valueOf(ID), status);
+    }
+
+    public Task<Void> updateRemindersDate(long ID, DateBasic date) {
+        HashMap<String, Object> dateObject = new HashMap<>();
+        dateObject.put("day", date.getDay());
+        dateObject.put("month", date.getMonth());
+        dateObject.put("year", date.getYear());
+        return new DAOUser().updateDate(user.getUid(), String.valueOf(ID), dateObject);
     }
 
     public DatabaseReference getCardsReminders() { return new DAOUser().get(user.getUid()).child("reminders"); }

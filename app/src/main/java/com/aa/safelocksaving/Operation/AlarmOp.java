@@ -40,15 +40,16 @@ public class AlarmOp {
     }
 
     @SuppressLint("UnspecifiedImmutableFlag")
-    public void setAlarm(long id, String title, String text, DateBasic date) {
+    public void setAlarm(long id, String title, String text, DateBasic date, int importance) {
         if (!daoAlarm.existAlarm(id)) {
             int requestCode = daoAlarm.getRequestCode(id);
             daoAlarm.setAlarm(id, requestCode);
-            Log.i("alarm", "alarm not exist");
+            //Log.i("alarm", "alarm not exist");
             Calendar calendar = Calendar.getInstance();
             calendar.set(date.getYear(), date.getMonth(), date.getDay());
             alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             Intent intent = new Intent(context, AlarmReceiver.class);
+            intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
             intent.putExtra("Id", id);
             intent.putExtra("RequestCode", requestCode);
             intent.putExtra("Title", title);

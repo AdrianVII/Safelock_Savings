@@ -27,9 +27,16 @@ public class Main_Activity extends AppCompatActivity implements ChipNavigationBa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
         chipNavigationBarMain = findViewById(R.id.chipNavigationBarMain);
-        loadFragments(new Reminders_Fragments(), true);
+        //loadFragments(new Reminders_Fragments(), true);
+        firstFragment();
         chipNavigationBarMain.setItemSelected(R.id.menuReminders, true);
         chipNavigationBarMain.setOnItemSelectedListener(this);
+    }
+
+    private void firstFragment() {
+        Reminders_Fragments fragments = new Reminders_Fragments();
+        if (getIntent().getExtras() != null) fragments.setArguments(getIntent().getExtras());
+        loadFragments(fragments, true);
     }
 
     private void loadFragments(Fragment fragment, boolean netChecker) {

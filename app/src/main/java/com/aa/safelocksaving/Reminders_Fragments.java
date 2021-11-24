@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.aa.safelocksaving.Dialog.Dialog_Subscription_Notification;
 import com.aa.safelocksaving.Operation.AlarmOp;
 import com.aa.safelocksaving.Operation.CardListAdapter;
 import com.aa.safelocksaving.Operation.OPBasics;
@@ -26,6 +27,7 @@ import com.aa.safelocksaving.data.CardItem;
 import com.aa.safelocksaving.data.Reminders_CardData;
 import com.aa.safelocksaving.data.Reminders_ShopData;
 import com.aa.safelocksaving.data.Reminders_SubscriptionData;
+import com.aa.safelocksaving.data.Status;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -56,6 +58,34 @@ public class Reminders_Fragments extends Fragment {
         return view;
     }
 
+    /*private void showDialog(List<CardItem> items) {
+        if (getArguments() != null) {
+            Bundle bundle = getArguments();
+            for (CardItem item : items) {
+                switch (item.getType()) {
+                    case 0:
+                        if ( ((Reminders_CardData)item.getItem()).getID() == bundle.getLong("Id") )
+                            new Dialog_Subscription_Notification(requireActivity(), new Dialog_Subscription_Notification.onButtonClickListener() {
+                                @Override
+                                public void onYesClick(View view) {
+
+                                }
+
+                                @Override
+                                public void onNoClick(View view) {
+
+                                }
+
+                                @Override
+                                public void onCancelledClick(View view) {
+
+                                }
+                            }).show();
+                        break;
+                }
+            }
+        }
+    }*/
 
     @Override
     public void onResume() {
@@ -67,7 +97,9 @@ public class Reminders_Fragments extends Fragment {
                 if (snapshot.exists()) {
                     cardItems = new ArrayList<>();
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        if (dataSnapshot.getValue(CardItem.class).getStatus() != 0) {
+                        if (dataSnapshot.getValue(CardItem.class).getStatus() != Status.DELETED &&
+                                dataSnapshot.getValue(CardItem.class).getStatus() != Status.CANCELED &&
+                                dataSnapshot.getValue(CardItem.class).getStatus() != Status.FINISHED) {
                             switch (dataSnapshot.getValue(CardItem.class).getType()) {
                                 case 0:
                                     cardItems.add(new CardItem(0, dataSnapshot.child("item").getValue(Reminders_CardData.class), dataSnapshot.getValue(CardItem.class).getStatus()));
@@ -87,6 +119,8 @@ public class Reminders_Fragments extends Fragment {
                     reminder_cards.setLayoutManager(new LinearLayoutManager(getContext()));
                     new ItemTouchHelper(swipe).attachToRecyclerView(reminder_cards);
                     cardListAdapter = new CardListAdapter(cardItems, getContext());
+                    //showDialog(cardItems);
+                    if (getArguments() != null) cardListAdapter.setNewStatus(getArguments().getLong("Id"));
                     reminder_cards.setAdapter(cardListAdapter);
                     reminder_cards.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
@@ -126,7 +160,7 @@ public class Reminders_Fragments extends Fragment {
             LinearLayout CardView = viewHolder.itemView.findViewById(R.id.linearLayoutCard);
             int position = viewHolder.getAdapterPosition();
             if (direction == ItemTouchHelper.RIGHT)
-                cardListAdapter.removeElement(position, cardListAdapter.getID(position), CardView, CardView);
+                cardListAdapter.removeElement(position, cardListAdapter.getID(position), CardView, CardView, Status.DELETED);
             else if (direction == ItemTouchHelper.LEFT)
                 cardListAdapter.pause_resume(position, cardListAdapter.getID(position), CardView, cardListAdapter.getImportantColor(position));
         }
@@ -165,4 +199,3 @@ public class Reminders_Fragments extends Fragment {
     };
 
 }
-

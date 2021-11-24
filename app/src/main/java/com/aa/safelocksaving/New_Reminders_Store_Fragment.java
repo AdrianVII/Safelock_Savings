@@ -1,9 +1,12 @@
 package com.aa.safelocksaving;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -89,13 +92,33 @@ public class New_Reminders_Store_Fragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        cutoffDateText.setOnClickListener(view -> {
-            new Date_Picker(cutoffDateText, getContext(), (day, month, year) -> cutoffDate = new DateBasic(day, month, year));
+        cutoffDateText.setOnClickListener(view -> new Date_Picker(cutoffDateText, getContext(), (day, month, year) -> cutoffDate = new DateBasic(day, month, year)));
+        deadlineText.setOnClickListener(view -> new Date_Picker(deadlineText, getContext(), (day, month, year) -> deadlineDate = new DateBasic(day, month, year)));
+        importanceLayout.setOnClickListener(view -> new Dialog_Important(requireActivity(), this::setColor).show());
+        amountEdit.setOnKeyListener((view, i, keyEvent) -> {
+            if (keyEvent.getAction() == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
+                new Date_Picker(cutoffDateText, getContext(), (day, month, year) -> cutoffDate = new DateBasic(day, month, year));
+                ((InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(amountEdit.getWindowToken(), 0);
+                return true;
+            }
+            return false;
         });
-        deadlineText.setOnClickListener(view -> {
-            new Date_Picker(deadlineText, getContext(), (day, month, year) -> deadlineDate = new DateBasic(day, month, year));
+        /*descriptionEdit.setOnKeyListener((view, i, keyEvent) -> {
+            if (keyEvent.getAction() == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
+                new Dialog_Important(requireActivity(), this::setColor).show();
+                ((InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(descriptionEdit.getWindowToken(), 0);
+                return true;
+            }
+            return false;
+        });*/
+        monthEdit.setOnKeyListener((view, i, keyEvent) -> {
+            if (keyEvent.getAction() == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
+                if (edit) upgrade(getArguments().getLong("id"));
+                else upload();
+                return true;
+            }
+            return false;
         });
-        importanceLayout.setOnClickListener(view -> new Dialog_Important(requireActivity(), color -> setColor(color)).show());
         btnNext.setOnClickListener(view -> {
             if (edit) upgrade(getArguments().getLong("id"));
             else upload();

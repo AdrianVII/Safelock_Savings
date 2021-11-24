@@ -1,9 +1,13 @@
 package com.aa.safelocksaving;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.os.PowerManager;
+import android.provider.Settings;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -35,6 +39,7 @@ public class Splash_Screen_Activity extends AppCompatActivity {
 
         textView.setAnimation(animation2);
         imageView.setAnimation(animation1);
+        //checkBatteryOptimization(); //Test...
         new CheckUpdate(this, () -> new Handler().postDelayed(() -> {
             if (new Authentication().isLogged(FirebaseAuth.getInstance())) {
                 if (new DAOConfigurationData(this).verifyBiometric())
@@ -47,6 +52,12 @@ public class Splash_Screen_Activity extends AppCompatActivity {
                 countDownTimer.start();
             }
         }, 2000));
+    }
+
+    private boolean isIgnoringBatteryOptimizations() { return ((PowerManager)getSystemService(Context.POWER_SERVICE)).isIgnoringBatteryOptimizations(getPackageName()); }
+
+    private void checkBatteryOptimization() {
+        if (!isIgnoringBatteryOptimizations()) startActivity(new Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS));
     }
 
     class MyCountDownTimer extends CountDownTimer {

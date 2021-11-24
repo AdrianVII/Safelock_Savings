@@ -1,9 +1,12 @@
 package com.aa.safelocksaving;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -106,10 +109,26 @@ public class New_Reminders_Cards_Fragment extends Fragment {
         super.onResume();
         cutoff.setOnClickListener(view -> new Date_Picker(cutoff, getContext(), (day, month, year) -> cutoffDate = new DateBasic(day, month, year)));
         deadline.setOnClickListener(view -> new Date_Picker(deadline, getContext(), (day, month, year) -> deadlineDate = new DateBasic(day, month, year)));
-        important.setOnClickListener(view -> new Dialog_Important(requireActivity(), color -> setColor(color)).show());
+        important.setOnClickListener(view -> new Dialog_Important(requireActivity(), this::setColor).show());
         btnNext.setOnClickListener(view -> {
             if (edit) upgrade(getArguments().getLong("id"));
             else upload();
+        });
+        settlement.setOnKeyListener((view, i, keyEvent) -> {
+            if (keyEvent.getAction() == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
+                new Date_Picker(cutoff, getContext(), (day, month, year) -> cutoffDate = new DateBasic(day, month, year));
+                ((InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(settlement.getWindowToken(), 0);
+                return true;
+            }
+            return false;
+        });
+        month.setOnKeyListener((view, i, keyEvent) -> {
+            if (keyEvent.getAction() == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
+                if (edit) upgrade(getArguments().getLong("id"));
+                else upload();
+                return true;
+            }
+            return false;
         });
     }
 

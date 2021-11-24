@@ -1,9 +1,12 @@
 package com.aa.safelocksaving;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -106,8 +109,15 @@ public class New_Reminders_Subscription_Fragments extends Fragment {
     public void onStart() {
         super.onStart();
         Date.setOnClickListener(view -> new Date_Picker(Date, getContext(), (day, month, year) -> DATE = new DateBasic(day, month, year)));
-
-        importantcolor1.setOnClickListener(view -> new Dialog_Important(getActivity(), color -> setColor(color)).show());
+        importantcolor1.setOnClickListener(view -> new Dialog_Important(requireActivity(), this::setColor).show());
+        amount.setOnKeyListener((view, i, keyEvent) -> {
+            if (keyEvent.getAction() == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
+                new Date_Picker(Date, getContext(), (day, month, year) -> DATE = new DateBasic(day, month, year));
+                ((InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(amount.getWindowToken(), 0);
+                return true;
+            }
+            return false;
+        });
         btnNEXT.setOnClickListener(view -> {
             if (edit) upgrade(getArguments().getLong("id"));
             else upload();

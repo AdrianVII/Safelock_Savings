@@ -40,6 +40,7 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:background="@drawable/selector_menu_item"
             android:id="@+id/nameEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

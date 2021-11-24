@@ -193,7 +193,7 @@
     <string name="lastVersionText">Last Version</string>
     <string name="nightModeText">Night Mode</string>
     <string name="acceptText">Accept</string>
-    <string name="didYouMakeThePaymentText">Did You Make The Payment?</string>
+    <string name="didYouMakeThePaymentText">Did you make the payment?</string>
     <string name="cancelledText">Cancelled</string>
     <string name="whatMethodDidYouUseText">What Method Did You Use To Make The Payment?</string>
     <string name="paymentTypeText">Payment Type</string>

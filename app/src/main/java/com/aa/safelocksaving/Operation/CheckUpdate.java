@@ -32,7 +32,6 @@ public class CheckUpdate {
 
     public interface noUpdateListener {
         void noUpdate();
-
     }
 
     public CheckUpdate(Activity activity, noUpdateListener listener) {
