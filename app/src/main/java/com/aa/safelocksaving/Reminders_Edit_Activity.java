@@ -2,6 +2,7 @@ package com.aa.safelocksaving;
 
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -12,7 +13,6 @@ import androidx.fragment.app.FragmentTransaction;
 public class Reminders_Edit_Activity extends AppCompatActivity {
     private int typeBundle;
     private TextView title;
-    private ImageView menuCard;
     private TextView type;
     private Bundle allBundle;
     private TextView btnBack;
@@ -23,7 +23,6 @@ public class Reminders_Edit_Activity extends AppCompatActivity {
         setContentView(R.layout.reminders_edit_activity);
         allBundle = getIntent().getExtras();
         title = findViewById(R.id.title);
-        menuCard = findViewById(R.id.menuCard);
         type = findViewById(R.id.Type);
         btnBack = findViewById(R.id.btnBack);
         typeBundle = allBundle.getInt("type");

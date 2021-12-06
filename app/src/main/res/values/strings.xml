@@ -195,11 +195,11 @@
     <string name="acceptText">Accept</string>
     <string name="didYouMakeThePaymentText">Did you make the payment?</string>
     <string name="cancelledText">Cancelled</string>
-    <string name="whatMethodDidYouUseText">What Method Did You Use To Make The Payment?</string>
+    <string name="whatMethodDidYouUseText">What method did you use to make the payment?</string>
     <string name="paymentTypeText">Payment Type</string>
     <string name="addQuantityText">Add Quantity</string>
     <string name="defaultAmountText">Default Amount</string>
-    <string name="amountPaidText">Amount Paid</string>
+    <string name="amountPaidText">Amount Paid:</string>
     <string name="areYouSureYouWantToDeleteEverythingFromBudgetsText">Are You Sure You Want To Delete Everything From Budgets?</string>
     <string name="ifYouDeleteEverythingYouWillNotBeAbleToUndoThisActionText">If You Delete Everything,You Will Not Be Able To Undo This Action</string>
     <string name="fingerprintText">Fingerprint</string>
@@ -217,4 +217,10 @@
     <string name="uploadingText">Uploading ...</string>
     <string name="twopointsText" translatable="false">:</string>
     <string name="renameText">Rename</string>
+    <string name="batteryOptimizationText">Battery Optimization</string>
+    <string name="batteryOptimizationDescriptionText">It is requiered to remove the battery optimization application from the system</string>
+    <string name="moneyText" translatable="false">$</string>
+    <string name="enterAmountText">Enter Amount</string>
+    <string name="interestGeneratedText">Interest generated</string>
+    <string name="percentageText" translatable="false">%</string>
 </resources>

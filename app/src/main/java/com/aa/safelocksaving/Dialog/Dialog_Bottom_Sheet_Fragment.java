@@ -47,12 +47,12 @@ public class Dialog_Bottom_Sheet_Fragment extends BottomSheetDialogFragment {
     public void onStart() {
         super.onStart();
         Folder.setOnClickListener(view -> {
-            listener.OnClickFolder(view);
             dismiss();
+            listener.OnClickFolder(view);
         });
         Camera.setOnClickListener(view -> {
-            listener.OnClickCamera(view);
             dismiss();
+            listener.OnClickCamera(view);
         });
     }
 }

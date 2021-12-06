@@ -3,12 +3,10 @@ package com.aa.safelocksaving.Operation;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
@@ -19,7 +17,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aa.safelocksaving.DAO.DAOConfigurationData;
+import com.aa.safelocksaving.Dialog.Card_Store_Notification;
 import com.aa.safelocksaving.Dialog.Dialog_Subscription_Notification;
+import com.aa.safelocksaving.Dialog.Dialog_Upload;
+import com.aa.safelocksaving.Dialog.Progress_Alert_Dialog;
+import com.aa.safelocksaving.Dialog.Store_Notification_Dialog;
 import com.aa.safelocksaving.R;
 import com.aa.safelocksaving.Reminders_Edit_Activity;
 import com.aa.safelocksaving.data.CardItem;
@@ -33,12 +35,13 @@ import com.aa.safelocksaving.data.Status;
 import com.aa.safelocksaving.data.Type;
 
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<CardItem> items;
-    private Context context;
-    private AlarmOp alarmOp;
+    private final List<CardItem> items;
+    private final Context context;
+    private final AlarmOp alarmOp;
 
     public CardListAdapter(List<CardItem> items, Context context) {
         this.items = items;
@@ -47,24 +50,145 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     public void setNewStatus(long ID) {
-        Toast.makeText(context, "getArgument isn't null", Toast.LENGTH_SHORT).show();
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i).getStatus() == Status.ACTIVE || items.get(i).getStatus() == Status.LIMIT) {
                 switch (items.get(i).getType()) {
-                    case Type.CARD:
-                        break;
-                    case Type.SUBSCRIPTION:
-                        if (((Reminders_SubscriptionData) items.get(i).getItem()).getID() == ID)
-                            showDialogForSubscription(i);
-                        break;
-                    /*case 2:
-                        break;*/
+                    case Type.CARD: if (((Reminders_CardData)items.get(i).getItem()).getID() == ID) showDialogForCard(i); break;
+                    case Type.SUBSCRIPTION: if (((Reminders_SubscriptionData)items.get(i).getItem()).getID() == ID) showDialogForSubscription(i); break;
+                    case Type.SHOP: if (((Reminders_ShopData)items.get(i).getItem()).getID() == ID) showDialogForShop(i); break;
                 }
             }
         }
     }
 
+    private void showDialogForShop(int position) {
+        new Store_Notification_Dialog(context, new Store_Notification_Dialog.onButtonClickListener() {
+            @Override
+            public void OnYesClick(View view) {
+                if ( ((Reminders_ShopData)items.get(position).getItem()).getMonth() > 0 ) {
+                    DateBasic dateBasic = ((Reminders_ShopData) items.get(position).getItem()).getCutoffDate();
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.set(dateBasic.getYear(), dateBasic.getMonth(), dateBasic.getDay());
+                    setNewDate(((Reminders_ShopData) items.get(position).getItem()).getID(), position, calendar, Calendar.MONTH, 1, dateBasic, "cutoffDate");
+                    dateBasic = ((Reminders_ShopData) items.get(position).getItem()).getDeadline();
+                    calendar.set(dateBasic.getYear(), dateBasic.getMonth(), dateBasic.getDay());
+                    setNewDate(((Reminders_ShopData) items.get(position).getItem()).getID(), position, calendar, Calendar.MONTH, 1, dateBasic, "deadline");
+                    HashMap<String, Object> dataUpdate = new HashMap<>();
+                    int newMonth = ((Reminders_ShopData)items.get(position).getItem()).getProgressMonth() + 1;
+                    double newAmount = ((Reminders_ShopData)items.get(position).getItem()).getAmount() + ((Reminders_ShopData)items.get(position).getItem()).getProgressAmount();
+                    dataUpdate.put("progressMonth", newMonth);
+                    dataUpdate.put("progressAmount", newAmount);
+                    Dialog_Upload dialogUpload = new Dialog_Upload(context);
+                    dialogUpload.start();
+                    new OPBasics().updateCard(((Reminders_ShopData)items.get(position).getItem()).getID(), dataUpdate).addOnCompleteListener(task -> {
+                        dialogUpload.dismiss();
+                        if (task.isSuccessful()) {
+                            ((Reminders_ShopData)items.get(position).getItem()).setProgressMonth(newMonth);
+                            ((Reminders_ShopData)items.get(position).getItem()).setProgressAmount(newAmount);
+                            notifyItemChanged(position);
+                            if (newMonth == ((Reminders_ShopData)items.get(position).getItem()).getMonth()) {
+                                dialogUpload.start();
+                                new OPBasics().updateRemindersStatus(((Reminders_ShopData)items.get(position).getItem()).getID(), Status.FINISHED).addOnCompleteListener(task2 -> {
+                                    dialogUpload.dismiss();
+                                    if (task2.isSuccessful()) {
+                                        items.get(position).setStatus(Status.FINISHED);
+                                        notifyItemChanged(position);
+                                    }
+                                }).addOnFailureListener(e -> {
+                                    dialogUpload.dismiss();
+                                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                });
+                            }
+                        }
+                    }).addOnFailureListener(e -> {
+                        dialogUpload.dismiss();
+                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    });
+
+                }
+            }
+
+            @Override
+            public void OnNoClick(View view) {
+
+            }
+        }, ((Reminders_ShopData)items.get(position).getItem()).getName(), ((Reminders_ShopData)items.get(position).getItem()).getAmount()).show();
+    }
+
+    private void showDialogForCard(int position) {
+        new Card_Store_Notification(context, new Card_Store_Notification.onButtonClickListener() {
+            @Override
+            public void OnYesClick(View view) {
+
+            }
+
+            @Override
+            public void OnNoClick(View view) {
+
+            }
+
+            @Override
+            public void OnAcceptClick(View view, double amount, double accumulated) {
+                if ( ((Reminders_CardData)items.get(position).getItem()).getMonth() > 0 ) {
+                    DateBasic dateBasic = ((Reminders_CardData)items.get(position).getItem()).getCutoffDate();
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.set(dateBasic.getYear(), dateBasic.getMonth(), dateBasic.getDay());
+                    setNewDate(((Reminders_CardData)items.get(position).getItem()).getID(), position, calendar, Calendar.MONTH, 1, dateBasic, "cutoffDate");
+                    dateBasic = ((Reminders_CardData) items.get(position).getItem()).getDeadline();
+                    calendar.set(dateBasic.getYear(), dateBasic.getMonth(), dateBasic.getDay());
+                    setNewDate(((Reminders_CardData) items.get(position).getItem()).getID(), position, calendar, Calendar.MONTH, 1, dateBasic, "deadline");
+                    HashMap<String, Object> dataUpdate = new HashMap<>();
+                    //if (amount > ((Reminders_CardData)items.get(position).getItem()).getAmount() + ((Reminders_CardData)items.get(position).getItem()).getAccumulatedAmount()) ;
+                    int newMonth = ((Reminders_CardData)items.get(position).getItem()).getProgressMonth() + 1;
+                    double newAmount = ((Reminders_CardData)items.get(position).getItem()).getProgressAmount() + amount;
+                    //double newAccumulated = ((Reminders_CardData)items.get(position).getItem()).getAccumulatedAmount() + accumulated;
+                    double newAccumulated = (amount < ((Reminders_CardData)items.get(position).getItem()).getAmount() + ((Reminders_CardData)items.get(position).getItem()).getAccumulatedAmount()) ?
+                            ((Reminders_CardData)items.get(position).getItem()).getAccumulatedAmount() + accumulated : 0;
+                    dataUpdate.put("progressMonth", newMonth);
+                    dataUpdate.put("progressAmount", newAmount);
+                    dataUpdate.put("accumulatedAmount", newAccumulated);
+                    Dialog_Upload dialogUpload = new Dialog_Upload(context);
+                    dialogUpload.start();
+                    new OPBasics().updateCard(((Reminders_CardData)items.get(position).getItem()).getID(), dataUpdate).addOnCompleteListener(task -> {
+                        dialogUpload.dismiss();
+                        if (task.isSuccessful()) {
+                            ((Reminders_CardData)items.get(position).getItem()).setProgressMonth(newMonth);
+                            ((Reminders_CardData)items.get(position).getItem()).setProgressAmount(newAmount);
+                            notifyItemChanged(position);
+                            if (newMonth == ((Reminders_CardData)items.get(position).getItem()).getMonth() || ((Reminders_CardData)items.get(position).getItem()).getProgressAmount() >= ((Reminders_CardData)items.get(position).getItem()).getSettlement()) {
+                                dialogUpload.start();
+                                new OPBasics().updateRemindersStatus(((Reminders_CardData)items.get(position).getItem()).getID(), Status.FINISHED).addOnCompleteListener(task2 -> {
+                                    dialogUpload.dismiss();
+                                    if (task2.isSuccessful()) {
+                                        items.get(position).setStatus(Status.FINISHED);
+                                        notifyItemChanged(position);
+                                    }
+                                }).addOnFailureListener(e -> {
+                                    dialogUpload.dismiss();
+                                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                });
+                            }
+                        }
+                    }).addOnFailureListener(e -> {
+                        dialogUpload.dismiss();
+                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    });
+                }
+            }
+
+            @Override
+            public void OnCancelClick(View view) {
+            }
+        },
+                ((Reminders_CardData)items.get(position).getItem()).getSettlement() - ((Reminders_CardData)items.get(position).getItem()).getProgressAmount(),
+                ((Reminders_CardData)items.get(position).getItem()).getAmount(),
+                ((Reminders_CardData)items.get(position).getItem()).getMinAmount(),
+                ((Reminders_CardData)items.get(position).getItem()).getAccumulatedAmount()
+        ).show();
+    }
+
     private void showDialogForSubscription(int position) {
+        long ID = ((Reminders_SubscriptionData)items.get(position).getItem()).getID();
         new Dialog_Subscription_Notification(context, new Dialog_Subscription_Notification.onButtonClickListener() {
             @Override
             public void onYesClick(View view) {
@@ -73,42 +197,26 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 calendar.set(dateBasic.getYear(), dateBasic.getMonth(), dateBasic.getDay());
                 switch (((Reminders_SubscriptionData) items.get(position).getItem()).getRepeat()) {
                     case Repeat.WEEKLY:
-                        calendar.add(Calendar.DAY_OF_MONTH, 7);
-                        dateBasic.setDay(calendar.get(Calendar.DAY_OF_MONTH));
-                        dateBasic.setMonth(calendar.get(Calendar.MONTH));
-                        dateBasic.setYear(calendar.get(Calendar.YEAR));
-                        new OPBasics().updateRemindersDate(((Reminders_SubscriptionData) items.get(position).getItem()).getID(), dateBasic).addOnCompleteListener(task -> {
-                            if (task.isSuccessful()) {
-                                ((Reminders_SubscriptionData) items.get(position).getItem()).setDate(dateBasic);
-                                new AlarmOp(context).cancelAlarm(((Reminders_SubscriptionData) items.get(position).getItem()).getID());
-                                notifyDataSetChanged();
-                            }
-                        });
+                        setNewDate( ((Reminders_SubscriptionData)items.get(position).getItem()).getID(), position, calendar, Calendar.DAY_OF_MONTH, 7, dateBasic, "date");
                         break;
                     case Repeat.BIWEEKLY:
-                        calendar.add(Calendar.DAY_OF_MONTH, 14);
-                        dateBasic.setDay(calendar.get(Calendar.DAY_OF_MONTH));
-                        dateBasic.setMonth(calendar.get(Calendar.MONTH));
-                        dateBasic.setYear(calendar.get(Calendar.YEAR));
-                        new OPBasics().updateRemindersDate(((Reminders_SubscriptionData) items.get(position).getItem()).getID(), dateBasic).addOnCompleteListener(task -> {
-                            if (task.isSuccessful()) {
-                                ((Reminders_SubscriptionData) items.get(position).getItem()).setDate(dateBasic);
-                                new AlarmOp(context).cancelAlarm(((Reminders_SubscriptionData) items.get(position).getItem()).getID());
-                                notifyDataSetChanged();
-                            }
-                        });
+                        setNewDate( ((Reminders_SubscriptionData)items.get(position).getItem()).getID(), position, calendar, Calendar.DAY_OF_MONTH, 14, dateBasic, "date");
                         break;
                     case Repeat.MONTHLY:
-                        calendar.add(Calendar.MONTH, 1);
-                        dateBasic.setDay(calendar.get(Calendar.DAY_OF_MONTH));
-                        dateBasic.setMonth(calendar.get(Calendar.MONTH));
-                        dateBasic.setYear(calendar.get(Calendar.YEAR));
-                        new OPBasics().updateRemindersDate(((Reminders_SubscriptionData) items.get(position).getItem()).getID(), dateBasic).addOnCompleteListener(task -> {
+                        setNewDate( ((Reminders_SubscriptionData)items.get(position).getItem()).getID(), position, calendar, Calendar.MONTH, 1, dateBasic, "date");
+                        break;
+                    case Repeat.NO:
+                        Dialog_Upload dialogUpload = new Dialog_Upload(context);
+                        dialogUpload.start();
+                        new OPBasics().updateRemindersStatus(ID, Status.CANCELED).addOnCompleteListener(task -> {
+                            dialogUpload.dismiss();
                             if (task.isSuccessful()) {
-                                ((Reminders_SubscriptionData) items.get(position).getItem()).setDate(dateBasic);
-                                new AlarmOp(context).cancelAlarm(((Reminders_SubscriptionData) items.get(position).getItem()).getID());
+                                items.get(position).setStatus(Status.CANCELED);
                                 notifyDataSetChanged();
                             }
+                        }).addOnFailureListener(e -> {
+                            dialogUpload.dismiss();
+                            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
                         });
                         break;
                 }
@@ -123,19 +231,49 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             public void onCancelledClick(View view) {
                 items.get(position).setStatus(Status.CANCELED);
                 notifyDataSetChanged();
-
-
             }
         }, cancel -> {
             if (((Reminders_SubscriptionData) items.get(position).getItem()).getRepeat() == Repeat.NO)
                 cancel.setVisibility(View.GONE);
-        }).show();
+        }, ((Reminders_SubscriptionData)items.get(position).getItem()).getName(), ((Reminders_SubscriptionData)items.get(position).getItem()).getAmount()).show();
+    }
+
+    private void setNewDate(long ID, int position, Calendar calendar, int DATE, int NEW, DateBasic dateBasic, String dateID) {
+        calendar.add(DATE, NEW);
+        dateBasic.setDay(calendar.get(Calendar.DAY_OF_MONTH));
+        dateBasic.setMonth(calendar.get(Calendar.MONTH));
+        dateBasic.setYear(calendar.get(Calendar.YEAR));
+        Dialog_Upload dialogUpload = new Dialog_Upload(context);
+        dialogUpload.start();
+        new OPBasics().updateRemindersDate(ID, dateID, dateBasic).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                switch (items.get(position).getType()) {
+                    case Type.CARD: ((Reminders_CardData) items.get(position).getItem()).setDeadline(dateBasic); break;
+                    case Type.SUBSCRIPTION: ((Reminders_SubscriptionData) items.get(position).getItem()).setDate(dateBasic); break;
+                    case Type.SHOP: ((Reminders_ShopData) items.get(position).getItem()).setDeadline(dateBasic); break;
+                }
+                new AlarmOp(context).cancelAlarm(ID);
+                new OPBasics().updateRemindersStatus(ID, Status.ACTIVE).addOnCompleteListener(task1 -> {
+                    dialogUpload.dismiss();
+                    if (task1.isSuccessful()) {
+                        items.get(position).setStatus(Status.ACTIVE);
+                        notifyItemChanged(position);
+                    }
+                }).addOnFailureListener(e -> {
+                    dialogUpload.dismiss();
+                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+            }
+        }).addOnFailureListener(e -> {
+            dialogUpload.dismiss();
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+        });
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if (viewType == 0) {
+        if (viewType == Type.CARD) {
             return new CardViewHolder(
                     LayoutInflater.from(parent.getContext()).inflate(
                             R.layout.card_element,
@@ -143,7 +281,7 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                             false
                     )
             );
-        } else if (viewType == 1) {
+        } else if (viewType == Type.SUBSCRIPTION) {
             return new SubscriptionViewHolder(
                     LayoutInflater.from(parent.getContext()).inflate(
                             R.layout.card_element,
@@ -164,10 +302,10 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if (getItemViewType(position) == 0) {
+        if (getItemViewType(position) == Type.CARD) {
             Reminders_CardData cardData = (Reminders_CardData) items.get(position).getItem();
             ((CardViewHolder) holder).setCardBind(cardData);
-        } else if (getItemViewType(position) == 1) {
+        } else if (getItemViewType(position) == Type.SUBSCRIPTION) {
             Reminders_SubscriptionData subscriptionData = (Reminders_SubscriptionData) items.get(position).getItem();
             ((SubscriptionViewHolder) holder).setSubscriptionBind(subscriptionData);
         } else {
@@ -209,47 +347,39 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
 
         void setCardBind(@NonNull Reminders_CardData item) {
-            setLimitStatus(getBindingAdapterPosition(), item.getDeadline().getDay(), item.getID());
+            checkAllStatus(
+                    getBindingAdapterPosition(),
+                    item.getID(),
+                    item.getName(),
+                    item.getAmount(),
+                    item.getImportance(),
+                    item.getCutoffDate(),
+                    item.getDeadline(),
+                    CardView
+            );
 
-            if (!isPaused(getBindingAdapterPosition())) {
-                alarmOp.setAlarm(
-                        item.getID(),
-                        context.getString(R.string.nextPaymentOfText) + item.getName(),
-                        context.getString(R.string.theAmountOfText) + item.getAmount(),
-                        item.getDeadline(),
-                        item.getImportance()
-                );
-            }
-
-            importantColor.setText(item.getImportance() == 1 ? context.getString(R.string.lessImportantText) : item.getImportance() == 2 ? context.getString(R.string.importantText) : context.getString(R.string.veryImportantText));
+            importantColor.setText(item.getImportance() == Importance.LESS ? context.getString(R.string.lessImportantText) : item.getImportance() == Importance.MEDIUM ? context.getString(R.string.importantText) : context.getString(R.string.veryImportantText));
             titleText.setText(item.getName());
             dateText.setText(item.getDeadline().toString());
-            amountText.setText(String.valueOf(item.getAmount()));
-            minAmountNum.setText(String.valueOf(item.getMinAmount()));
-            settlementNum.setText(String.valueOf(item.getSettlement()));
+            amountText.setText(String.valueOf(item.getAmount() + item.getAccumulatedAmount()));
+            minAmountNum.setText(String.valueOf(item.getMinAmount() + item.getAccumulatedAmount()));
+            settlementNum.setText(String.valueOf(item.getSettlement() - item.getProgressAmount() + item.getAccumulatedAmount()));
             cutoffDateText.setText(item.getDeadline().toString());
-            monthNum.setText(String.valueOf(item.getMonth()));
-
+            monthNum.setText(String.valueOf(item.getMonth() - item.getProgressMonth()));
             setColorStatus(getBindingAdapterPosition(), CardView, item.getImportance());
-            /*if (items.get(getAdapterPosition()).getStatus() != Status.PAUSED) {
-                setColor(item.getImportance(), CardView);
-            } else {
-                CardView.setBackgroundColor(context.getColor(R.color.Background_selector_item));
-            }*/
             CardView.setOnClickListener(view -> {
-                int v = (cardExpansion.getVisibility() == View.GONE) ? View.VISIBLE : View.GONE;
-                cardExpansion.setVisibility(v);
+                cardExpansion.setVisibility((cardExpansion.getVisibility() == View.GONE) ? View.VISIBLE : View.GONE);
                 notifyDataSetChanged();
             });
             img.setOnClickListener(view -> {
                 PopupMenu popupMenu = new PopupMenu(context, img);
-                if (items.get(getAdapterPosition()).getStatus() != Status.PAUSED)
+                if (items.get(getBindingAdapterPosition()).getStatus() != Status.PAUSED)
                     popupMenu.inflate(R.menu.menu_card);
                 else popupMenu.inflate(R.menu.menu_card_paused);
                 popupMenu.setOnMenuItemClickListener(menuItem -> menuStatus(
                         new Intent(context, Reminders_Edit_Activity.class)
                                 .putExtra("id", item.getID())
-                                .putExtra("type", items.get(getAdapterPosition()).getType())
+                                .putExtra("type", items.get(getBindingAdapterPosition()).getType())
                                 .putExtra("name", item.getName())
                                 .putExtra("amount", item.getAmount())
                                 .putExtra("minAmount", item.getMinAmount())
@@ -262,7 +392,7 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                                 .putExtra("year", item.getDeadline().getYear())
                                 .putExtra("importance", item.getImportance())
                                 .putExtra("months", item.getMonth()),
-                        menuItem, CardView, getAdapterPosition(), item.getID(), view, item.getImportance()));
+                        menuItem, CardView, getBindingAdapterPosition(), item.getID(), view, item.getImportance()));
                 popupMenu.show();
             });
 
@@ -289,14 +419,6 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
 
         void setSubscriptionBind(@NonNull Reminders_SubscriptionData item) {
-            //if status is cancelled and it's not repeated...
-            /*if (items.get(getBindingAdapterPosition()).getStatus() == Status.CANCELLED && item.getRepeat() != Repeat.NO) {
-
-            }*/
-
-            //if (item.getDate().getDay() == Calendar.getInstance().get(Calendar.DAY_OF_MONTH))
-            setLimitStatus(getBindingAdapterPosition(), item.getDate().getDay(), item.getID());
-
             checkAllStatus(
                     getBindingAdapterPosition(),
                     item.getID(),
@@ -307,42 +429,26 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     item.getDate(),
                     CardView
             );
-
-            /*if (!isPaused(getBindingAdapterPosition())) {
-                alarmOp.setAlarm(
-                        item.getID(),
-                        context.getString(R.string.nextPaymentOfText) + item.getName(),
-                        context.getString(R.string.theAmountOfText) + item.getAmount(),
-                        item.getDate(),
-                        item.getImportance()
-                );
-            }*/
-            importantColor.setText(item.getImportance() == 1 ? context.getString(R.string.lessImportantText) : item.getImportance() == 2 ? context.getString(R.string.importantText) : context.getString(R.string.veryImportantText));
+            importantColor.setText(item.getImportance() == Importance.LESS ? context.getString(R.string.lessImportantText) : item.getImportance() == Importance.MEDIUM ? context.getString(R.string.importantText) : context.getString(R.string.veryImportantText));
             titleText.setText(item.getName());
             dateText.setText(item.getDate().toString());
             amountText.setText(String.valueOf(item.getAmount()));
-            setColor(item.getImportance(), CardView);
             repeatText.setText((item.getRepeat() == Repeat.WEEKLY) ? context.getString(R.string.weeklyText) : (item.getRepeat() == Repeat.BIWEEKLY) ? context.getString(R.string.biweeklyText) : (item.getRepeat() == Repeat.MONTHLY) ? context.getString(R.string.monthlyText) : context.getString(R.string.noText));
 
             setColorStatus(getBindingAdapterPosition(), CardView, item.getImportance());
-            /*if (items.get(getAdapterPosition()).getStatus() != Status.PAUSED) {
-                setColor(item.getImportance(), CardView);
-            } else {
-                CardView.setBackgroundColor(context.getColor(R.color.Background_selector_item));
-            }*/
             CardView.setOnClickListener(view -> {
                 subscriptionExpansion.setVisibility((subscriptionExpansion.getVisibility() == View.GONE) ? View.VISIBLE : View.GONE);
                 notifyDataSetChanged();
             });
             img.setOnClickListener(view -> {
                 PopupMenu popupMenu = new PopupMenu(context, img);
-                if (items.get(getAdapterPosition()).getStatus() != Status.PAUSED)
+                if (items.get(getBindingAdapterPosition()).getStatus() != Status.PAUSED)
                     popupMenu.inflate(R.menu.menu_card);
                 else popupMenu.inflate(R.menu.menu_card_paused);
                 popupMenu.setOnMenuItemClickListener(menuItem -> menuStatus(
                         new Intent(context, Reminders_Edit_Activity.class)
                                 .putExtra("id", item.getID())
-                                .putExtra("type", items.get(getAdapterPosition()).getType())
+                                .putExtra("type", items.get(getBindingAdapterPosition()).getType())
                                 .putExtra("name", item.getName())
                                 .putExtra("amount", item.getAmount())
                                 .putExtra("day", item.getDate().getDay())
@@ -350,7 +456,7 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                                 .putExtra("year", item.getDate().getYear())
                                 .putExtra("importance", item.getImportance())
                                 .putExtra("repeat", item.getRepeat()),
-                        menuItem, CardView, getAdapterPosition(), item.getID(), view, item.getImportance()));
+                        menuItem, CardView, getBindingAdapterPosition(), item.getID(), view, item.getImportance()));
                 popupMenu.show();
             });
         }
@@ -378,56 +484,38 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
 
         void setShopBind(@NonNull Reminders_ShopData item) {
-
-            /*checkAllStatus(
+            checkAllStatus(
                     getBindingAdapterPosition(),
                     item.getID(),
+                    item.getName(),
+                    item.getAmount(),
                     item.getImportance(),
                     item.getCutoffDate(),
-                    item.getDeadline()
-            );*/
+                    item.getDeadline(),
+                    CardView
+            );
 
-            if (!isPaused(getBindingAdapterPosition())) {
-                setLimitStatus(getBindingAdapterPosition(), item.getDeadline().getDay(), item.getID());
-                alarmOp.setAlarm(
-                        item.getID(),
-                        context.getString(R.string.nextPaymentOfText) + item.getName(),
-                        context.getString(R.string.theAmountOfText) + item.getAmount(),
-                        item.getDeadline(),
-                        item.getImportance()
-                );
-            }
-            importantColor.setText(item.getImportance() == 1 ? context.getString(R.string.lessImportantText) : item.getImportance() == 2 ? context.getString(R.string.importantText) : context.getString(R.string.veryImportantText));
+            importantColor.setText(item.getImportance() == Importance.LESS ? context.getString(R.string.lessImportantText) : item.getImportance() == Importance.MEDIUM ? context.getString(R.string.importantText) : context.getString(R.string.veryImportantText));
             titleText.setText(item.getName());
             dateText.setText(item.getDeadline().toString());
             amountText.setText(String.valueOf(item.getAmount()));
-            setColor(item.getImportance(), CardView);
             descriptionText.setText(item.getDescription());
             cutoffDateText.setText(item.getCutoffDate().toString());
-            monthNum.setText(String.valueOf(item.getMonth()));
-
+            monthNum.setText(String.valueOf(item.getMonth() - item.getProgressMonth()));
             setColorStatus(getBindingAdapterPosition(), CardView, item.getImportance());
-            /*if (items.get(getAdapterPosition()).getStatus() != Status.PAUSED) {
-                setColor(item.getImportance(), CardView);
-            } else {
-                if (items.get(getBindingAdapterPosition()).getStatus() == Status.PAUSED)
-                    CardView.setBackgroundColor(context.getColor(R.color.Background_selector_item));
-                else if (items.get(getBindingAdapterPosition()).getStatus() != Status.LIMIT)
-                    CardView.setBackgroundColor(context.getColor(R.color.));
-            }*/
             CardView.setOnClickListener(view -> {
                 shopExpansion.setVisibility((shopExpansion.getVisibility() == View.GONE) ? View.VISIBLE : View.GONE);
                 notifyDataSetChanged();
             });
             img.setOnClickListener(view -> {
                 PopupMenu popupMenu = new PopupMenu(context, img);
-                if (items.get(getAdapterPosition()).getStatus() != Status.PAUSED)
+                if (items.get(getBindingAdapterPosition()).getStatus() != Status.PAUSED)
                     popupMenu.inflate(R.menu.menu_card);
                 else popupMenu.inflate(R.menu.menu_card_paused);
                 popupMenu.setOnMenuItemClickListener(menuItem -> menuStatus(
                         new Intent(context, Reminders_Edit_Activity.class)
                                 .putExtra("id", item.getID())
-                                .putExtra("type", items.get(getAdapterPosition()).getType())
+                                .putExtra("type", items.get(getBindingAdapterPosition()).getType())
                                 .putExtra("name", item.getName())
                                 .putExtra("amount", item.getAmount())
                                 .putExtra("dayCutoffDate", item.getCutoffDate().getDay())
@@ -439,14 +527,19 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                                 .putExtra("description", item.getDescription())
                                 .putExtra("importance", item.getImportance())
                                 .putExtra("months", item.getMonth()),
-                        menuItem, CardView, getAdapterPosition(), item.getID(), view, item.getImportance()));
+                        menuItem, CardView, getBindingAdapterPosition(), item.getID(), view, item.getImportance()));
                 popupMenu.show();
             });
         }
     }
 
-    private void setLimitStatus(int position, int day, long ID) {
-        if (day == Calendar.getInstance().get(Calendar.DAY_OF_MONTH) && items.get(position).getStatus() != Status.LIMIT) {
+    private void setLimitStatus(int position, DateBasic dateBasic, long ID) {
+        Calendar calendar = Calendar.getInstance();
+        if (dateBasic.getDay() == calendar.get(Calendar.DAY_OF_MONTH) &&
+                dateBasic.getMonth() == calendar.get(Calendar.MONTH) &&
+                dateBasic.getYear() == calendar.get(Calendar.YEAR) &&
+                items.get(position).getStatus() != Status.LIMIT &&
+                items.get(position).getStatus() != Status.PAUSED) {
             new OPBasics().updateRemindersStatus(ID, Status.LIMIT).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     items.get(position).setStatus(Status.LIMIT);
@@ -456,21 +549,25 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
+    private void setIndeterminateStatus(int position, DateBasic date) {
+        if (
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH) > date.getDay() &&
+                        Calendar.getInstance().get(Calendar.MONTH) > date.getMonth() &&
+                        Calendar.getInstance().get(Calendar.YEAR) > date.getYear()
+        ) items.get(position).setStatus(Status.INDETERMINATE);
+    }
+
     private void setColorStatus(int position, LinearLayout CardView, int importance) {
         switch (items.get(position).getStatus()) {
-            case Status.PAUSED:
-                CardView.setBackgroundColor(context.getColor(R.color.Background_selector_item));
-                break;
-            case Status.LIMIT:
-                CardView.setBackgroundColor(context.getColor(R.color.delete_night));
-                break; //Change background.
-            default:
-                setColor(importance, CardView);
-                break;
+            case Status.PAUSED: CardView.setBackgroundColor(context.getColor(R.color.Background_selector_item)); break;
+            case Status.LIMIT: CardView.setBackgroundColor(context.getColor(R.color.delete_night)); break;
+            default: setColor(importance, CardView); break;
         }
     }
 
     private void checkAllStatus(int position, long ID, String name, Double amount, int importance, DateBasic cutoffDate, DateBasic deadlineDate, LinearLayout CardView) {
+        setLimitStatus(position, deadlineDate, ID);
+        setIndeterminateStatus(position, deadlineDate);
         switch (items.get(position).getStatus()) {
             case Status.ACTIVE:
                 alarmOp.setAlarm(
@@ -487,7 +584,9 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             case Status.FINISHED:
                 removeElement(position, ID, CardView, CardView, Status.FINISHED);
                 break;
-            case Status.LIMIT:
+            case Status.INDETERMINATE:
+                removeElement(position, ID, CardView, CardView, Status.INDETERMINATE);
+                break;
         }
     }
 
@@ -533,32 +632,6 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return false;
     }
 
-    /*public void removeElement(int pos, long elementID, View view, LinearLayout CardView) {
-        final int position = pos;
-
-        alarmOp.cancelAlarm(elementID);
-
-        CardItem auxItem = items.get(position);
-        int auxStatus = auxItem.getStatus();
-        long id = elementID;
-        new OPBasics().updateRemindersStatus(id, Status.DELETED).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                items.remove(position);
-                notifyItemRemoved(position);
-                new SnackBar_Action(context, 32, 32, view).showSBMargin(v -> {
-                    new OPBasics().updateRemindersStatus(id, auxStatus).addOnCompleteListener(task1 -> {
-                        if (task1.isSuccessful()) {
-                            items.add(position, auxItem);
-                            notifyItemInserted(position);
-                            if (auxItem.getStatus() == Status.PAUSED)
-                                CardView.setBackgroundColor(context.getColor(R.color.Background_selector_item));
-                        }
-                    });
-                });
-            }
-        });
-    }*/
-
     public void removeElement(int position, long elementID, View view, LinearLayout CardView, int statusDeleted) {
         alarmOp.cancelAlarm(elementID);
         int auxStatus = items.get(position).getStatus();
@@ -566,15 +639,17 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             if (task.isSuccessful()) {
                 CardItem auxItem = items.remove(position);
                 notifyItemRemoved(position);
-                new SnackBar_Action(context, 32, 32, view).showSBMargin(v ->
-                        new OPBasics().updateRemindersStatus(elementID, auxStatus).addOnCompleteListener(task1 -> {
-                            if (task1.isSuccessful()) {
-                                items.add(position, auxItem);
-                                notifyItemInserted(position);
-                                if (auxItem.getStatus() == Status.PAUSED)
-                                    CardView.setBackgroundColor(context.getColor(R.color.Background_selector_item));
-                            }
-                        }));
+                if (statusDeleted == Status.DELETED) {
+                    new SnackBar_Action(context, 32, 32, view).showSBMargin(v ->
+                            new OPBasics().updateRemindersStatus(elementID, auxStatus).addOnCompleteListener(task1 -> {
+                                if (task1.isSuccessful()) {
+                                    items.add(position, auxItem);
+                                    notifyItemInserted(position);
+                                    if (auxItem.getStatus() == Status.PAUSED)
+                                        CardView.setBackgroundColor(context.getColor(R.color.Background_selector_item));
+                                }
+                            }));
+                }
             }
         });
     }
@@ -609,20 +684,20 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     public int getImportantColor(int pos) {
-        return (items.get(pos).getType() == 0 ? ((Reminders_CardData) items.get(pos).getItem()).getImportance() : items.get(pos).getType() == 1 ? ((Reminders_SubscriptionData) items.get(pos).getItem()).getImportance() : items.get(pos).getType() == 2 ? ((Reminders_ShopData) items.get(pos).getItem()).getImportance() : 0);
+        return (items.get(pos).getType() == Type.CARD ? ((Reminders_CardData) items.get(pos).getItem()).getImportance() : items.get(pos).getType() == Type.SUBSCRIPTION ? ((Reminders_SubscriptionData) items.get(pos).getItem()).getImportance() : items.get(pos).getType() == Type.SHOP ? ((Reminders_ShopData) items.get(pos).getItem()).getImportance() : 0);
     }
 
     public long getID(int pos) {
-        return (items.get(pos).getType() == 0 ? ((Reminders_CardData) items.get(pos).getItem()).getID() : items.get(pos).getType() == 1 ? ((Reminders_SubscriptionData) items.get(pos).getItem()).getID() : items.get(pos).getType() == 2 ? ((Reminders_ShopData) items.get(pos).getItem()).getID() : 0);
+        return (items.get(pos).getType() == Type.CARD ? ((Reminders_CardData) items.get(pos).getItem()).getID() : items.get(pos).getType() == Type.SUBSCRIPTION ? ((Reminders_SubscriptionData) items.get(pos).getItem()).getID() : items.get(pos).getType() == Type.SHOP ? ((Reminders_ShopData) items.get(pos).getItem()).getID() : 0);
     }
 
     public boolean isPaused(int position) {
         return items.get(position).getStatus() == Status.PAUSED;
     }
 
-    public int getStatus(int pos) {
+    /*public int getStatus(int pos) {
         return items.get(pos).getStatus();
-    }
+    }*/
 
     private int getType(int pos) {
         return items.get(pos).getType();

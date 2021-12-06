@@ -97,7 +97,6 @@ public class OPBasics {
 
     public Task<Void> updateCard(long ID, HashMap<String, Object> card) { return new DAOUser().updateCard(user.getUid(), String.valueOf(ID), card); }
 
-    public Task<Void> updateDate(long ID, String dateID, HashMap<String, Object> date) { return new DAOUser().updateDate(user.getUid(), String.valueOf(ID), dateID, date); }
 
     public Task<Void> reAuthenticate(Activity activity, String password) {
         return user.reauthenticate(EmailAuthProvider.getCredential(new DAOUserData(activity).get(UserData.Email, ""), password));
@@ -118,12 +117,12 @@ public class OPBasics {
         return new DAOUser().updateStatus(user.getUid(), String.valueOf(ID), status);
     }
 
-    public Task<Void> updateRemindersDate(long ID, DateBasic date) {
+    public Task<Void> updateRemindersDate(long ID, String dateID, DateBasic date) {
         HashMap<String, Object> dateObject = new HashMap<>();
         dateObject.put("day", date.getDay());
         dateObject.put("month", date.getMonth());
         dateObject.put("year", date.getYear());
-        return new DAOUser().updateDate(user.getUid(), String.valueOf(ID), dateObject);
+        return new DAOUser().updateDate(user.getUid(), String.valueOf(ID), dateID, dateObject);
     }
 
     public DatabaseReference getCardsReminders() { return new DAOUser().get(user.getUid()).child("reminders"); }
@@ -166,6 +165,7 @@ public class OPBasics {
             Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
         }
     }
-
 }
+
+
 

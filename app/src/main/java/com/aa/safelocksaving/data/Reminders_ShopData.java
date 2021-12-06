@@ -9,10 +9,12 @@ public class Reminders_ShopData {
     private int importance;
     private int month;
     private long ID;
+    private double progressAmount;
+    private int progressMonth;
 
     public Reminders_ShopData(){ }
 
-    public Reminders_ShopData(long ID, String name, double amount, DateBasic cutoffDate, DateBasic deadline, String description, int importance, int month) {
+    public Reminders_ShopData(long ID, String name, double amount, DateBasic cutoffDate, DateBasic deadline, String description, int importance, int month, double progressAmount, int progressMonth) {
         this.ID = ID;
         this.name = name;
         this.amount = amount;
@@ -21,8 +23,9 @@ public class Reminders_ShopData {
         this.description = description;
         this.importance = importance;
         this.month = month;
+        this.progressAmount = progressAmount;
+        this.progressMonth = progressMonth;
     }
-
 
     public long getID() {
         return ID;
@@ -87,4 +90,12 @@ public class Reminders_ShopData {
     public void setMonth(int month) {
         this.month = month;
     }
+
+    public double getProgressAmount() { return progressAmount; }
+
+    public void setProgressAmount(double progressAmount) { this.progressAmount = progressAmount; }
+
+    public int getProgressMonth() { return progressMonth; }
+
+    public void setProgressMonth(int progressMonth) { this.progressMonth = progressMonth; }
 }

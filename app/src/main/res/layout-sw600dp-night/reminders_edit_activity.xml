@@ -31,17 +31,6 @@
             android:textColor="@color/text_color"
             android:textSize="35sp" />
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-        <ImageView
-            android:id="@+id/menuCard"
-            android:layout_width="40dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_more_night" />
-
     </LinearLayout>
 
 

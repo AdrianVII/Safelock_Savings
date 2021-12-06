@@ -29,6 +29,8 @@ import com.aa.safelocksaving.Operation.OPBasics;
 import com.aa.safelocksaving.data.CardItem;
 import com.aa.safelocksaving.data.DateBasic;
 import com.aa.safelocksaving.data.Reminders_SubscriptionData;
+import com.aa.safelocksaving.data.Status;
+import com.aa.safelocksaving.data.Type;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -143,7 +145,17 @@ public class New_Reminders_Subscription_Fragments extends Fragment {
             card.put("repeat", itemSelected);
             new OPBasics().updateCard(ID, card).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    HashMap<String, Object> date = new HashMap<>();
+                    new OPBasics().updateRemindersDate(ID, "date", DATE).addOnCompleteListener(task1 -> {
+                        upload.dismiss();
+                        if (task1.isSuccessful()) {
+                            Toast.makeText(getContext(), getString(R.string.editedCardText), Toast.LENGTH_SHORT).show();
+                            requireActivity().finish();
+                        }
+                    }).addOnFailureListener(e -> {
+                        upload.dismiss();
+                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    });
+                    /*HashMap<String, Object> date = new HashMap<>();
                     date.put("day", DATE.getDay());
                     date.put("month", DATE.getMonth());
                     date.put("year", DATE.getYear());
@@ -156,7 +168,7 @@ public class New_Reminders_Subscription_Fragments extends Fragment {
                     }).addOnFailureListener(e -> {
                         upload.dismiss();
                         Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                    });
+                    });*/
                 }
             }).addOnFailureListener(e -> {
                 upload.dismiss();
@@ -171,7 +183,7 @@ public class New_Reminders_Subscription_Fragments extends Fragment {
             long ID = System.currentTimeMillis();
             new OPBasics().addRemindersCards(
                     new CardItem(
-                            1,
+                            Type.SUBSCRIPTION,
                             new Reminders_SubscriptionData(
                                     ID,
                                     name.getText().toString().trim(),
@@ -180,7 +192,7 @@ public class New_Reminders_Subscription_Fragments extends Fragment {
                                     color,
                                     itemSelected
                             ),
-                            1
+                            Status.ACTIVE
                     ),
                     String.valueOf(ID)
             ).addOnCompleteListener(task -> {

@@ -1,48 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_night"
     android:fitsSystemWindows="true"
-    android:background="@color/background_night">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/btnBack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/backText"
+        android:fontFamily="@font/roboto_regular"
         android:padding="10dp"
-        android:textColor="@color/text_color"
-        android:fontFamily="@font/roboto_regular"/>
+        android:text="@string/backText"
+        android:textColor="@color/text_color" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/newReminderText"
-        android:textSize="25sp"
-        android:fontFamily="@font/poppins_regular"
         android:layout_marginHorizontal="26dp"
-        android:textColor="@color/text_color"/>
+        android:fontFamily="@font/poppins_regular"
+        android:text="@string/newReminderText"
+        android:textColor="@color/text_color"
+        android:textSize="25sp" />
 
     <Spinner
         android:id="@+id/Spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginHorizontal="18dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/background_spinner_night"
-        android:entries="@array/typeReminders"
-        android:popupBackground="@drawable/background_spinner_night"
-        android:paddingVertical="12dp"
         android:dropDownVerticalOffset="60dp"
+        android:entries="@array/typeReminders"
+        android:paddingVertical="12dp"
+        android:popupBackground="@drawable/background_spinner_night"
         android:popupElevation="20dp"
-        android:theme="@style/text"/>
+        android:theme="@style/text" />
 
     <FrameLayout
         android:id="@+id/fragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
 
 </LinearLayout>

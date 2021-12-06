@@ -6,13 +6,13 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,8 +25,6 @@ import com.aa.safelocksaving.data.Authentication;
 import com.aa.safelocksaving.data.UserData;
 import com.aa.safelocksaving.Operation.OPBasics;
 import com.github.dhaval2404.imagepicker.ImagePicker;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -40,6 +38,7 @@ public class Account_Activity extends AppCompatActivity {
     private CircleImageView imageView;
     private static final int REQUEST_CODE_IMAGE = 100;
     private static final int REQUEST_CODE_CAMERA = 101;
+    private static final int REQUEST_CODE_READ_PERMISSION = 102;
     private Uri image;
 
     @Override
@@ -98,7 +97,8 @@ public class Account_Activity extends AppCompatActivity {
         new Dialog_Bottom_Sheet_Fragment(new Dialog_Bottom_Sheet_Fragment.OnClickListener() {
             @Override
             public void OnClickFolder(View view) {
-                startActivityForResult(new Intent().setType("image/*").setAction(Intent.ACTION_GET_CONTENT), REQUEST_CODE_IMAGE);
+                if (checkReadPermission())
+                    startActivityForResult(new Intent().setType("image/*").setAction(Intent.ACTION_GET_CONTENT), REQUEST_CODE_IMAGE);
             }
 
             @Override
@@ -106,9 +106,17 @@ public class Account_Activity extends AppCompatActivity {
                 ImagePicker.Companion.with(Account_Activity.this)
                         .cameraOnly()
                         .crop()
+                        .compress(1024)
                         .start(REQUEST_CODE_CAMERA);
             }
         }).show(getSupportFragmentManager(), Dialog_Bottom_Sheet_Fragment.TAG);
+    }
+
+    private boolean checkReadPermission () {
+        if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+            requestPermissions(new String[] { Manifest.permission.READ_EXTERNAL_STORAGE }, REQUEST_CODE_READ_PERMISSION);
+        else return true;
+        return false;
     }
 
     @Override
@@ -125,4 +133,10 @@ public class Account_Activity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_CODE_READ_PERMISSION && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            startActivityForResult(new Intent().setType("image/*").setAction(Intent.ACTION_GET_CONTENT), REQUEST_CODE_IMAGE);
+    }
 }

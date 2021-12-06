@@ -115,6 +115,7 @@
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout-night/budgets_card_element.xml" value="0.3625" />
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout-night/budgets_edit_activity.xml" value="0.3625" />
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout-night/budgets_fragments.xml" value="0.2223731884057971" />
+        <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout-night/card_notification_dialog.xml" value="0.3625" />
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout-night/dialog_box.xml" value="0.3625" />
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout-night/dialog_change_password.xml" value="0.3625" />
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout-night/dialog_delete.xml" value="0.3625" />
@@ -137,6 +138,7 @@
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout-night/settings_fragments.xml" value="0.3203125" />
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout-night/shop_store_notification_dialog.xml" value="0.3625" />
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout-night/signin_biometric_activity.xml" value="0.3625" />
+        <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout-night/store_notification_dialog.xml" value="0.3625" />
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout-night/subcription_notification_dialog.xml" value="0.3625" />
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout-night/subscription_notification_dialog.xml" value="0.20260416666666667" />
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout-notnight/main_activity.xml" value="0.3625" />
@@ -198,6 +200,7 @@
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout/budguets_card_element.xml" value="0.3625" />
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout/button_sheet_dialog.xml" value="0.3625" />
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout/card_element.xml" value="0.3625" />
+        <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout/card_notification_dialog.xml" value="0.3625" />
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout/dialog_box.xml" value="0.3625" />
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout/dialog_change_password.xml" value="0.3625" />
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout/dialog_checkupdate.xml" value="0.3625" />
@@ -226,13 +229,14 @@
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout/reports_fragments.xml" value="0.3625" />
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout/repurt_card_element.xml" value="0.25" />
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout/settings_fragments.xml" value="0.33" />
-        <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout/shop_store_notification_dialog.xml" value="0.3625" />
+        <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout/shop_store_notification_dialog.xml" value="0.5" />
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout/signin_activity.xml" value="0.25" />
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout/signin_biometric_activity.xml" value="0.3625" />
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout/spinner_spinner_dropdown.xml" value="0.3625" />
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout/spinner_text_color.xml" value="0.3625" />
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout/splash_screen_activity.xml" value="0.3625" />
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout/start_activity.xml" value="0.33" />
+        <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout/store_notification_dialog.xml" value="0.3625" />
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout/subcription_notification_dialog.xml" value="0.3625" />
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout/subscription_notification_dialog.xml" value="0.500485908649174" />
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/layout/view_reports.xml" value="0.3625" />
@@ -241,6 +245,7 @@
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/menu/menu_budgets_card.xml" value="0.3625" />
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/menu/menu_card.xml" value="0.3625" />
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/menu/menu_card_paused.xml" value="0.3625" />
+        <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/menu/menu_edit_reminders.xml" value="0.3625" />
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/menu/menu_first.xml" value="0.3625" />
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/menu/menu_second.xml" value="0.3625" />
         <entry key="..\:/Users/cimar/OneDrive/Documentos/Universidad Veracruzana/Semetre 9/Moviles/Proyecto/app/src/main/res/mipmap-anydpi-v26/logo.xml" value="0.3687179487179487" />

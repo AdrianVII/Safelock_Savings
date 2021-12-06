@@ -24,24 +24,27 @@ public class Dialog_Box extends Dialog {
     public Dialog_Box(@NonNull Activity activity, String title, String message) {
         super(activity);
         this.activity = activity;
-        super.setContentView(R.layout.dialog_box);
-        super.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        Window window = super.getWindow();
+        setContentView(R.layout.dialog_box);
+        getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        Window window = getWindow();
         window.setGravity(Gravity.CENTER);
         window.getAttributes().windowAnimations = R.anim.displacement_up;
-        btnYes = super.findViewById(R.id.btnyes);
-        btnNo = super.findViewById(R.id.btnno);
-        textTitle = super.findViewById(R.id.title);
-        textMessage = super.findViewById(R.id.message);
+        btnYes = findViewById(R.id.btnyes);
+        btnNo = findViewById(R.id.btnno);
+        textTitle = findViewById(R.id.title);
+        textMessage = findViewById(R.id.message);
         textTitle.setText(title);
         textMessage.setText(message);
-        super.setCancelable(false);
+        setCancelable(false);
         window.setLayout(ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
         show();
     }
 
     public void OnActionButton(OnPositiveClickListener listener) {
-        btnYes.setOnClickListener(view -> listener.positiveClick(view, this.activity));
+        btnYes.setOnClickListener(view -> {
+            dismiss();
+            listener.positiveClick(view, this.activity);
+        });
         btnNo.setOnClickListener(view -> {
             super.dismiss();
             listener.negativeClick(view);

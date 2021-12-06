@@ -1,58 +1,43 @@
 package com.aa.safelocksaving.Dialog;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.aa.safelocksaving.Account_Activity;
 import com.aa.safelocksaving.R;
 
 import soup.neumorphism.NeumorphButton;
 
-public class Dialog_Subscription_Notification extends Dialog {
-    private Button yes;
-    private Button no;
-    private Button cancelled;
+public class Store_Notification_Dialog extends Dialog {
+    private NeumorphButton yes;
+    private NeumorphButton no;
     private TextView name;
     private TextView amount;
 
     public interface onButtonClickListener {
-        void onYesClick(View view);
-        void onNoClick(View view);
-        void onCancelledClick(View view);
+        void OnYesClick(View view);
+        void OnNoClick(View view);
     }
 
-    public interface onVisibilityListener {
-        void OnVisibility(Button cancel);
-    }
-
-    public Dialog_Subscription_Notification(@NonNull Context context, onButtonClickListener listener, onVisibilityListener visibilityListener, String nameText, double amountText) {
+    public Store_Notification_Dialog(@NonNull Context context,onButtonClickListener listener, String nameText, double amountText) {
         super(context);
-        setContentView(R.layout.subscription_notification_dialog);
+        setContentView(R.layout.store_notification_dialog);
         getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         Window window = getWindow();
         window.setGravity(Gravity.CENTER);
         yes = findViewById(R.id.yes);
         no = findViewById(R.id.no);
-        cancelled = findViewById(R.id.cancelled);
-        visibilityListener.OnVisibility(cancelled);
         yes.setOnClickListener(view -> {
-            listener.onYesClick(view);
+            listener.OnYesClick(view);
             dismiss();
         });
         no.setOnClickListener(view -> {
-            listener.onNoClick(view);
-            dismiss();
-        });
-        cancelled.setOnClickListener(view -> {
-            listener.onCancelledClick(view);
+            listener.OnNoClick(view);
             dismiss();
         });
         name = findViewById(R.id.name);

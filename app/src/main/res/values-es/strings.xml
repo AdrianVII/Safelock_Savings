@@ -141,11 +141,11 @@
     <string name="acceptText">Aceptar</string>
     <string name="didYouMakeThePaymentText">¿Realizaste el pago?</string>
     <string name="cancelledText">Cancelado</string>
-    <string name="whatMethodDidYouUseText">Cuál Metodo Utilizaste Para Realizar El Pago?</string>
+    <string name="whatMethodDidYouUseText">¿Cuál metodo utilizaste para realizar el pago?</string>
     <string name="paymentTypeText">Tipo De Pago</string>
     <string name="addQuantityText">Agregar Cantidad</string>
     <string name="defaultAmountText">Cantidad Predeterminada</string>
-    <string name="amountPaidText">Cantidad Pagada</string>
+    <string name="amountPaidText">Cantidad Pagada:</string>
     <string name="areYouSureYouWantToDeleteEverythingFromBudgetsText">¿Estas Seguro De Eliminar Todo En Presupuestos?</string>
     <string name="ifYouDeleteEverythingYouWillNotBeAbleToUndoThisActionText">Si Eliminas Todo, No Podras Deshacer Esta Accion</string>
     <string name="fingerprintText">Huella Dactilar</string>
@@ -162,4 +162,8 @@
     <string name="versionText">Versión</string>
     <string name="uploadingText">Subiendo ...</string>
     <string name="renameText">Cambiar Nombre</string>
+    <string name="batteryOptimizationText">Optimización de Batería</string>
+    <string name="batteryOptimizationDescriptionText">Se requiere de quitar a la aplicación de la optimización de batería del sistema</string>
+    <string name="enterAmountText">Ingresa Cantidad</string>
+    <string name="interestGeneratedText">Intereses Generados</string>
 </resources>

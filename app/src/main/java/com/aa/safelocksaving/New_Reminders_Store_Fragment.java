@@ -26,6 +26,8 @@ import com.aa.safelocksaving.Operation.OPBasics;
 import com.aa.safelocksaving.data.CardItem;
 import com.aa.safelocksaving.data.DateBasic;
 import com.aa.safelocksaving.data.Reminders_ShopData;
+import com.aa.safelocksaving.data.Status;
+import com.aa.safelocksaving.data.Type;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -103,14 +105,6 @@ public class New_Reminders_Store_Fragment extends Fragment {
             }
             return false;
         });
-        /*descriptionEdit.setOnKeyListener((view, i, keyEvent) -> {
-            if (keyEvent.getAction() == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
-                new Dialog_Important(requireActivity(), this::setColor).show();
-                ((InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(descriptionEdit.getWindowToken(), 0);
-                return true;
-            }
-            return false;
-        });*/
         monthEdit.setOnKeyListener((view, i, keyEvent) -> {
             if (keyEvent.getAction() == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
                 if (edit) upgrade(getArguments().getLong("id"));
@@ -141,7 +135,24 @@ public class New_Reminders_Store_Fragment extends Fragment {
             card.put("month", Integer.parseInt(monthEdit.getText().toString()));
             new OPBasics().updateCard(ID, card).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    HashMap<String, Object> date = new HashMap<>();
+                    new OPBasics().updateRemindersDate(ID, "cutoffDate", cutoffDate).addOnCompleteListener(task1 -> {
+                        if (task1.isSuccessful()) {
+                            new OPBasics().updateRemindersDate(ID, "deadline", deadlineDate).addOnCompleteListener(task2 -> {
+                                upload.dismiss();
+                                if (task2.isSuccessful()) {
+                                    Toast.makeText(getContext(), getString(R.string.editedCardText), Toast.LENGTH_SHORT).show();
+                                    requireActivity().finish();
+                                }
+                            }).addOnFailureListener(e -> {
+                                upload.dismiss();
+                                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                            });
+                        }
+                    }).addOnFailureListener(e -> {
+                        upload.dismiss();
+                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    });
+                    /*HashMap<String, Object> date = new HashMap<>();
                     date.put("day", cutoffDate.getDay());
                     date.put("month", cutoffDate.getMonth());
                     date.put("year", cutoffDate.getYear());
@@ -165,7 +176,7 @@ public class New_Reminders_Store_Fragment extends Fragment {
                     }).addOnFailureListener(e -> {
                         upload.dismiss();
                         Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                    });
+                    });*/
                 }
             }).addOnFailureListener(e -> {
                 upload.dismiss();
@@ -180,7 +191,7 @@ public class New_Reminders_Store_Fragment extends Fragment {
             long ID = System.currentTimeMillis();
             new OPBasics().addRemindersCards(
                     new CardItem(
-                            2,
+                            Type.SHOP,
                             new Reminders_ShopData(
                                     ID,
                                     nameEdit.getText().toString().trim(),
@@ -189,10 +200,11 @@ public class New_Reminders_Store_Fragment extends Fragment {
                                     deadlineDate,
                                     descriptionEdit.getText().toString().trim(),
                                     color,
-                                    Integer.parseInt(monthEdit.getText().toString().trim())
-
+                                    Integer.parseInt(monthEdit.getText().toString().trim()),
+                                    0,
+                                    0
                             ),
-                            1
+                            Status.ACTIVE
                     ),
                     String.valueOf(ID)
             ).addOnCompleteListener(task -> {

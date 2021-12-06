@@ -10,10 +10,13 @@ public class Reminders_CardData {
     private DateBasic cutoffDate;
     private DateBasic deadline;
     private long ID;
+    private double progressAmount;
+    private int progressMonth;
+    private double accumulatedAmount;
 
     public Reminders_CardData() {  }
 
-    public Reminders_CardData(long ID, String name, double amount, double minAmount, double settlement, DateBasic cutoffDate, DateBasic deadline, int importance, int month) {
+    public Reminders_CardData(long ID, String name, double amount, double minAmount, double settlement, DateBasic cutoffDate, DateBasic deadline, int importance, int month, double progressAmount, int progressMonth, double accumulatedAmount) {
         this.ID = ID;
         this.name = name;
         this.amount = amount;
@@ -23,6 +26,9 @@ public class Reminders_CardData {
         this.deadline = deadline;
         this.importance = importance;
         this.month = month;
+        this.progressAmount = progressAmount;
+        this.progressMonth = progressMonth;
+        this.accumulatedAmount = accumulatedAmount;
     }
 
     public long getID() {
@@ -94,4 +100,16 @@ public class Reminders_CardData {
     public void setMonth(int month) {
         this.month = month;
     }
+
+    public double getProgressAmount() { return progressAmount; }
+
+    public void setProgressAmount(double progressAmount) { this.progressAmount = progressAmount; }
+
+    public int getProgressMonth() { return progressMonth; }
+
+    public void setProgressMonth(int progressMonth) { this.progressMonth = progressMonth; }
+
+    public double getAccumulatedAmount() { return accumulatedAmount; }
+
+    public void setAccumulatedAmount(double accumulatedAmount) { this.accumulatedAmount = accumulatedAmount; }
 }

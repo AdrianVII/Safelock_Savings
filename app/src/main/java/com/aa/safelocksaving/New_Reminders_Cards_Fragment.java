@@ -27,6 +27,8 @@ import com.aa.safelocksaving.data.Reminders_CardData;
 import com.aa.safelocksaving.Operation.CheckData;
 import com.aa.safelocksaving.Operation.Date_Picker;
 import com.aa.safelocksaving.Operation.OPBasics;
+import com.aa.safelocksaving.data.Status;
+import com.aa.safelocksaving.data.Type;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -132,8 +134,6 @@ public class New_Reminders_Cards_Fragment extends Fragment {
         });
     }
 
-
-
     private void setColor(int color) {
         this.color = color;
         new ImportantColor(getActivity(),importantColor,color);
@@ -151,17 +151,9 @@ public class New_Reminders_Cards_Fragment extends Fragment {
             card.put("month", Integer.parseInt(month.getText().toString()));
             new OPBasics().updateCard(ID, card).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    HashMap<String, Object> date = new HashMap<>();
-                    date.put("day", cutoffDate.getDay());
-                    date.put("month", cutoffDate.getMonth());
-                    date.put("year", cutoffDate.getYear());
-                    new OPBasics().updateDate(ID, "cutoffDate", date).addOnCompleteListener(task1 -> {
+                    new OPBasics().updateRemindersDate(ID, "cutoffDate", cutoffDate).addOnCompleteListener(task1 -> {
                         if (task1.isSuccessful()) {
-                            HashMap<String, Object> dateD = new HashMap<>();
-                            dateD.put("day", deadlineDate.getDay());
-                            dateD.put("month", deadlineDate.getMonth());
-                            dateD.put("year", deadlineDate.getYear());
-                            new OPBasics().updateDate(ID, "deadline", dateD).addOnCompleteListener(task2 -> {
+                            new OPBasics().updateRemindersDate(ID, "deadline", deadlineDate).addOnCompleteListener(task2 -> {
                                 upload.dismiss();
                                 if (task2.isSuccessful()) {
                                     Toast.makeText(getContext(), getString(R.string.editedCardText), Toast.LENGTH_SHORT).show();
@@ -190,7 +182,7 @@ public class New_Reminders_Cards_Fragment extends Fragment {
             long ID = System.currentTimeMillis();
             new OPBasics().addRemindersCards(
                     new CardItem(
-                            0,
+                            Type.CARD,
                             new Reminders_CardData(
                                     ID,
                                     name.getText().toString().trim(),
@@ -200,10 +192,12 @@ public class New_Reminders_Cards_Fragment extends Fragment {
                                     cutoffDate,
                                     deadlineDate,
                                     color,
-                                    Integer.parseInt(month.getText().toString().trim())
-
+                                    Integer.parseInt(month.getText().toString().trim()),
+                                    0,
+                                    0,
+                                    0
                             ),
-                            1
+                            Status.ACTIVE
                     ),
                     String.valueOf(ID)
             ).addOnCompleteListener(task -> {

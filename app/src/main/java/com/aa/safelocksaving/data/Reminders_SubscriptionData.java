@@ -43,9 +43,7 @@ public class Reminders_SubscriptionData {
         this.amount = amount;
     }
 
-    public DateBasic getDate() {
-        return date;
-    }
+    public DateBasic getDate() { return date; }
 
     public void setDate(DateBasic date) {
         this.date = date;
