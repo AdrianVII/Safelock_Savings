@@ -2,18 +2,14 @@ package com.aa.safelocksaving;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.AbsListView;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -26,7 +22,6 @@ import com.aa.safelocksaving.DAO.DAOBudgets;
 import com.aa.safelocksaving.DAO.DAOConfigurationData;
 import com.aa.safelocksaving.Operation.BudgetCardListAdapter;
 import com.aa.safelocksaving.Operation.OPBasics;
-import com.aa.safelocksaving.Operation.SnackBar_Action;
 import com.aa.safelocksaving.Operation.ViewAnimation;
 import com.aa.safelocksaving.data.Budgets_Data;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -34,7 +29,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,7 +56,7 @@ public class Budgets_Fragments extends Fragment {
         View view = inflater.inflate(R.layout.budgets_fragments, container, false);
         add = view.findViewById(R.id.add);
         budgets_cards = view.findViewById(R.id.recycler);
-        payment = view.findViewById(R.id.payment);
+        payment = view.findViewById(R.id.menuPayment);
         paymentNumber = view.findViewById(R.id.paymentNumber);
         PriceTotal = view.findViewById(R.id.PriceTotal);
         paymentButton = view.findViewById(R.id.paymentButton);

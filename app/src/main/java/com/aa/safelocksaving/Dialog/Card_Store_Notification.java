@@ -50,7 +50,7 @@ public class Card_Store_Notification extends Dialog implements AdapterView.OnIte
         editTextAmount.setVisibility(View.GONE);
         accept.setEnabled(visible != View.GONE);
         paymentText.setText(String.valueOf(quantity));
-        interest.setVisibility(quantity == minAmount ? View.VISIBLE : View.GONE);
+        interest.setVisibility(quantity == minAmount + accumulatedAmount ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -75,6 +75,7 @@ public class Card_Store_Notification extends Dialog implements AdapterView.OnIte
                     public void afterTextChanged(Editable editable) {
                         editAmount = editTextAmount.getText().toString().isEmpty() ? 0 : Double.parseDouble(editTextAmount.getText().toString());
                         accept.setEnabled( editAmount >= minAmount );
+                        interest.setVisibility( editAmount < (amount + accumulatedAmount) ? View.VISIBLE : View.GONE );
                     }
                 }); //Pending...
                 editTextAmount.setVisibility(View.VISIBLE);
@@ -144,7 +145,7 @@ public class Card_Store_Notification extends Dialog implements AdapterView.OnIte
             listener.OnAcceptClick(
                     view,
                     spinner.getSelectedItemPosition() == 4 ? Double.parseDouble(editTextAmount.getText().toString()) : Double.parseDouble(paymentText.getText().toString()),
-                    (amount * Double.parseDouble(interestText.getText().toString()) / 100)
+                    interestText.getText().toString().isEmpty() ? 0 : ((amount + accumulatedAmount) * Double.parseDouble(interestText.getText().toString()) / 100)
             );
             dismiss();
         });

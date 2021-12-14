@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -24,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/newReportText"
-            android:textSize="45sp"
+            android:textSize="50sp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins_regular"
             android:layout_marginHorizontal="26dp"
@@ -35,11 +36,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
-        <ImageView
-            android:id="@+id/menuCard"
-            android:layout_width="44dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_menu_grey" />
 
     </LinearLayout>
 
@@ -48,7 +44,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/background_report_months"
         android:padding="12dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="30dp"
         android:layout_marginHorizontal="10dp"
         android:orientation="horizontal">
 

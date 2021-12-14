@@ -45,4 +45,10 @@ public class DateBasic {
         calendar.set(Year, Month, Day);
         return DateFormat.getDateInstance(DateFormat.DATE_FIELD).format(calendar.getTime());
     }
+
+    public String fullDate() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Year, Month, Day);
+        return DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+    }
 }

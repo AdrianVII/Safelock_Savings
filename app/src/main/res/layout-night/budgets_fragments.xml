@@ -91,7 +91,7 @@
             app:borderWidth="0dp" />
 
         <soup.neumorphism.NeumorphCardView
-            android:id="@+id/payment"
+            android:id="@+id/menuPayment"
             style="@style/Widget.Neumorph.CardView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -7,16 +7,20 @@ public class Reminders_SubscriptionData {
     private int importance;
     private int repeat;
     private long ID;
+    private int progressRepeat;
+    private double progressAmount;
 
     public Reminders_SubscriptionData() {  }
 
-    public Reminders_SubscriptionData(long ID, String name, double amount, DateBasic date, int importance, int repeat) {
+    public Reminders_SubscriptionData(long ID, String name, double amount, DateBasic date, int importance, int repeat, int progressRepeat, double progressAmount) {
         this.ID = ID;
         this.name = name;
         this.amount = amount;
         this.date = date;
         this.importance = importance;
         this.repeat = repeat;
+        this.progressRepeat = progressRepeat;
+        this.progressAmount = progressAmount;
     }
 
     public long getID() {
@@ -64,4 +68,13 @@ public class Reminders_SubscriptionData {
     public void setRepeat(int repeat) {
         this.repeat = repeat;
     }
+
+    public int getProgressRepeat() { return progressRepeat; }
+
+    public void setProgressRepeat(int progressRepeat) { this.progressRepeat = progressRepeat; }
+
+    public double getProgressAmount() { return progressAmount; }
+
+    public void setProgressAmount(double progressAmount) { this.progressAmount = progressAmount; }
 }
+

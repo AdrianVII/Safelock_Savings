@@ -26,19 +26,6 @@
             android:fontFamily="@font/poppins_regular"
             android:textColor="@color/grey"/>
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-        <ImageView
-            android:id="@+id/menuCard"
-            android:layout_width="34dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_menu_grey" />
-
-
-
 
     </LinearLayout>
 

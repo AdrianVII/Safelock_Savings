@@ -166,4 +166,5 @@
     <string name="batteryOptimizationDescriptionText">Se requiere de quitar a la aplicación de la optimización de batería del sistema</string>
     <string name="enterAmountText">Ingresa Cantidad</string>
     <string name="interestGeneratedText">Intereses Generados</string>
+    <string name="seeText">Visualizar</string>
 </resources>

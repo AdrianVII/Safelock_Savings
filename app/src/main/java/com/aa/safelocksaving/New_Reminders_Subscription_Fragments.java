@@ -190,7 +190,9 @@ public class New_Reminders_Subscription_Fragments extends Fragment {
                                     Double.parseDouble(amount.getText().toString().trim()),
                                     DATE,
                                     color,
-                                    itemSelected
+                                    itemSelected,
+                                    0,
+                                    0
                             ),
                             Status.ACTIVE
                     ),

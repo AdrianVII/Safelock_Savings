@@ -223,4 +223,5 @@
     <string name="enterAmountText">Enter Amount</string>
     <string name="interestGeneratedText">Interest generated</string>
     <string name="percentageText" translatable="false">%</string>
+    <string name="seeText">See</string>
 </resources>

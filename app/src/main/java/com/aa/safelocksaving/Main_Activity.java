@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -84,9 +85,13 @@ public class Main_Activity extends AppCompatActivity implements ChipNavigationBa
     }
 
     private boolean isConnection() {
-        return ( ((ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE))
+        /*return (((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))
                 .getNetworkInfo(ConnectivityManager.TYPE_MOBILE)
                 .getState() == NetworkInfo.State.CONNECTED || (((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))
-                .getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED));
-    }
+                .getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED));*/
+        return ((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))
+                .getActiveNetworkInfo().getType() == ConnectivityManager.TYPE_WIFI ||
+                ((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))
+                        .getActiveNetworkInfo().getType() == ConnectivityManager.TYPE_MOBILE;
+     }
 }

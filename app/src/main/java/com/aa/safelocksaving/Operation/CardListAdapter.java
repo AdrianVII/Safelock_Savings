@@ -19,8 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.aa.safelocksaving.DAO.DAOConfigurationData;
 import com.aa.safelocksaving.Dialog.Card_Store_Notification;
 import com.aa.safelocksaving.Dialog.Dialog_Subscription_Notification;
+import com.aa.safelocksaving.Dialog.Dialog_Update;
 import com.aa.safelocksaving.Dialog.Dialog_Upload;
-import com.aa.safelocksaving.Dialog.Progress_Alert_Dialog;
 import com.aa.safelocksaving.Dialog.Store_Notification_Dialog;
 import com.aa.safelocksaving.R;
 import com.aa.safelocksaving.Reminders_Edit_Activity;
@@ -51,7 +51,7 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     public void setNewStatus(long ID) {
         for (int i = 0; i < items.size(); i++) {
-            if (items.get(i).getStatus() == Status.ACTIVE || items.get(i).getStatus() == Status.LIMIT) {
+            if (items.get(i).getStatus() == Status.ACTIVE || items.get(i).getStatus() == Status.LIMIT || items.get(i).getStatus() == Status.PAUSED) {
                 switch (items.get(i).getType()) {
                     case Type.CARD: if (((Reminders_CardData)items.get(i).getItem()).getID() == ID) showDialogForCard(i); break;
                     case Type.SUBSCRIPTION: if (((Reminders_SubscriptionData)items.get(i).getItem()).getID() == ID) showDialogForSubscription(i); break;
@@ -86,12 +86,14 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                             ((Reminders_ShopData)items.get(position).getItem()).setProgressMonth(newMonth);
                             ((Reminders_ShopData)items.get(position).getItem()).setProgressAmount(newAmount);
                             notifyItemChanged(position);
+                            //notifyDataSetChanged();
                             if (newMonth == ((Reminders_ShopData)items.get(position).getItem()).getMonth()) {
                                 dialogUpload.start();
                                 new OPBasics().updateRemindersStatus(((Reminders_ShopData)items.get(position).getItem()).getID(), Status.FINISHED).addOnCompleteListener(task2 -> {
                                     dialogUpload.dismiss();
                                     if (task2.isSuccessful()) {
                                         items.get(position).setStatus(Status.FINISHED);
+                                        //notifyDataSetChanged();
                                         notifyItemChanged(position);
                                     }
                                 }).addOnFailureListener(e -> {
@@ -138,12 +140,12 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     calendar.set(dateBasic.getYear(), dateBasic.getMonth(), dateBasic.getDay());
                     setNewDate(((Reminders_CardData) items.get(position).getItem()).getID(), position, calendar, Calendar.MONTH, 1, dateBasic, "deadline");
                     HashMap<String, Object> dataUpdate = new HashMap<>();
-                    //if (amount > ((Reminders_CardData)items.get(position).getItem()).getAmount() + ((Reminders_CardData)items.get(position).getItem()).getAccumulatedAmount()) ;
                     int newMonth = ((Reminders_CardData)items.get(position).getItem()).getProgressMonth() + 1;
                     double newAmount = ((Reminders_CardData)items.get(position).getItem()).getProgressAmount() + amount;
-                    //double newAccumulated = ((Reminders_CardData)items.get(position).getItem()).getAccumulatedAmount() + accumulated;
+                    /*double newAccumulated = (amount < ((Reminders_CardData)items.get(position).getItem()).getAmount() + ((Reminders_CardData)items.get(position).getItem()).getAccumulatedAmount()) ?
+                            ((Reminders_CardData)items.get(position).getItem()).getAccumulatedAmount() + accumulated : 0;*/
                     double newAccumulated = (amount < ((Reminders_CardData)items.get(position).getItem()).getAmount() + ((Reminders_CardData)items.get(position).getItem()).getAccumulatedAmount()) ?
-                            ((Reminders_CardData)items.get(position).getItem()).getAccumulatedAmount() + accumulated : 0;
+                            accumulated : 0;
                     dataUpdate.put("progressMonth", newMonth);
                     dataUpdate.put("progressAmount", newAmount);
                     dataUpdate.put("accumulatedAmount", newAccumulated);
@@ -154,6 +156,7 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         if (task.isSuccessful()) {
                             ((Reminders_CardData)items.get(position).getItem()).setProgressMonth(newMonth);
                             ((Reminders_CardData)items.get(position).getItem()).setProgressAmount(newAmount);
+                            ((Reminders_CardData)items.get(position).getItem()).setAccumulatedAmount(newAccumulated);
                             notifyItemChanged(position);
                             if (newMonth == ((Reminders_CardData)items.get(position).getItem()).getMonth() || ((Reminders_CardData)items.get(position).getItem()).getProgressAmount() >= ((Reminders_CardData)items.get(position).getItem()).getSettlement()) {
                                 dialogUpload.start();
@@ -192,34 +195,51 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         new Dialog_Subscription_Notification(context, new Dialog_Subscription_Notification.onButtonClickListener() {
             @Override
             public void onYesClick(View view) {
-                DateBasic dateBasic = ((Reminders_SubscriptionData) items.get(position).getItem()).getDate();
-                Calendar calendar = Calendar.getInstance();
-                calendar.set(dateBasic.getYear(), dateBasic.getMonth(), dateBasic.getDay());
-                switch (((Reminders_SubscriptionData) items.get(position).getItem()).getRepeat()) {
-                    case Repeat.WEEKLY:
-                        setNewDate( ((Reminders_SubscriptionData)items.get(position).getItem()).getID(), position, calendar, Calendar.DAY_OF_MONTH, 7, dateBasic, "date");
-                        break;
-                    case Repeat.BIWEEKLY:
-                        setNewDate( ((Reminders_SubscriptionData)items.get(position).getItem()).getID(), position, calendar, Calendar.DAY_OF_MONTH, 14, dateBasic, "date");
-                        break;
-                    case Repeat.MONTHLY:
-                        setNewDate( ((Reminders_SubscriptionData)items.get(position).getItem()).getID(), position, calendar, Calendar.MONTH, 1, dateBasic, "date");
-                        break;
-                    case Repeat.NO:
-                        Dialog_Upload dialogUpload = new Dialog_Upload(context);
-                        dialogUpload.start();
-                        new OPBasics().updateRemindersStatus(ID, Status.CANCELED).addOnCompleteListener(task -> {
-                            dialogUpload.dismiss();
-                            if (task.isSuccessful()) {
-                                items.get(position).setStatus(Status.CANCELED);
-                                notifyDataSetChanged();
-                            }
-                        }).addOnFailureListener(e -> {
-                            dialogUpload.dismiss();
-                            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        });
-                        break;
-                }
+                HashMap<String, Object> updateDate = new HashMap<>();
+                int repeatUp = ((Reminders_SubscriptionData) items.get(position).getItem()).getProgressRepeat() + 1;
+                double amountUp = ((Reminders_SubscriptionData) items.get(position).getItem()).getAmount() + ((Reminders_SubscriptionData) items.get(position).getItem()).getProgressAmount();
+                updateDate.put("progressRepeat", repeatUp);
+                updateDate.put("progressAmount", amountUp);
+                Dialog_Upload dialogUpload = new Dialog_Upload(context);
+                dialogUpload.start();
+                new OPBasics().updateCard(ID, updateDate).addOnCompleteListener(task2 -> {
+                    dialogUpload.dismiss();
+                    if (task2.isSuccessful()) {
+                        ((Reminders_SubscriptionData) items.get(position).getItem()).setProgressRepeat(repeatUp);
+                        ((Reminders_SubscriptionData) items.get(position).getItem()).setProgressAmount(amountUp);
+                        notifyItemChanged(position);
+                        DateBasic dateBasic = ((Reminders_SubscriptionData) items.get(position).getItem()).getDate();
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.set(dateBasic.getYear(), dateBasic.getMonth(), dateBasic.getDay());
+                        switch (((Reminders_SubscriptionData) items.get(position).getItem()).getRepeat()) {
+                            case Repeat.WEEKLY:
+                                setNewDate( ((Reminders_SubscriptionData)items.get(position).getItem()).getID(), position, calendar, Calendar.DAY_OF_MONTH, 7, dateBasic, "date");
+                                break;
+                            case Repeat.BIWEEKLY:
+                                setNewDate( ((Reminders_SubscriptionData)items.get(position).getItem()).getID(), position, calendar, Calendar.DAY_OF_MONTH, 14, dateBasic, "date");
+                                break;
+                            case Repeat.MONTHLY:
+                                setNewDate( ((Reminders_SubscriptionData)items.get(position).getItem()).getID(), position, calendar, Calendar.MONTH, 1, dateBasic, "date");
+                                break;
+                            case Repeat.NO:
+                                dialogUpload.start();
+                                new OPBasics().updateRemindersStatus(ID, Status.CANCELED).addOnCompleteListener(task -> {
+                                    dialogUpload.dismiss();
+                                    if (task.isSuccessful()) {
+                                        items.get(position).setStatus(Status.CANCELED);
+                                        notifyItemChanged(position);
+                                    }
+                                }).addOnFailureListener(e -> {
+                                    dialogUpload.dismiss();
+                                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                });
+                                break;
+                        }
+                    }
+                }).addOnFailureListener(e -> {
+                    dialogUpload.dismiss();
+                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
             }
 
             @Override
@@ -628,6 +648,9 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             case R.id.menuDelete:
                 removeElement(pos, elementID, view, CardView, Status.DELETED);
                 return true;
+            case R.id.menuPayment:
+                setNewStatus(elementID);
+                return true;
         }
         return false;
     }
@@ -694,10 +717,6 @@ public class CardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public boolean isPaused(int position) {
         return items.get(position).getStatus() == Status.PAUSED;
     }
-
-    /*public int getStatus(int pos) {
-        return items.get(pos).getStatus();
-    }*/
 
     private int getType(int pos) {
         return items.get(pos).getType();

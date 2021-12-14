@@ -14,7 +14,7 @@
         android:title="@string/deleteText"/>
 
     <item
-        android:id="@+id/payment"
+        android:id="@+id/menuPayment"
         android:title="@string/toPayText"/>
 
 </menu>
