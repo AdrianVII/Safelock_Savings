@@ -27,8 +27,7 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -53,13 +52,17 @@ public class ReportCardListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         //Table
         PdfPTable table = new PdfPTable(2);
         //Title cell
+        PdfPCell cellName = new PdfPCell();
+        cellName.setVerticalAlignment(Element.ALIGN_MIDDLE);
+        cellName.addElement(new Paragraph(context.getString(R.string.nameText)));
 
-        Paragraph paragraphName = new Paragraph(context.getString(R.string.nameText));
-        paragraphName.setAlignment(Element.ALIGN_MIDDLE);
-        Paragraph paragraphType = new Paragraph(context.getString(R.string.typeText));
-        paragraphType.setAlignment(Element.ALIGN_MIDDLE);
-        table.addCell(paragraphName);
-        table.addCell(paragraphType);
+        PdfPCell cellType = new PdfPCell();
+        cellType.setHorizontalAlignment(Element.ALIGN_MIDDLE);
+        cellType.addElement(new Paragraph(context.getString(R.string.typeText)));
+
+        table.addCell(cellName);
+        table.addCell(cellType);
+
         for (int i = 0; i < items.size(); i++) {
             String name = items.get(i).getType() == Type.CARD ? ((Reminders_CardData)items.get(i).getItem()).getName() : items.get(i).getType() == Type.SUBSCRIPTION ? ((Reminders_SubscriptionData)items.get(i).getItem()).getName() : ((Reminders_ShopData)items.get(i).getItem()).getName();
             String type = items.get(i).getType() == Type.CARD ? context.getString(R.string.cardText) : items.get(i).getType() == Type.SUBSCRIPTION ? context.getString(R.string.subscriptionText) : context.getString(R.string.shopText);
