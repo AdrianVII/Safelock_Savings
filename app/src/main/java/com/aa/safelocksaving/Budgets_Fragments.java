@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.aa.safelocksaving.DAO.DAOBudgets;
 import com.aa.safelocksaving.DAO.DAOConfigurationData;
+import com.aa.safelocksaving.Dialog.Dialog_Delete_Cards_Budgets;
 import com.aa.safelocksaving.Operation.BudgetCardListAdapter;
 import com.aa.safelocksaving.Operation.OPBasics;
 import com.aa.safelocksaving.Operation.ViewAnimation;
@@ -125,13 +126,18 @@ public class Budgets_Fragments extends Fragment {
                     });
                     budgets_cards.setAdapter(budgetCardListAdapter);
                     trash.setOnClickListener(view -> {
-                        budgetCardListAdapter.removeAll();
-                        paymentNumber.setText("");
-                        /*new SnackBar_Action(getContext(), 32, 32, view).showSBMargin(v -> {
-                            budgetCardListAdapter.recoveryAll();
-                            new OPBasics().addAllBudgetsCards(auxItem);
-                            budgets_cards.setAdapter(new BudgetCardListAdapter(auxItem, getContext()));
-                        });*/
+                        new Dialog_Delete_Cards_Budgets(requireActivity(), new Dialog_Delete_Cards_Budgets.onButtonClickListener() {
+                            @Override
+                            public void onYesClick(View view) {
+                                budgetCardListAdapter.removeAll();
+                                paymentNumber.setText("0");
+                            }
+
+                            @Override
+                            public void onNoClick(View view) {
+
+                            }
+                        }).show();
                     });
 
                     budgets_cards.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -203,13 +209,13 @@ public class Budgets_Fragments extends Fragment {
         }
 
         if (sum > Double.parseDouble(paymentNumber.getText().toString())) {
-            if (!new DAOConfigurationData(getContext()).verifyNightMode()) {
-                payment.setBackgroundColor(getContext().getColor(R.color.red_black));
-            } else payment.setBackgroundColor(getContext().getColor(R.color.delete_night));
+            if (!new DAOConfigurationData(requireContext()).verifyNightMode()) {
+                payment.setBackgroundColor(requireContext().getColor(R.color.red_black));
+            } else payment.setBackgroundColor(requireContext().getColor(R.color.delete_night));
         } else {
-            if (!new DAOConfigurationData(getContext()).verifyNightMode()) {
-                payment.setBackgroundColor(getContext().getColor(R.color.white_background));
-            }else payment.setBackgroundColor(getContext().getColor(R.color.bottom_night));
+            if (!new DAOConfigurationData(requireContext()).verifyNightMode()) {
+                payment.setBackgroundColor(requireContext().getColor(R.color.white_background));
+            }else payment.setBackgroundColor(requireContext().getColor(R.color.bottom_night));
         }
     }
 

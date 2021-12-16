@@ -32,7 +32,7 @@ public class View_Reports_Activity extends AppCompatActivity {
             month.setText(monthText);
             year.setText(String.valueOf(bundle.getInt("year")));
             name.setText(bundle.getString("name"));
-            String amountText = String.format("$%.2f", bundle.getDouble("amount"));
+            @SuppressLint("DefaultLocale") String amountText = String.format("$%.2f", bundle.getDouble("amount"));
             amount.setText(amountText);
             Date.setText(bundle.getString("date"));
         } else onBackPressed();

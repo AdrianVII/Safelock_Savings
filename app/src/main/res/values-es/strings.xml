@@ -167,4 +167,12 @@
     <string name="enterAmountText">Ingresa Cantidad</string>
     <string name="interestGeneratedText">Intereses Generados</string>
     <string name="seeText">Visualizar</string>
+    <string name="statusText">Estatus</string>
+    <string name="deletedText">Eliminado</string>
+    <string name="activeText">Activo</string>
+    <string name="pausedText">Pausado</string>
+    <string name="finishedText">Finalizado</string>
+    <string name="canceledText">Cancelado</string>
+    <string name="indeterminateText">Indeterminado</string>
+    <string name="limitText">Límite</string>
 </resources>

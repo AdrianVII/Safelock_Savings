@@ -28,7 +28,6 @@ public class Main_Activity extends AppCompatActivity implements ChipNavigationBa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
         chipNavigationBarMain = findViewById(R.id.chipNavigationBarMain);
-        //loadFragments(new Reminders_Fragments(), true);
         firstFragment();
         chipNavigationBarMain.setItemSelected(R.id.menuReminders, true);
         chipNavigationBarMain.setOnItemSelectedListener(this);
@@ -89,9 +88,10 @@ public class Main_Activity extends AppCompatActivity implements ChipNavigationBa
                 .getNetworkInfo(ConnectivityManager.TYPE_MOBILE)
                 .getState() == NetworkInfo.State.CONNECTED || (((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))
                 .getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED));*/
-        return ((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))
+        /*return ((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))
                 .getActiveNetworkInfo().getType() == ConnectivityManager.TYPE_WIFI ||
                 ((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))
-                        .getActiveNetworkInfo().getType() == ConnectivityManager.TYPE_MOBILE;
+                        .getActiveNetworkInfo().getType() == ConnectivityManager.TYPE_MOBILE;*/
+        return ((ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo() != null;
      }
 }

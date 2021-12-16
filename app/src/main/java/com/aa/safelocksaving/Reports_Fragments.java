@@ -84,13 +84,8 @@ public class Reports_Fragments extends Fragment {
                     cardList.setLayoutManager(new LinearLayoutManager(getContext()));
                     ReportCardListAdapter cardListAdapter = new ReportCardListAdapter(items, getContext());
                     cardList.setAdapter(cardListAdapter);
-                    download.setOnClickListener(view -> {
-                        try {
-                            cardListAdapter.createPDF();
-                        } catch (FileNotFoundException | DocumentException e) {
-                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    download.setOnClickListener(view -> cardListAdapter.createPDF());
+                    share.setOnClickListener(view -> cardListAdapter.sharePDF());
                 }
             }
 

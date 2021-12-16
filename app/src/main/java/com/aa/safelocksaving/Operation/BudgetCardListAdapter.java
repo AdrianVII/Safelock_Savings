@@ -1,5 +1,6 @@
 package com.aa.safelocksaving.Operation;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
@@ -10,12 +11,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aa.safelocksaving.Budgets_Edit_Card;
 import com.aa.safelocksaving.DAO.DAOUser;
+import com.aa.safelocksaving.Dialog.Dialog_Upload;
 import com.aa.safelocksaving.R;
 import com.aa.safelocksaving.data.Budgets_Data;
 
@@ -23,7 +26,6 @@ import java.util.List;
 
 public class BudgetCardListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Budgets_Data> items;
-    private List<Budgets_Data> auxItems;
     private Context context;
 
     public BudgetCardListAdapter(List<Budgets_Data> items, Context context) {
@@ -31,8 +33,20 @@ public class BudgetCardListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         this.context = context;
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void removeAll() {
-
+        Dialog_Upload dialogUpload = new Dialog_Upload(context);
+        dialogUpload.start();
+        new OPBasics().removeAllBudgets().addOnCompleteListener(task -> {
+            dialogUpload.dismiss();
+            if (task.isSuccessful()) {
+                items.clear();
+                notifyDataSetChanged();
+            }
+        }).addOnFailureListener(e -> {
+            dialogUpload.dismiss();
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+        });
     }
 
     @NonNull

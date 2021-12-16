@@ -224,4 +224,12 @@
     <string name="interestGeneratedText">Interest generated</string>
     <string name="percentageText" translatable="false">%</string>
     <string name="seeText">See</string>
+    <string name="statusText">Status</string>
+    <string name="deletedText">Deleted</string>
+    <string name="activeText">Active</string>
+    <string name="pausedText">Paused</string>
+    <string name="finishedText">Finished</string>
+    <string name="canceledText">Canceled</string>
+    <string name="indeterminateText">Indeterminate</string>
+    <string name="limitText">Limit</string>
 </resources>
